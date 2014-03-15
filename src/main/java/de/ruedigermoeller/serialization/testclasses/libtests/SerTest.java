@@ -54,7 +54,8 @@ public abstract class SerTest {
         readIter = 0;
         writeIter = 0;
         timRead = timWrite = 0;
-        int testTimeNanos = testTimeMS * 1000*1000;
+        long testTimeNanos = testTimeMS * 1000l*1000l;
+        long warmupTimeNanos = warmupTime*1000l*1000l;
         
 
         System.out.println("==================== Run Test "+title);
@@ -62,8 +63,8 @@ public abstract class SerTest {
         
         long startTim = 0;
         startTim = System.nanoTime();
-        while ( System.nanoTime()-startTim < warmupTime*1000*1000 ) {
-            for ( int i = 0; i < 100; i++ ) {
+        while ( System.nanoTime()-startTim < warmupTimeNanos ) {
+            for ( int i = 0; i < 10; i++ ) {
                 try {
                     runOnce(toWrite);
                 } catch (Throwable th) {
