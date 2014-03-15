@@ -8,34 +8,28 @@ import de.ruedigermoeller.serialization.testclasses.jdkcompatibility.Externaliza
 import java.io.Serializable;
 
 /**
- * Copyright (c) 2012, Ruediger Moeller. All rights reserved.
- * <p/>
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
- * <p/>
- * This library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- * MA 02110-1301  USA
- * <p/>
- * Date: 05.10.13
- * Time: 00:40
- * To change this template use File | Settings | File Templates.
+ Copyright [2014] Ruediger Moeller
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
  */
+
 public class BigObject implements Serializable, HasDescription {
 //        runner.runAll(FrequentPrimitives.getArray(200));
 //        runner.runAll(new StringPerformance(0));
 //        runner.runAll(new FrequentCollections());
 //        runner.runAll(new LargeNativeArrays());
 //        runner.runAll("new Primitives(0).createPrimArray() jva ser bug");
-//        runner.runAll(new PrimitiveArrays().createPrimArray());
+//        runner.runAll(new Arrays().createPrimArray());
 //        runner.runAll(new CommonCollections());
 //        runner.runAll(Trader.generateTrader(101, true));
 //        runner.runAll(ManyClasses.getArray() );
@@ -57,7 +51,7 @@ public class BigObject implements Serializable, HasDescription {
             new FrequentCollections(),
             new CommonCollections(),
             "new Primitives(0).createPrimArray() jva ser bug",
-            new PrimitiveArrays(),
+            new Arrays(),
             Trader.generateTrader(13, true),
             new ManyClasses(123),
             new ExternalizableTest(),
@@ -67,7 +61,7 @@ public class BigObject implements Serializable, HasDescription {
             new FrequentCollections(),
             new CommonCollections(),
             "new Primitives(0).createPrimArray() jva ser bug",
-            new PrimitiveArrays(),
+            new Arrays(),
             "A",
             "B",
             "C",
@@ -80,7 +74,7 @@ public class BigObject implements Serializable, HasDescription {
             new FrequentCollections(),
             new CommonCollections(),
             "new Primitives(0).createPrimArray() jva ser bug",
-            new PrimitiveArrays(),
+            new Arrays(),
             Trader.generateTrader(13, true),
             new ManyClasses(123),
             new ExternalizableTest(),
@@ -93,7 +87,7 @@ public class BigObject implements Serializable, HasDescription {
             "A",
             "B",
             "C",
-            new PrimitiveArrays(),
+            new Arrays(),
             Trader.generateTrader(13, true),
             new ManyClasses(123),
             new ExternalizableTest(),
@@ -103,7 +97,7 @@ public class BigObject implements Serializable, HasDescription {
             new FrequentCollections(),
             new CommonCollections(),
             "new Primitives(0).createPrimArray() jva ser bug",
-            new PrimitiveArrays(),
+            new Arrays(),
             Trader.generateTrader(13, true),
             new ManyClasses(123),
             new ExternalizableTest(),
@@ -116,7 +110,7 @@ public class BigObject implements Serializable, HasDescription {
             new FrequentCollections(),
             new CommonCollections(),
             "new Primitives(0).createPrimArray() jva ser bug",
-            new PrimitiveArrays(),
+            new Arrays(),
             Trader.generateTrader(13, true),
             null,
             new ManyClasses(123),
@@ -126,7 +120,7 @@ public class BigObject implements Serializable, HasDescription {
             new FrequentCollections(),
             new CommonCollections(),
             "new Primitives(0).createPrimArray() jva ser bug",
-            new PrimitiveArrays(),
+            new Arrays(),
             Trader.generateTrader(13, true),
             new ManyClasses(123),
             new ExternalizableTest(),
@@ -136,7 +130,7 @@ public class BigObject implements Serializable, HasDescription {
             new FrequentCollections(),
             new CommonCollections(),
             "new Primitives(0).createPrimArray() jva ser bug",
-            new PrimitiveArrays(),
+            new Arrays(),
             Trader.generateTrader(13, true),
             new ManyClasses(123),
             null,
@@ -147,7 +141,7 @@ public class BigObject implements Serializable, HasDescription {
             new CommonCollections(),
             "new Primitives(0).createPrimArray() jva ser bug",
             null,
-            new PrimitiveArrays(),
+            new Arrays(),
             Trader.generateTrader(13, true),
             new ManyClasses(123),
             new ExternalizableTest(),
@@ -157,7 +151,7 @@ public class BigObject implements Serializable, HasDescription {
             new FrequentCollections(),
             new CommonCollections(),
             "new Primitives(0).createPrimArray() jva ser bug",
-            new PrimitiveArrays(),
+            new Arrays(),
             null,
             Trader.generateTrader(13, true),
             new ManyClasses(123),
@@ -171,7 +165,7 @@ public class BigObject implements Serializable, HasDescription {
             new FrequentCollections(),
             new CommonCollections(),
             "new Primitives(0).createPrimArray() jva ser bug",
-            new PrimitiveArrays(),
+            new Arrays(),
             null,
             Trader.generateTrader(13, true),
             new ManyClasses(123),
@@ -184,7 +178,7 @@ public class BigObject implements Serializable, HasDescription {
             new CommonCollections(),
             "new Primitives(0).createPrimArray() jva ser bug",
             null,
-            new PrimitiveArrays(),
+            new Arrays(),
             Trader.generateTrader(13, true),
             null,
             "A",
@@ -201,7 +195,7 @@ public class BigObject implements Serializable, HasDescription {
             new FrequentCollections(),
             new CommonCollections(),
             "new Primitives(0).createPrimArray() jva ser bug",
-            new PrimitiveArrays(),
+            new Arrays(),
             Trader.generateTrader(13, true),
             null,
             new ManyClasses(123),
@@ -215,7 +209,7 @@ public class BigObject implements Serializable, HasDescription {
             new CommonCollections(),
             null,
             "new Primitives(0).createPrimArray() jva ser bug",
-            new PrimitiveArrays(),
+            new Arrays(),
             Trader.generateTrader(13, true),
             new ManyClasses(123),
             new ExternalizableTest(),

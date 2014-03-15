@@ -1,23 +1,17 @@
 package de.ruedigermoeller.serialization.testclasses;
 
-import com.esotericsoftware.kryo.Kryo;
-import com.esotericsoftware.kryo.io.Input;
-import com.esotericsoftware.kryo.io.Output;
-import de.ruedigermoeller.serialization.FSTConfiguration;
-import de.ruedigermoeller.serialization.FSTObjectInput;
-import de.ruedigermoeller.serialization.FSTObjectOutput;
+import com.beust.jcommander.JCommander;
+import com.beust.jcommander.Parameter;
 import de.ruedigermoeller.serialization.testclasses.basicstuff.*;
-import de.ruedigermoeller.serialization.testclasses.docusample.FSTTestApp;
 import de.ruedigermoeller.serialization.testclasses.enterprise.*;
 import de.ruedigermoeller.serialization.testclasses.jdkcompatibility.*;
 import de.ruedigermoeller.serialization.testclasses.libtests.*;
 import de.ruedigermoeller.serialization.testclasses.remoting.ShortRemoteCall;
-import de.ruedigermoeller.serialization.util.FSTUtil;
-import sun.misc.Unsafe;
 
 import java.io.*;
-import java.lang.reflect.Field;
-import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Formatter;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -32,52 +26,37 @@ public class TestRunner {
         System.setProperty("fst.unsafe","true");
     }
 
-    SerTest kryotest = new KryoTest("Kryo 2.23");
-    SerTest kryoUnsTest = new KryoUnsafeTest("Kryo 2.23 UnsafeIn/Output");
-    SerTest speedFST = new FSTTest("FST (preferSpeed=true, Unsafe enabled)",true,true);
-    SerTest defFST = new FSTTest("FST (Unsafe enabled)",true,false);
-    SerTest defFSTNoUns = new FSTTest("FST ",false,false);
-    SerTest defser = new JavaSerTest("Java built in");
-//    SerTest gridgain = new GridGainTest("GridGain 4.5"); cannot redistribute ..
+    public TestRunner() {
+        registerTests();
+    }
+
+    List<SerTest> mTests = new ArrayList<>();
+    public void registerTests() {
+        mTests.addAll(java.util.Arrays.asList(
+                new FSTTest("FST", false, false), // unsafe and preferspeed deprecated unsupported since 1.43.
+                new KryoTest("Kryo 2.23"),
+                new KryoUnsafeTest("Kryo 2.23 UnsafeIn/Output"),
+                new JBossRiver("JBoss-River"),
+                new JavaSerTest("Java built in"),
+                new JBossSerializer("JBoss-Serializer")
+        ));
+    }
 
     Class testClass;
-    public SerTest[] runAll( Object toSer ) throws IOException, InterruptedException {
+    public List<SerTest> runAll( Object toSer, int warmUP, int testRuns ) throws IOException, InterruptedException {
         testClass = toSer.getClass();
-        if ( toSer instanceof Swing) {
-            ((Swing) toSer).showInFrame("Original");
-            ((Swing) toSer).init();
-            try {
-                Thread.sleep(10000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-            }
-        }
+
         System.out.println();
         System.out.println();
         System.out.println("************** Running all with "+toSer.getClass().getName()+" **********************************");
-//        SerTest tests[] = { speedFST, defFST, kryoUnsTest, defFSTNoUns, kryotest, defser };
-//        SerTest tests[] = { speedFST, kryoUnsTest, defFST, kryotest};
-//        SerTest tests[] = { speedFST, kryotest, kryoUnsTest };
-//        SerTest tests[] = { speedFST, kryoUnsTest };
-//        SerTest tests[] = { defFST };
-//        SerTest tests[] = { defFST, defFSTNoUns, kryotest };
-        SerTest tests[] = { defFSTNoUns, kryotest};
-//        SerTest tests[] = { kryotest };
-        if ( toSer instanceof BigObject ) {
-            SerTest.Run/=100;
-            SerTest.WarmUP/=100;
+        
+        for (int i = 0; i < mTests.size(); i++) {
+            SerTest test = mTests.get(i);
+            test.run(toSer, warmUP, testRuns);
         }
-        for (int i = 0; i < tests.length; i++) {
-            SerTest test = tests[i];
-            test.run(toSer);
-        }
-        for (int i = 0; i < tests.length; i++) {
-            SerTest test = tests[i];
+        for (int i = 0; i < mTests.size(); i++) {
+            SerTest test = mTests.get(i);
             test.dumpRes();
-        }
-        if ( toSer instanceof BigObject ) {
-            SerTest.Run*=100;
-            SerTest.WarmUP*=100;
         }
 
         charter.heading("Test Class: "+testClass.getSimpleName());
@@ -92,92 +71,106 @@ public class TestRunner {
                 charter.text("");
             }
         } catch (Exception e) {
-        }
-
-        charter.openChart("Read Time (micros)");
-        int fac = 3;
-        boolean cont = true;
-        while( cont ) {
-            cont = false;
-            for (int i = 0; i < tests.length; i++) {
-                SerTest test = tests[i];
-                int val = (int)(test.timRead*1000/SerTest.Run);
-                if ( val/fac > 130 ) {
-                    fac++;
-                    cont = true;
-                }
-            }
-        }
-        for (int i = 0; i < tests.length; i++) {
-            SerTest test = tests[i];
-            charter.chartBar(test.title, (int)(test.timRead*1000/SerTest.Run), fac, test.getColor());
-        }
-        charter.closeChart();
-
-        charter.openChart("Write Time (micros)");
-        for (int i = 0; i < tests.length; i++) {
-            SerTest test = tests[i];
-            charter.chartBar(test.title, (int)(test.timWrite*1000/SerTest.Run), fac, test.getColor());
-        }
-        charter.closeChart();
-
-        charter.openChart("Size (byte)");
-        fac = 500;
-        cont = true;
-        while( cont ) {
-            cont = false;
-            for (int i = 0; i < tests.length; i++) {
-                SerTest test = tests[i];
-                int val = test.bout.size();
-                if ( val/fac > 70 ) {
-                    fac++;
-                    cont = true;
-                }
-            }
-        }
-        for (int i = 0; i < tests.length; i++) {
-            SerTest test = tests[i];
-            charter.chartBar(test.title, test.bout.size(), fac, test.getColor());
-        }
-        charter.closeChart();
-
-        return tests;
-    }
-    HtmlCharter charter = new HtmlCharter("./result.html");
-
-
-    public static void main( String[] arg ) throws Exception {
-        try {
-            ReadResolve.main(null);
-            SpecialsTest.main(null);
-        } catch (Exception e) {
             e.printStackTrace();
         }
 
+        List<Integer> hi = new ArrayList<>();
+        List<Integer> lo = new ArrayList<>();
+        List<Integer> siz = new ArrayList<>();
+        String names[] = new String[mTests.size()];
+        for (int i = 0; i < mTests.size(); i++) {
+            SerTest serTest = mTests.get(i);
+            if ( serTest.readIter == 0 || serTest.writeIter == 0 ) {
+                lo.add(0);
+                hi.add(0);
+                siz.add(0);
+                names[i] = serTest.title+" FAIL ";
+            } else {
+                int rv = (int) ((serTest.timRead*1000) / serTest.readIter);
+                int wv = (int) ((serTest.timWrite*1000) / serTest.writeIter);
+                lo.add(rv);
+                hi.add(rv+wv);
+                siz.add(serTest.bout.size());
+                names[i] = serTest.title;
+            }
+        }
+        charter.gChart(hi,lo,"read+write (ns)",names);
+        charter.gChart(siz,siz,"size (bytes)",names);
+
+        String format = "%-34s %14s %14s %14s %14s\n";
+        String table = new Formatter().format( format, new Object[] {"lib", "read (ns)","write (ns)","total (ns)", "size (bytes)"} ).toString();
+        for (int i = 0; i < mTests.size(); i++) {
+            SerTest serTest = mTests.get(i);
+            table += new Formatter().format(format,
+                    names[i],
+                    lo.get(i),
+                    hi.get(i)-lo.get(i),
+                    hi.get(i),
+                    siz.get(i)
+                    ).toString();
+        }
+        charter.text("<br><pre style='background-color:#ccc;'>"+table+"</pre><br>");
+        
+
+        return mTests;
+    }
+    HtmlCharter charter = new HtmlCharter("./result.html");
+
+    @Parameter(names = { "-warm" }, description = "number of warmup time ms >5000 for stable results")
+    Integer warmup = 5000;
+    @Parameter(names = { "-test" }, description = "number of test time ms  >5000 for stable results")
+    Integer test = 5000;
+    @Parameter(names = { "-cases" }, description = "testcases to execute (string of a..z, not specified: all)")
+    String tests = "abcdefghijklmnop";
+
+    @Parameter(names = "--help", help = true)
+    private boolean help;
+
+    public static void main( String[] arg ) throws Exception {
+        
         TestRunner runner = new TestRunner();
+        JCommander jCommander = new JCommander(runner, arg);
+        
         runner.charter.setAsc(new AsciiCharter("./result.txt"));
 
-
         runner.charter.openDoc();
-        runner.charter.text("<i>intel i7 3770K 3,4 ghz, 4 core, 8 threads</i>");
+        runner.charter.text("OS:" + System.getProperty("os.name"));
+        runner.charter.text("JVM:" + System.getProperty("java.vendor") + " " + System.getProperty("java.version"));
+        runner.charter.text("CPU:" + System.getenv("PROCESSOR_IDENTIFIER") + " os-arch:" + System.getenv("PROCESSOR_ARCHITECTURE"));
+        runner.charter.text("Cores (incl HT):" + Runtime.getRuntime().availableProcessors());
         runner.charter.text("<i>"+System.getProperty("java.runtime.version")+","+System.getProperty("java.vm.name")+","+System.getProperty("os.name")+"</i>");
 
-        SerTest.WarmUP = 20000; SerTest.Run = SerTest.WarmUP*1+1;
-//        SerTest.WarmUP = 200; SerTest.Run = 3000;
-        runner.runAll(FrequentPrimitives.getArray(200));
-        runner.runAll(FrequentPrimitivesExternalizable.getArray(200));
-        runner.runAll(new FrequentCollections());
-        runner.runAll(new LargeNativeArrays());
-        runner.runAll(new StringPerformance(0));
-        runner.runAll(new Primitives(0).createPrimArray());
-        runner.runAll(new PrimitiveArrays().createPrimArray());
-        runner.runAll(new CommonCollections());
-        runner.runAll(Trader.generateTrader(101, true));
-        runner.runAll(ManyClasses.getArray() );
-        runner.runAll(new ExternalizableTest());
-        runner.runAll(new BigObject("dummy"));
-        runner.runAll(HeavyNesting.createNestedObject(1000));
+        Object media = "";
+        // read in the popular media benchmark
+        ObjectInputStream oin = new ObjectInputStream(new FileInputStream(".\\data\\media_from_eisheye_test.os"));
+        media = oin.readObject();
+
+        Object testCases[] = {
+                "a", FrequentPrimitives.getArray(10), // avoid measuring init overhead only for jboss, jdk 
+                "b", FrequentPrimitivesExternalizable.getArray(10), // avoid measuring init overhead only for jboss, jdk
+                "c", new FrequentCollections(1),
+                "d", new LargeNativeArrays(1),
+                "e", new StringPerformance(0),
+                "f", new Primitives(),
+                "g", Arrays.createPrimArray(),
+                "h", new CommonCollections(),
+                "i", Trader.generateTrader(101, true),
+                "j", new ManyClasses(1),    // ref hashing, class writing
+                "k", new ExternalizableTest(),  // performance of object*stream faking
+                "l", new BigObject("dummy"),
+                "m", HeavyNesting.createNestedObject(1000),
+                "o", media,
+                "p", new SmallThing(),
+                "n", new ShortRemoteCall(1),
+        };
+
+        for (int i = 0; i < testCases.length; i+=2) {
+            String testLetter = (String) testCases[i];
+            if ( runner.tests.indexOf(testLetter) >= 0 ) {
+                Object testCase = testCases[i+1];
+                runner.runAll(testCase,runner.warmup,runner.test);
+            }
+        }
         runner.charter.closeDoc();
-        FSTTestApp.main(new String[0]);
     }
 }

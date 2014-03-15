@@ -39,21 +39,15 @@ public class FSTTest extends SerTest {
     {
         defconf = FSTConfiguration.createDefaultConfiguration();
     }
-
+    
+    FSTObjectInput in;
+    FSTObjectOutput out;
     public FSTTest(String desc,boolean uns,boolean preferSpeed) {
         super(desc);
         this.uns = uns;
         defconf.setPreferSpeed(preferSpeed);
-    }
-
-    @Override
-    public void run( Object toWrite ) {
-        Unsafe tmp = FSTUtil.unsafe;
-        if ( ! uns ) {
-            FSTUtil.unsafe = null;
-        }
-        super.run(toWrite);
-        FSTUtil.unsafe = tmp;
+        in = new FSTObjectInput(defconf);
+        out = new FSTObjectOutput(defconf);
     }
 
     public String getColor() {
@@ -63,27 +57,20 @@ public class FSTTest extends SerTest {
     @Override
     protected void readTest(ByteArrayInputStream bin, Class cl) {
         try {
-            FSTObjectInput in = defconf.getObjectInput(bin);
+            in.resetForReuse(bin);
             Object res = in.readObject(cl);
-            if ( res instanceof Swing && WarmUP == 0) {
-                ((Swing) res).showInFrame("FST Copy");
-            }
-            bin.close();
             resObject = res;
-//                out.clnames.differencesTo(in.clnames);
         } catch (Throwable e) {
-//                out.clnames.differencesTo(in.clnames);
             FSTUtil.printEx(e);
             throw new RuntimeException(e);
         }
     }
     @Override
     protected void writeTest(Object toWrite, OutputStream bout, Class aClass) {
-        FSTObjectOutput out = defconf.getObjectOutput(bout);
+        out.resetForReUse(bout);
         try {
             out.writeObject(toWrite, aClass);
             out.flush();
-            bout.close();
         } catch (Throwable e) {
             FSTUtil.printEx(e);
             throw new RuntimeException(e);

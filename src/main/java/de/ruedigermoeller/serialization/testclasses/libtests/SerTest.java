@@ -29,8 +29,6 @@ import com.cedarsoftware.util.DeepEquals;
  * To change this template use File | Settings | File Templates.
  */
 public abstract class SerTest {
-    public static int WarmUP = 10000;
-    public static int Run = WarmUP+1;
 
     public String title;
     public ByteArrayOutputStream bout = new ByteArrayOutputStream(100000);
@@ -45,25 +43,37 @@ public abstract class SerTest {
         this.title = title;
     }
 
-    public void run( Object toWrite ) {
+    public int readIter = 0;
+    public int writeIter = 0;
+    public void run(Object toWrite, int warmupTime, int testTimeMS) {
         testObject = toWrite;
+        readIter = 0;
+        writeIter = 0;
+
         System.out.println("==================== Run Test "+title);
         System.out.println("warmup ..");
-        for ( int i = 0; i < WarmUP; i++ ) {
-            try {
-                runOnce(toWrite);
-            } catch (Throwable th) {
-                break;
+        
+        long startTim = 0;
+        startTim = System.currentTimeMillis();
+        while ( System.currentTimeMillis()-startTim < warmupTime ) {
+            for ( int i = 0; i < 500; i++ ) {
+                try {
+                    runOnce(toWrite);
+                } catch (Throwable th) {
+                    break;
+                }
             }
         }
 
         System.gc();
         System.out.println("write ..");
-        long startTim = 0;
         try {
             startTim = System.currentTimeMillis();
-            for ( int i = 0; i < Run; i++ ) {
-                runWriteTest(toWrite);
+            while ( System.currentTimeMillis()-startTim < testTimeMS ) {
+                for ( int i = 0; i < 1000; i++ ) {
+                    runWriteTest(toWrite);
+                }
+                writeIter++;
             }
             timWrite = System.currentTimeMillis()-startTim;
         } catch (Exception e) {
@@ -75,8 +85,11 @@ public abstract class SerTest {
         try {
             System.out.println("read ..");
             startTim = System.currentTimeMillis();
-            for ( int i = 0; i < Run; i++ ) {
-                runReadTest(toWrite.getClass());
+            while ( System.currentTimeMillis()-startTim < testTimeMS ) {
+                for ( int i = 0; i < 1000; i++ ) {
+                    runReadTest(toWrite.getClass());
+                }
+                readIter++;
             }
             timRead = System.currentTimeMillis()-startTim;
         } catch (Exception e) {
@@ -103,7 +116,7 @@ public abstract class SerTest {
 
     public void dumpRes() {
         try {
-        System.out.println(title+" : Size:"+length+",  TimeRead: "+(timRead*1000/Run)+" microsec ["+timRead+"],   TimeWrite: "+(timWrite*1000/Run)+" microsec ["+timWrite+"]");
+        System.out.println(title+" : Size:"+length+",  TimeRead: "+(timRead*1000/readIter)+" ns,   TimeWrite: "+(timWrite*1000/writeIter)+" ns ");
         } catch (Exception e) {
             System.out.println("** Exception in dump"+e.getMessage());
         }

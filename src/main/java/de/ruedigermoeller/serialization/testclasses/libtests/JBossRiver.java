@@ -1,5 +1,13 @@
 package de.ruedigermoeller.serialization.testclasses.libtests;
 
+import org.jboss.marshalling.*;
+import org.jboss.marshalling.river.RiverMarshallerFactory;
+import org.jboss.marshalling.serial.SerialMarshallerFactory;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+
 /**
  * Copyright (c) 2012, Ruediger Moeller. All rights reserved.
  * <p/>
@@ -22,5 +30,46 @@ package de.ruedigermoeller.serialization.testclasses.libtests;
  * Time: 00:34
  * To change this template use File | Settings | File Templates.
  */
-public class JBossRiver {
+public class JBossRiver extends SerTest {
+
+    private Marshaller marshaller = null;
+    private Unmarshaller unmarshaller = null;
+
+    public JBossRiver(String title) {
+        super(title);
+        try {
+            MarshallingConfiguration cfg = new MarshallingConfiguration();
+            MarshallerFactory factory = new RiverMarshallerFactory();
+            marshaller = factory.createMarshaller(cfg);
+            unmarshaller = factory.createUnmarshaller(cfg);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    protected void readTest(ByteArrayInputStream bin, Class cl) {
+        try {
+            InputStreamByteInput inputStreamByteInput = new InputStreamByteInput(bin);
+            unmarshaller.start(inputStreamByteInput);
+            resObject = unmarshaller.readObject();
+            unmarshaller.finish();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void writeTest(Object toWrite, OutputStream bout, Class aClass) {
+        try {
+            marshaller.start(new OutputStreamByteOutput(bout));
+            marshaller.writeObject(toWrite);
+            marshaller.finish();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
+

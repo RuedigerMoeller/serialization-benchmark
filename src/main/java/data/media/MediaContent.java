@@ -1,12 +1,14 @@
 package data.media;
 
-import de.ruedigermoeller.serialization.annotations.Predict;
+
+import de.ruedigermoeller.serialization.testclasses.HasDescription;
 
 import java.util.List;
 
 @SuppressWarnings("serial")
-public class MediaContent implements java.io.Serializable
+public class MediaContent implements java.io.Serializable, HasDescription
 {
+    private static final long serialVersionUID = -4108392545133045514l;
 	public Media media;
 
 	public List<Image> images;
@@ -63,5 +65,10 @@ public class MediaContent implements java.io.Serializable
 
     public List<Image> getImages() {
         return images;
+    }
+
+    @Override
+    public String getDescription() {
+        return "mesures serializing the cyclefree object structure used by one of the most known encoding/decoding tests";
     }
 }

@@ -3,6 +3,10 @@ package de.ruedigermoeller.serialization.testclasses;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
+import java.net.URLEncoder;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -49,6 +53,34 @@ public class HtmlCharter {
             asc.openChart(title);
     }
 
+    public void gChart(List<Integer> hivalues,List<Integer> lovalues, String title, String names[]) {
+        int chartSize = Math.min(18, hivalues.size() ); // more bars aren't possible with gcharts
+        int max = Collections.max( hivalues );
+        String res = "https://chart.googleapis.com/chart?cht=bhs&chs=600x"+(chartSize *20+14); // html: finally a device independent technology
+//        res+="&chtt="+URLEncoder.encode(title);
+        res+="&chd=t:";
+        for (int i = 0; i < chartSize; i++) {
+            int val = lovalues.get(i);
+            res+= val +((i< chartSize -1) ? ",":"|");
+        }
+        for (int i = 0; i < chartSize; i++) {
+            int valLower = lovalues.get(i);
+            int val = hivalues.get(i);
+            val -= valLower;
+            res+=val+((i< chartSize -1) ? ",":"");
+        }
+        res += "&chco=5d99f9,4d89f9";
+        res += "&chdlp=t";
+        res += "&chbh=15";
+        res += "&chds=0,"+max;
+        res += "&chxr=1,0,"+max;
+        res += "&chxt=y,x&chxl=0:|";
+        for (int i = 0; i < chartSize; i++) {
+            res+= URLEncoder.encode(names[chartSize-i-1]+((i< chartSize -1) ? "|":"") );
+        }
+        out.println( "<b>"+title+"</b><br><img src='"+res+"'/><br>" );
+    }
+    
     public void chartBar(String text, int value, int div, String cl) {
         color = cl;
         if ( value == 0 ) {

@@ -8,14 +8,31 @@ package de.ruedigermoeller.serialization.testclasses.remoting;
  * To change this template use File | Settings | File Templates.
  */
 
+import de.ruedigermoeller.serialization.testclasses.HasDescription;
+
 import java.io.Serializable;
 
 /**
  * measure speed with small objects as typical in remoting
  */
-public class ShortRemoteCall implements Serializable {
-    int methodId = 44;
-    Object args[] = {}; // no args
-    int someSenderIdOrWhatever = 345782;
-    int callBackId = 35378758;
+public class ShortRemoteCall implements Serializable, HasDescription {
+    int methodId;
+    Object args[];
+    int someSenderIdOrWhatever;
+    int callBackId;
+
+    public ShortRemoteCall() {
+    }
+
+    public ShortRemoteCall(int dummy) {
+        methodId = 44;
+        args = new Object[]{}; // no args
+        someSenderIdOrWhatever = 345782;
+        callBackId = 35378758;
+    }
+
+    @Override
+    public String getDescription() {
+        return "measures overhead of stream initialization+classname decoding. Only one very short object is serialized";
+    }
 }
