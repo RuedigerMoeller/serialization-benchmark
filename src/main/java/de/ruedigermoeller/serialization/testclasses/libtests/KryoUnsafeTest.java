@@ -31,8 +31,7 @@ import java.io.OutputStream;
  * Time: 10:35
  * To change this template use File | Settings | File Templates.
  */
-public class KryoUnsafeTest extends SerTest {
-    Kryo kryo;
+public class KryoUnsafeTest extends KryoTest {
 
     public KryoUnsafeTest(String title) {
         super(title);
@@ -45,23 +44,8 @@ public class KryoUnsafeTest extends SerTest {
     @Override
     public void init() {
         kryo = new Kryo();
-        in = new UnsafeInput();
-        output = new UnsafeOutput();
-    }
-
-    Input in;
-    @Override
-    protected void readTest(ByteArrayInputStream bin, Class cl) {
-        Object res = kryo.readObject(in,cl);
-        in.close();
-        resObject = res;
-    }
-
-    Output output;
-    @Override
-    protected void writeTest(Object toWrite, OutputStream bout, Class aClass) {
-        kryo.writeObject(output, toWrite);
-        output.close();
+        in = new UnsafeInput(500*1000);
+        output = new UnsafeOutput(500*1000);
     }
 
 }
