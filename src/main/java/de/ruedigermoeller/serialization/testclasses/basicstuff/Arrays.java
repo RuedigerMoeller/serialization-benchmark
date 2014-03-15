@@ -1,6 +1,5 @@
 package de.ruedigermoeller.serialization.testclasses.basicstuff;
 
-import de.ruedigermoeller.serialization.annotations.*;
 import de.ruedigermoeller.serialization.testclasses.HasDescription;
 
 import java.io.Serializable;
@@ -13,7 +12,7 @@ import java.util.Date;
  * Time: 22:01
  * To change this template use File | Settings | File Templates.
  */
-public class PrimitiveArrays implements Serializable, HasDescription {
+public class Arrays implements Serializable, HasDescription {
     byte b[] = {1,2,3,4,5,6,7,8,-1,-2,127,1,2,3,4,5,6,7,8,-1,-2,127,1,2,3,4,5,6,7,8,-1,-2,127,1,2,3,4,5,6,7,8,-1,-2,127,1,2,3,-4,5,6,7,8,-1,-2,127};
     // aim for diff compression
     int i[] = {9991,9992,9993,9994,9995,9996,9987,9878,9878,-2,7127,9871,9872,8435,9784,9785,9786,9877,9878,9877,-2,7127,7891,9876,9873,9874,8798,7896,9877,9878,9784,9785,9786,9877,9878,9877,-2,7127,7891,9876,9873,9874,8798,7896,9877,9878,9784,9785,9786,9877,9878,9877,-2,7127,7891,9876,9873,9874,8798,7896,9877,9878,};
@@ -57,10 +56,10 @@ public class PrimitiveArrays implements Serializable, HasDescription {
     Object nul[] = { null, null, null, null,null, null,null, null, "pok", null, null, null, o0, o1, o2, null, null,null, null, null, null, null,null, null, null, null, null,null, null, null, null, null,null, null, null, null, null, o1 };
 
     // to avoid measurement of stream init performance
-    public static PrimitiveArrays[] createPrimArray() {
-        PrimitiveArrays res[] = new PrimitiveArrays[7];
+    public static Arrays[] createPrimArray() {
+        Arrays res[] = new Arrays[7];
         for (int i = 0; i < res.length; i++) {
-            res[i] = new PrimitiveArrays();
+            res[i] = new Arrays();
         }
         return res;
     }
