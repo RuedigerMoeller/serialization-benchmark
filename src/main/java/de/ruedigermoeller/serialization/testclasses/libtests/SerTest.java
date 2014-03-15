@@ -62,7 +62,7 @@ public abstract class SerTest {
         
         long startTim = 0;
         startTim = System.nanoTime();
-        while ( System.nanoTime()-startTim < warmupTime ) {
+        while ( System.nanoTime()-startTim < warmupTime*1000*1000 ) {
             for ( int i = 0; i < 100; i++ ) {
                 try {
                     runOnce(toWrite);
