@@ -30,11 +30,11 @@ public class TestRunner {
     public void registerTests() {
         mTests.addAll(java.util.Arrays.asList(
                 new FSTTest("FST", false, false), // unsafe and preferspeed deprecated unsupported since 1.43.
-                new KryoTest("Kryo 2.23"),
-                new KryoUnsafeTest("Kryo 2.23 UnsafeIn/Output"),
-                new JBossRiver("JBoss-River"),
-                new JavaSerTest("Java built in"),
-                new JBossSerializer("JBoss-Serializer")
+                new KryoTest("Kryo 2.23")
+//                new KryoUnsafeTest("Kryo 2.23 UnsafeIn/Output"),
+//                new JBossRiver("JBoss-River"),
+//                new JavaSerTest("Java built in"),
+//                new JBossSerializer("JBoss-Serializer")
         ));
     }
 
@@ -82,8 +82,8 @@ public class TestRunner {
                 siz.add(0);
                 names[i] = serTest.title+" FAIL ";
             } else {
-                int rv = (int) ((serTest.timRead*1000) / serTest.readIter);
-                int wv = (int) ((serTest.timWrite*1000) / serTest.writeIter);
+                int rv = (int) (serTest.timRead / serTest.readIter);
+                int wv = (int) (serTest.timWrite / (long)serTest.writeIter);
                 lo.add(rv);
                 hi.add(rv+wv);
                 siz.add(serTest.bout.size());
@@ -113,11 +113,11 @@ public class TestRunner {
     HtmlCharter charter = new HtmlCharter("./result.html");
 
     @Parameter(names = { "-warm" }, description = "number of warmup time ms >5000 for stable results")
-    Integer warmup = 5000;
+    Integer warmup = 4000;
     @Parameter(names = { "-test" }, description = "number of test time ms  >5000 for stable results")
-    Integer test = 5000;
+    Integer test = 2000;
     @Parameter(names = { "-cases" }, description = "testcases to execute (string of a..z, not specified: all)")
-    String tests = "abcdefghijklmnop";
+    String tests = "abcdefghijklmnopqrstuvwxyz";
 
     @Parameter(names = "--help", help = true)
     private boolean help;
@@ -142,6 +142,7 @@ public class TestRunner {
         media = oin.readObject();
 
         Object testCases[] = {
+                "q", new SmallThing(),
                 "a", FrequentPrimitives.getArray(10), // avoid measuring init overhead only for jboss, jdk 
                 "b", FrequentPrimitivesExternalizable.getArray(10), // avoid measuring init overhead only for jboss, jdk
                 "c", new FrequentCollections(1),
@@ -156,8 +157,8 @@ public class TestRunner {
                 "l", new BigObject("dummy"),
                 "m", HeavyNesting.createNestedObject(1000),
                 "o", media,
-                "p", new SmallThing(),
                 "n", new ShortRemoteCall(1),
+                "p", new SmallThing(), // same as initial: measure effects of max hashsize on reuse speed
         };
 
         for (int i = 0; i < testCases.length; i+=2) {

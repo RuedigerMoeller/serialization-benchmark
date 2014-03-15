@@ -30,6 +30,11 @@ public class JavaSerTest extends SerTest {
         super(title);
     }
 
+    @Override
+    public void init() {
+        
+    }
+
     public String getColor() {
         return "#c0c0c0";
     }

@@ -3,6 +3,8 @@ package de.ruedigermoeller.serialization.testclasses.libtests;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
+import com.esotericsoftware.kryo.io.UnsafeInput;
+import com.esotericsoftware.kryo.io.UnsafeOutput;
 import de.ruedigermoeller.serialization.testclasses.jdkcompatibility.Swing;
 
 import java.io.ByteArrayInputStream;
@@ -31,7 +33,7 @@ import java.io.OutputStream;
  * To change this template use File | Settings | File Templates.
  */
 public class KryoTest extends SerTest {
-    static Kryo kryo = new Kryo();
+    Kryo kryo;
 
     public KryoTest(String title) {
         super(title);
@@ -41,27 +43,27 @@ public class KryoTest extends SerTest {
         return "#A0A0A0";
     }
 
-    Input out;
+    @Override
+    public void init() {
+        kryo = new Kryo();
+        in = new Input(500*1000);
+        output = new Output(500*1000);
+    }
+
+    Input in;
     @Override
     protected void readTest(ByteArrayInputStream bin, Class cl) {
-        if ( out ==null )
-            out = new Input(bin);
-        else
-            out.setInputStream(bin);
-        Object res = kryo.readObject(out,cl);
-        out.close();
+        in.setInputStream(bin);
+        Object res = kryo.readObject(in,cl);
+        in.close();
         resObject = res;
     }
 
     Output output;
     @Override
     protected void writeTest(Object toWrite, OutputStream bout, Class aClass) {
-        if ( output == null )
-            output = new Output(bout);
-        else
-            output.setOutputStream(bout);
+        output.setOutputStream(bout);
         kryo.writeObject(output, toWrite);
         output.close();
     }
-
 }

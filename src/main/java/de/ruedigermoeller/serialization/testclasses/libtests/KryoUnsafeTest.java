@@ -5,7 +5,6 @@ import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
 import com.esotericsoftware.kryo.io.UnsafeInput;
 import com.esotericsoftware.kryo.io.UnsafeOutput;
-import de.ruedigermoeller.serialization.testclasses.jdkcompatibility.Swing;
 
 import java.io.ByteArrayInputStream;
 import java.io.OutputStream;
@@ -33,7 +32,7 @@ import java.io.OutputStream;
  * To change this template use File | Settings | File Templates.
  */
 public class KryoUnsafeTest extends SerTest {
-    static Kryo kryo = new Kryo();
+    Kryo kryo;
 
     public KryoUnsafeTest(String title) {
         super(title);
@@ -43,25 +42,24 @@ public class KryoUnsafeTest extends SerTest {
         return "#A0A0A0";
     }
 
-    Input out;
+    @Override
+    public void init() {
+        kryo = new Kryo();
+        in = new UnsafeInput();
+        output = new UnsafeOutput();
+    }
+
+    Input in;
     @Override
     protected void readTest(ByteArrayInputStream bin, Class cl) {
-        if ( out ==null )
-            out = new UnsafeInput(bin);
-        else
-            out.setInputStream(bin);
-        Object res = kryo.readObject(out,cl);
-        out.close();
+        Object res = kryo.readObject(in,cl);
+        in.close();
         resObject = res;
     }
 
     Output output;
     @Override
     protected void writeTest(Object toWrite, OutputStream bout, Class aClass) {
-        if ( output == null )
-            output = new UnsafeOutput(bout);
-        else
-            output.setOutputStream(bout);
         kryo.writeObject(output, toWrite);
         output.close();
     }

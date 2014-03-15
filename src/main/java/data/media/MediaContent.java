@@ -69,6 +69,6 @@ public class MediaContent implements java.io.Serializable, HasDescription
 
     @Override
     public String getDescription() {
-        return "mesures serializing the cyclefree object structure used by one of the most known encoding/decoding tests";
+        return "measures serializing the cyclefree object structure used by one of the most known encoding/decoding tests";
     }
 }

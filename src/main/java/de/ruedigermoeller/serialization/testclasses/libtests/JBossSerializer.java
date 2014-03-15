@@ -36,6 +36,10 @@ public class JBossSerializer extends SerTest {
 
     public JBossSerializer(String title) {
         super(title);
+    }
+
+    @Override
+    public void init() {
         try {
             MarshallingConfiguration cfg = new MarshallingConfiguration();
             SerialMarshallerFactory factory = new SerialMarshallerFactory();

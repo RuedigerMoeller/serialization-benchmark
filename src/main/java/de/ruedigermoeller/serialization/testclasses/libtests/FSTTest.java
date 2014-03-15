@@ -34,17 +34,20 @@ import java.io.OutputStream;
  */
 public class FSTTest extends SerTest {
 
-    boolean uns;
     FSTConfiguration defconf;
-    {
-        defconf = FSTConfiguration.createDefaultConfiguration();
-    }
-    
+    boolean uns;
+    boolean preferSpeed;
     FSTObjectInput in;
     FSTObjectOutput out;
     public FSTTest(String desc,boolean uns,boolean preferSpeed) {
         super(desc);
         this.uns = uns;
+        this.preferSpeed = preferSpeed;
+    }
+
+    @Override
+    public void init() {
+        defconf = FSTConfiguration.createDefaultConfiguration();
         defconf.setPreferSpeed(preferSpeed);
         in = new FSTObjectInput(defconf);
         out = new FSTObjectOutput(defconf);

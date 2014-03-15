@@ -42,21 +42,28 @@ public abstract class SerTest {
     public SerTest(String title) {
         this.title = title;
     }
+    
+    // reset everything, else distortion of results when writing small objects after large ones
+    public abstract void init(); 
 
     public int readIter = 0;
     public int writeIter = 0;
     public void run(Object toWrite, int warmupTime, int testTimeMS) {
+        init();
         testObject = toWrite;
         readIter = 0;
         writeIter = 0;
+        timRead = timWrite = 0;
+        int testTimeNanos = testTimeMS * 1000*1000;
+        
 
         System.out.println("==================== Run Test "+title);
         System.out.println("warmup ..");
         
         long startTim = 0;
-        startTim = System.currentTimeMillis();
-        while ( System.currentTimeMillis()-startTim < warmupTime ) {
-            for ( int i = 0; i < 500; i++ ) {
+        startTim = System.nanoTime();
+        while ( System.nanoTime()-startTim < warmupTime ) {
+            for ( int i = 0; i < 100; i++ ) {
                 try {
                     runOnce(toWrite);
                 } catch (Throwable th) {
@@ -68,14 +75,15 @@ public abstract class SerTest {
         System.gc();
         System.out.println("write ..");
         try {
-            startTim = System.currentTimeMillis();
-            while ( System.currentTimeMillis()-startTim < testTimeMS ) {
-                for ( int i = 0; i < 1000; i++ ) {
+            startTim = System.nanoTime();
+            while ( System.nanoTime()-startTim < testTimeNanos ) {
+                for ( int i = 0; i < 10; i++ ) {
                     runWriteTest(toWrite);
                 }
                 writeIter++;
             }
-            timWrite = System.currentTimeMillis()-startTim;
+            timWrite = System.nanoTime()-startTim;
+            writeIter*=10;
         } catch (Exception e) {
             System.out.println(""+title+" FAILURE in write "+e.getMessage());
         }
@@ -84,14 +92,16 @@ public abstract class SerTest {
         System.gc();
         try {
             System.out.println("read ..");
-            startTim = System.currentTimeMillis();
-            while ( System.currentTimeMillis()-startTim < testTimeMS ) {
-                for ( int i = 0; i < 1000; i++ ) {
-                    runReadTest(toWrite.getClass());
+            startTim = System.nanoTime();
+            Class<?> aClass = toWrite.getClass();
+            while ( System.nanoTime()-startTim < testTimeNanos ) {
+                for ( int i = 0; i < 10; i++ ) {
+                    runReadTest(aClass);
                 }
                 readIter++;
             }
-            timRead = System.currentTimeMillis()-startTim;
+            timRead = System.nanoTime()-startTim;
+            readIter*=10;
         } catch (Exception e) {
             timRead = 0;
             e.printStackTrace();
@@ -116,7 +126,7 @@ public abstract class SerTest {
 
     public void dumpRes() {
         try {
-        System.out.println(title+" : Size:"+length+",  TimeRead: "+(timRead*1000/readIter)+" ns,   TimeWrite: "+(timWrite*1000/writeIter)+" ns ");
+        System.out.println(title+" : Size:"+length+",  TimeRead: "+(timRead/readIter)+" ns,   TimeWrite: "+(timWrite/writeIter)+" ns ");
         } catch (Exception e) {
             System.out.println("** Exception in dump"+e.getMessage());
         }

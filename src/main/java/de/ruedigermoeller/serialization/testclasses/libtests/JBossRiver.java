@@ -37,6 +37,10 @@ public class JBossRiver extends SerTest {
 
     public JBossRiver(String title) {
         super(title);
+    }
+
+    @Override
+    public void init() {
         try {
             MarshallingConfiguration cfg = new MarshallingConfiguration();
             MarshallerFactory factory = new RiverMarshallerFactory();

@@ -56,7 +56,7 @@ public class HtmlCharter {
     public void gChart(List<Integer> hivalues,List<Integer> lovalues, String title, String names[]) {
         int chartSize = Math.min(18, hivalues.size() ); // more bars aren't possible with gcharts
         int max = Collections.max( hivalues );
-        String res = "https://chart.googleapis.com/chart?cht=bhs&chs=600x"+(chartSize *20+14); // html: finally a device independent technology
+        String res = "https://chart.googleapis.com/chart?cht=bhs&chs=600x"+(chartSize *20+16); // html: finally a device independent technology
 //        res+="&chtt="+URLEncoder.encode(title);
         res+="&chd=t:";
         for (int i = 0; i < chartSize; i++) {
