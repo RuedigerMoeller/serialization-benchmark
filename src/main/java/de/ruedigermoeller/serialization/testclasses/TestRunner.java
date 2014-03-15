@@ -22,10 +22,6 @@ import java.util.List;
  */
 public class TestRunner {
 
-    static {
-        System.setProperty("fst.unsafe","true");
-    }
-
     public TestRunner() {
         registerTests();
     }
