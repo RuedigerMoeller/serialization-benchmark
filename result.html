@@ -1,0 +1,215 @@
+<html>
+OS:Windows 8<br>
+JVM:Oracle Corporation 1.7.0_51<br>
+CPU:Intel64 Family 6 Model 58 Stepping 9, GenuineIntel os-arch:AMD64<br>
+Cores (incl HT):8<br>
+<i>1.7.0_51-b13,Java HotSpot(TM) 64-Bit Server VM,Windows 8</i><br>
+<br><h4>Test Class: FrequentPrimitives[]</h4>
+A array[10] of objects with a typical distribution of primitve fields: 2 short Strings, 3 boolean, 6 ints, 2 long, one double.<br>
+<br>
+<b>read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x136&chd=t:3526,3545,3740,8236,17696,11306|2690,3083,2955,7729,6558,10030&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,24254&chxr=1,0,24254&chxt=y,x&chxl=0:|JBoss-Serializer%7CJava+built+in%7CJBoss-River%7CKryo+2.23+UnsafeIn%2FOutput%7CKryo+2.23%7CFST'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x136&chd=t:836,708,848,1017,1143,1143|0,0,0,0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,1143&chxr=1,0,1143&chxt=y,x&chxl=0:|JBoss-Serializer%7CJava+built+in%7CJBoss-River%7CKryo+2.23+UnsafeIn%2FOutput%7CKryo+2.23%7CFST'/><br>
+<br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                          3526           2690           6216            836
+Kryo 2.23                                    3545           3083           6628            708
+Kryo 2.23 UnsafeIn/Output                    3740           2955           6695            848
+JBoss-River                                  8236           7729          15965           1017
+Java built in                               17696           6558          24254           1143
+JBoss-Serializer                            11306          10030          21336           1143
+</pre><br><br>
+<br><h4>Test Class: FrequentPrimitivesExternalizable[]</h4>
+A class with a typical distribution of primitve fields: 2 short Strings, 3 boolean, 6 ints, 2 long, one double. But implementing Externalizable<br>
+<br>
+<b>read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x136&chd=t:3139,3804,3769,5659,12669,9301|2919,3269,3004,4064,4058,5120&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,16727&chxr=1,0,16727&chxt=y,x&chxl=0:|JBoss-Serializer%7CJava+built+in%7CJBoss-River%7CKryo+2.23+UnsafeIn%2FOutput%7CKryo+2.23%7CFST'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x136&chd=t:964,722,862,964,1065,1065|0,0,0,0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,1065&chxr=1,0,1065&chxt=y,x&chxl=0:|JBoss-Serializer%7CJava+built+in%7CJBoss-River%7CKryo+2.23+UnsafeIn%2FOutput%7CKryo+2.23%7CFST'/><br>
+<br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                          3139           2919           6058            964
+Kryo 2.23                                    3804           3269           7073            722
+Kryo 2.23 UnsafeIn/Output                    3769           3004           6773            862
+JBoss-River                                  5659           4064           9723            964
+Java built in                               12669           4058          16727           1065
+JBoss-Serializer                             9301           5120          14421           1065
+</pre><br><br>
+<br><h4>Test Class: FrequentCollections</h4>
+Measures serialization of most popular collection classes. (HashMap and an ArrayList filled with Integer and Long).<br>
+<br>
+<b>read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x136&chd=t:20393,30672,30565,22232,173647,203630|13026,22339,20502,27133,211754,206014&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,409644&chxr=1,0,409644&chxt=y,x&chxl=0:|JBoss-Serializer%7CJava+built+in%7CJBoss-River%7CKryo+2.23+UnsafeIn%2FOutput%7CKryo+2.23%7CFST'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x136&chd=t:4671,4622,4443,4515,8435,8435|0,0,0,0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,8435&chxr=1,0,8435&chxt=y,x&chxl=0:|JBoss-Serializer%7CJava+built+in%7CJBoss-River%7CKryo+2.23+UnsafeIn%2FOutput%7CKryo+2.23%7CFST'/><br>
+<br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                         20393          13026          33419           4671
+Kryo 2.23                                   30672          22339          53011           4622
+Kryo 2.23 UnsafeIn/Output                   30565          20502          51067           4443
+JBoss-River                                 22232          27133          49365           4515
+Java built in                              173647         211754         385401           8435
+JBoss-Serializer                           203630         206014         409644           8435
+</pre><br><br>
+<br><h4>Test Class: LargeNativeArrays</h4>
+measures performance serializing a large int array, a large long array and a large double array filled with random values. Note that random values destroy any value compression, so the increased size of kryo in this test will not be observable in most real world data.<br>
+<br>
+<b>read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x136&chd=t:28524,55367,8181,36417,34288,41264|24239,52211,2890,41448,24243,38946&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,107578&chxr=1,0,107578&chxt=y,x&chxl=0:|JBoss-Serializer%7CJava+built+in%7CJBoss-River%7CKryo+2.23+UnsafeIn%2FOutput%7CKryo+2.23%7CFST'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x136&chd=t:31219,34928,31210,31339,31403,31403|0,0,0,0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,34928&chxr=1,0,34928&chxt=y,x&chxl=0:|JBoss-Serializer%7CJava+built+in%7CJBoss-River%7CKryo+2.23+UnsafeIn%2FOutput%7CKryo+2.23%7CFST'/><br>
+<br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                         28524          24239          52763          31219
+Kryo 2.23                                   55367          52211         107578          34928
+Kryo 2.23 UnsafeIn/Output                    8181           2890          11071          31210
+JBoss-River                                 36417          41448          77865          31339
+Java built in                               34288          24243          58531          31403
+JBoss-Serializer                            41264          38946          80210          31403
+</pre><br><br>
+<br><h4>Test Class: StringPerformance</h4>
+measures serialization of mid size to very long Strings<br>
+<br>
+<b>read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x136&chd=t:28556,60464,60762,56149,65148,124372|17936,46067,45727,47332,79500,65887&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,190259&chxr=1,0,190259&chxt=y,x&chxl=0:|JBoss-Serializer%7CJava+built+in%7CJBoss-River%7CKryo+2.23+UnsafeIn%2FOutput%7CKryo+2.23%7CFST'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x136&chd=t:20020,17716,17716,17820,17931,17931|0,0,0,0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,20020&chxr=1,0,20020&chxt=y,x&chxl=0:|JBoss-Serializer%7CJava+built+in%7CJBoss-River%7CKryo+2.23+UnsafeIn%2FOutput%7CKryo+2.23%7CFST'/><br>
+<br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                         28556          17936          46492          20020
+Kryo 2.23                                   60464          46067         106531          17716
+Kryo 2.23 UnsafeIn/Output                   60762          45727         106489          17716
+JBoss-River                                 56149          47332         103481          17820
+Java built in                               65148          79500         144648          17931
+JBoss-Serializer                           124372          65887         190259          17931
+</pre><br><br>
+<br><h4>Test Class: Primitives</h4>
+A broad test of primitive values and specials such as Enums, EnumSets, Date, String, byte, short, int, .. Byte, Character; Short, Integer, .. <br> plus opaque private field with same name in a private subclass<br>
+<br>
+<b>read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x136&chd=t:10246,0,0,53017,129927,64364|10641,0,0,27206,29994,51162&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,159921&chxr=1,0,159921&chxt=y,x&chxl=0:|JBoss-Serializer%7CJava+built+in%7CJBoss-River%7CKryo+2.23+UnsafeIn%2FOutput+FAIL+%7CKryo+2.23+FAIL+%7CFST'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x136&chd=t:1450,0,0,3048,3614,3669|0,0,0,0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,3669&chxr=1,0,3669&chxt=y,x&chxl=0:|JBoss-Serializer%7CJava+built+in%7CJBoss-River%7CKryo+2.23+UnsafeIn%2FOutput+FAIL+%7CKryo+2.23+FAIL+%7CFST'/><br>
+<br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                         10246          10641          20887           1450
+Kryo 2.23 FAIL                                  0              0              0              0
+Kryo 2.23 UnsafeIn/Output FAIL                  0              0              0              0
+JBoss-River                                 53017          27206          80223           3048
+Java built in                              129927          29994         159921           3614
+JBoss-Serializer                            64364          51162         115526           3669
+</pre><br><br>
+<br><h4>Test Class: Arrays[]</h4>
+Tests various arrays of int, Dimension, Date, Object. Nested arrays, multidimensional arrays.<br>
+<br>
+<b>read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x136&chd=t:75178,74964,60051,71280,185603,109893|51420,66118,48458,71976,99698,118335&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,285301&chxr=1,0,285301&chxt=y,x&chxl=0:|JBoss-Serializer%7CJava+built+in%7CJBoss-River%7CKryo+2.23+UnsafeIn%2FOutput%7CKryo+2.23%7CFST'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x136&chd=t:22764,9681,16471,16691,20774,20774|0,0,0,0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,22764&chxr=1,0,22764&chxt=y,x&chxl=0:|JBoss-Serializer%7CJava+built+in%7CJBoss-River%7CKryo+2.23+UnsafeIn%2FOutput%7CKryo+2.23%7CFST'/><br>
+<br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                         75178          51420         126598          22764
+Kryo 2.23                                   74964          66118         141082           9681
+Kryo 2.23 UnsafeIn/Output                   60051          48458         108509          16471
+JBoss-River                                 71280          71976         143256          16691
+Java built in                              185603          99698         285301          20774
+JBoss-Serializer                           109893         118335         228228          20774
+</pre><br><br>
+<br><h4>Test Class: CommonCollections</h4>
+In depth test of collections incl. collections of collections.<br> (ArrayList, ArrayDeque, ConcurrentLinkedQueue, Vector, TreeSet, LinkedList, TreeMap, ConcurrentHashMap, Hashtable, HashMap). Note: has been modified to workaround Kryo-specific Issue.<br>
+<br>
+<b>read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x136&chd=t:61424,130631,130528,86097,264432,207469|41091,63113,58081,96098,170642,177768&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,435074&chxr=1,0,435074&chxt=y,x&chxl=0:|JBoss-Serializer%7CJava+built+in%7CJBoss-River%7CKryo+2.23+UnsafeIn%2FOutput%7CKryo+2.23%7CFST'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x136&chd=t:8502,8323,9408,9886,13172,13172|0,0,0,0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,13172&chxr=1,0,13172&chxt=y,x&chxl=0:|JBoss-Serializer%7CJava+built+in%7CJBoss-River%7CKryo+2.23+UnsafeIn%2FOutput%7CKryo+2.23%7CFST'/><br>
+<br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                         61424          41091         102515           8502
+Kryo 2.23                                  130631          63113         193744           8323
+Kryo 2.23 UnsafeIn/Output                  130528          58081         188609           9408
+JBoss-River                                 86097          96098         182195           9886
+Java built in                              264432         170642         435074          13172
+JBoss-Serializer                           207469         177768         385237          13172
+</pre><br><br>
+<br><h4>Test Class: Trader</h4>
+Measures serialization of a typical 'Enterprise-Object' using Value-Classes instead of primitive tpyes.<br>
+<br>
+<b>read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x136&chd=t:55414,83995,80578,147758,235082,240648|50554,79361,72693,163913,198167,244351&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,484999&chxr=1,0,484999&chxt=y,x&chxl=0:|JBoss-Serializer%7CJava+built+in%7CJBoss-River%7CKryo+2.23+UnsafeIn%2FOutput%7CKryo+2.23%7CFST'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x136&chd=t:5192,5919,5928,7210,11075,11075|0,0,0,0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,11075&chxr=1,0,11075&chxt=y,x&chxl=0:|JBoss-Serializer%7CJava+built+in%7CJBoss-River%7CKryo+2.23+UnsafeIn%2FOutput%7CKryo+2.23%7CFST'/><br>
+<br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                         55414          50554         105968           5192
+Kryo 2.23                                   83995          79361         163356           5919
+Kryo 2.23 UnsafeIn/Output                   80578          72693         153271           5928
+JBoss-River                                147758         163913         311671           7210
+Java built in                              235082         198167         433249          11075
+JBoss-Serializer                           240648         244351         484999          11075
+</pre><br><br>
+<br><h4>Test Class: ManyClasses</h4>
+Tests speed serializing a complex object graph of many different classes with few primitive fields.<br>
+<br>
+<b>read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x136&chd=t:6033,8515,8016,45683,117495,61371|3505,5857,5699,20969,22179,53098&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,139674&chxr=1,0,139674&chxt=y,x&chxl=0:|JBoss-Serializer%7CJava+built+in%7CJBoss-River%7CKryo+2.23+UnsafeIn%2FOutput%7CKryo+2.23%7CFST'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x136&chd=t:1000,1220,1283,2322,3062,3062|0,0,0,0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,3062&chxr=1,0,3062&chxt=y,x&chxl=0:|JBoss-Serializer%7CJava+built+in%7CJBoss-River%7CKryo+2.23+UnsafeIn%2FOutput%7CKryo+2.23%7CFST'/><br>
+<br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                          6033           3505           9538           1000
+Kryo 2.23                                    8515           5857          14372           1220
+Kryo 2.23 UnsafeIn/Output                    8016           5699          13715           1283
+JBoss-River                                 45683          20969          66652           2322
+Java built in                              117495          22179         139674           3062
+JBoss-Serializer                            61371          53098         114469           3062
+</pre><br><br>
+<br><h4>Test Class: ExternalizableTest</h4>
+Performance of Externalizable objects.<br>
+<br>
+<b>read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x136&chd=t:69791,95705,99192,123767,191301,144327|95543,91131,89063,129922,173988,143785&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,365289&chxr=1,0,365289&chxt=y,x&chxl=0:|JBoss-Serializer%7CJava+built+in%7CJBoss-River%7CKryo+2.23+UnsafeIn%2FOutput%7CKryo+2.23%7CFST'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x136&chd=t:10137,4733,7507,13291,14840,14840|0,0,0,0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,14840&chxr=1,0,14840&chxt=y,x&chxl=0:|JBoss-Serializer%7CJava+built+in%7CJBoss-River%7CKryo+2.23+UnsafeIn%2FOutput%7CKryo+2.23%7CFST'/><br>
+<br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                         69791          95543         165334          10137
+Kryo 2.23                                   95705          91131         186836           4733
+Kryo 2.23 UnsafeIn/Output                   99192          89063         188255           7507
+JBoss-River                                123767         129922         253689          13291
+Java built in                              191301         173988         365289          14840
+JBoss-Serializer                           144327         143785         288112          14840
+</pre><br><br>
+<br><h4>Test Class: BigObject</h4>
+A bigger object graph consisting of some of the test objects at once<br>
+<br>
+<b>read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x136&chd=t:3536985,5016964,4959939,5159753,7663914,7782434|3718992,4028313,3887250,6579654,8553681,8144898&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,16217595&chxr=1,0,16217595&chxt=y,x&chxl=0:|JBoss-Serializer%7CJava+built+in%7CJBoss-River%7CKryo+2.23+UnsafeIn%2FOutput%7CKryo+2.23%7CFST'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x136&chd=t:432548,322340,396290,482426,588458,588458|0,0,0,0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,588458&chxr=1,0,588458&chxt=y,x&chxl=0:|JBoss-Serializer%7CJava+built+in%7CJBoss-River%7CKryo+2.23+UnsafeIn%2FOutput%7CKryo+2.23%7CFST'/><br>
+<br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                       3536985        3718992        7255977         432548
+Kryo 2.23                                 5016964        4028313        9045277         322340
+Kryo 2.23 UnsafeIn/Output                 4959939        3887250        8847189         396290
+JBoss-River                               5159753        6579654       11739407         482426
+Java built in                             7663914        8553681       16217595         588458
+JBoss-Serializer                          7782434        8144898       15927332         588458
+</pre><br><br>
+<br><h4>Test Class: HeavyNesting</h4>
+Heavily nested Objects<br>
+<br>
+<b>read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x136&chd=t:56347,78839,75165,159585,169928,249022|65469,86746,76354,205498,203160,247533&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,496555&chxr=1,0,496555&chxt=y,x&chxl=0:|JBoss-Serializer%7CJava+built+in%7CJBoss-River%7CKryo+2.23+UnsafeIn%2FOutput%7CKryo+2.23%7CFST'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x136&chd=t:3747,5009,7076,7115,10182,10182|0,0,0,0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,10182&chxr=1,0,10182&chxt=y,x&chxl=0:|JBoss-Serializer%7CJava+built+in%7CJBoss-River%7CKryo+2.23+UnsafeIn%2FOutput%7CKryo+2.23%7CFST'/><br>
+<br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                         56347          65469         121816           3747
+Kryo 2.23                                   78839          86746         165585           5009
+Kryo 2.23 UnsafeIn/Output                   75165          76354         151519           7076
+JBoss-River                                159585         205498         365083           7115
+Java built in                              169928         203160         373088          10182
+JBoss-Serializer                           249022         247533         496555          10182
+</pre><br><br>
+<br><h4>Test Class: MediaContent</h4>
+measures serializing the cyclefree object structure used by one of the most known encoding/decoding tests<br>
+<br>
+<b>read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x136&chd=t:1813,2244,2130,9529,35706,13272|1308,1729,1696,5870,6289,13020&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,41995&chxr=1,0,41995&chxt=y,x&chxl=0:|JBoss-Serializer%7CJava+built+in%7CJBoss-River%7CKryo+2.23+UnsafeIn%2FOutput%7CKryo+2.23%7CFST'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x136&chd=t:316,286,307,694,889,856|0,0,0,0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,889&chxr=1,0,889&chxt=y,x&chxl=0:|JBoss-Serializer%7CJava+built+in%7CJBoss-River%7CKryo+2.23+UnsafeIn%2FOutput%7CKryo+2.23%7CFST'/><br>
+<br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                          1813           1308           3121            316
+Kryo 2.23                                    2244           1729           3973            286
+Kryo 2.23 UnsafeIn/Output                    2130           1696           3826            307
+JBoss-River                                  9529           5870          15399            694
+Java built in                               35706           6289          41995            889
+JBoss-Serializer                            13272          13020          26292            856
+</pre><br><br>
+<br><h4>Test Class: ShortRemoteCall</h4>
+measures overhead of stream initialization+classname decoding. Only one very short object is serialized<br>
+<br>
+<b>read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x136&chd=t:280,354,337,2641,9031,4531|188,285,261,1577,1303,2720&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,10334&chxr=1,0,10334&chxt=y,x&chxl=0:|JBoss-Serializer%7CJava+built+in%7CJBoss-River%7CKryo+2.23+UnsafeIn%2FOutput%7CKryo+2.23%7CFST'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x136&chd=t:15,32,36,172,220,220|0,0,0,0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,220&chxr=1,0,220&chxt=y,x&chxl=0:|JBoss-Serializer%7CJava+built+in%7CJBoss-River%7CKryo+2.23+UnsafeIn%2FOutput%7CKryo+2.23%7CFST'/><br>
+<br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                           280            188            468             15
+Kryo 2.23                                     354            285            639             32
+Kryo 2.23 UnsafeIn/Output                     337            261            598             36
+JBoss-River                                  2641           1577           4218            172
+Java built in                                9031           1303          10334            220
+JBoss-Serializer                             4531           2720           7251            220
+</pre><br><br>
+<br><h4>Test Class: SmallThing</h4>
+only one int. benches pure init time<br>
+<br>
+<b>read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x136&chd=t:157,122,113,2121,4468,2491|132,107,105,1139,746,1370&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,5214&chxr=1,0,5214&chxt=y,x&chxl=0:|JBoss-Serializer%7CJava+built+in%7CJBoss-River%7CKryo+2.23+UnsafeIn%2FOutput%7CKryo+2.23%7CFST'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x136&chd=t:2,2,5,102,100,100|0,0,0,0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,102&chxr=1,0,102&chxt=y,x&chxl=0:|JBoss-Serializer%7CJava+built+in%7CJBoss-River%7CKryo+2.23+UnsafeIn%2FOutput%7CKryo+2.23%7CFST'/><br>
+<br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                           157            132            289              2
+Kryo 2.23                                     122            107            229              2
+Kryo 2.23 UnsafeIn/Output                     113            105            218              5
+JBoss-River                                  2121           1139           3260            102
+Java built in                                4468            746           5214            100
+JBoss-Serializer                             2491           1370           3861            100
+</pre><br><br>
+</html>
