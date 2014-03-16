@@ -16,7 +16,7 @@ Kryo 2.23 UnsafeIn/Output                    3740           2955           6695 
 JBoss-River                                  8236           7729          15965           1017
 Java built in                               17696           6558          24254           1143
 JBoss-Serializer                            11306          10030          21336           1143
-</pre><br><br>
+</pre><br>
 <br><h4>Test Class: FrequentPrimitivesExternalizable[]</h4>
 A class with a typical distribution of primitve fields: 2 short Strings, 3 boolean, 6 ints, 2 long, one double. But implementing Externalizable<br>
 <br>
@@ -29,7 +29,7 @@ Kryo 2.23 UnsafeIn/Output                    3769           3004           6773 
 JBoss-River                                  5659           4064           9723            964
 Java built in                               12669           4058          16727           1065
 JBoss-Serializer                             9301           5120          14421           1065
-</pre><br><br>
+</pre><br>
 <br><h4>Test Class: FrequentCollections</h4>
 Measures serialization of most popular collection classes. (HashMap and an ArrayList filled with Integer and Long).<br>
 <br>
@@ -42,7 +42,7 @@ Kryo 2.23 UnsafeIn/Output                   30565          20502          51067 
 JBoss-River                                 22232          27133          49365           4515
 Java built in                              173647         211754         385401           8435
 JBoss-Serializer                           203630         206014         409644           8435
-</pre><br><br>
+</pre><br>
 <br><h4>Test Class: LargeNativeArrays</h4>
 measures performance serializing a large int array, a large long array and a large double array filled with random values. Note that random values destroy any value compression, so the increased size of kryo in this test will not be observable in most real world data.<br>
 <br>
@@ -55,7 +55,7 @@ Kryo 2.23 UnsafeIn/Output                    8181           2890          11071 
 JBoss-River                                 36417          41448          77865          31339
 Java built in                               34288          24243          58531          31403
 JBoss-Serializer                            41264          38946          80210          31403
-</pre><br><br>
+</pre><br>
 <br><h4>Test Class: StringPerformance</h4>
 measures serialization of mid size to very long Strings<br>
 <br>
@@ -68,7 +68,7 @@ Kryo 2.23 UnsafeIn/Output                   60762          45727         106489 
 JBoss-River                                 56149          47332         103481          17820
 Java built in                               65148          79500         144648          17931
 JBoss-Serializer                           124372          65887         190259          17931
-</pre><br><br>
+</pre><br>
 <br><h4>Test Class: Primitives</h4>
 A broad test of primitive values and specials such as Enums, EnumSets, Date, String, byte, short, int, .. Byte, Character; Short, Integer, .. <br> plus opaque private field with same name in a private subclass<br>
 <br>
@@ -81,7 +81,7 @@ Kryo 2.23 UnsafeIn/Output FAIL                  0              0              0 
 JBoss-River                                 53017          27206          80223           3048
 Java built in                              129927          29994         159921           3614
 JBoss-Serializer                            64364          51162         115526           3669
-</pre><br><br>
+</pre><br>
 <br><h4>Test Class: Arrays[]</h4>
 Tests various arrays of int, Dimension, Date, Object. Nested arrays, multidimensional arrays.<br>
 <br>
@@ -94,7 +94,7 @@ Kryo 2.23 UnsafeIn/Output                   60051          48458         108509 
 JBoss-River                                 71280          71976         143256          16691
 Java built in                              185603          99698         285301          20774
 JBoss-Serializer                           109893         118335         228228          20774
-</pre><br><br>
+</pre><br>
 <br><h4>Test Class: CommonCollections</h4>
 In depth test of collections incl. collections of collections.<br> (ArrayList, ArrayDeque, ConcurrentLinkedQueue, Vector, TreeSet, LinkedList, TreeMap, ConcurrentHashMap, Hashtable, HashMap). Note: has been modified to workaround Kryo-specific Issue.<br>
 <br>
@@ -107,7 +107,7 @@ Kryo 2.23 UnsafeIn/Output                  130528          58081         188609 
 JBoss-River                                 86097          96098         182195           9886
 Java built in                              264432         170642         435074          13172
 JBoss-Serializer                           207469         177768         385237          13172
-</pre><br><br>
+</pre><br>
 <br><h4>Test Class: Trader</h4>
 Measures serialization of a typical 'Enterprise-Object' using Value-Classes instead of primitive tpyes.<br>
 <br>
@@ -120,7 +120,7 @@ Kryo 2.23 UnsafeIn/Output                   80578          72693         153271 
 JBoss-River                                147758         163913         311671           7210
 Java built in                              235082         198167         433249          11075
 JBoss-Serializer                           240648         244351         484999          11075
-</pre><br><br>
+</pre><br>
 <br><h4>Test Class: ManyClasses</h4>
 Tests speed serializing a complex object graph of many different classes with few primitive fields.<br>
 <br>
@@ -133,7 +133,7 @@ Kryo 2.23 UnsafeIn/Output                    8016           5699          13715 
 JBoss-River                                 45683          20969          66652           2322
 Java built in                              117495          22179         139674           3062
 JBoss-Serializer                            61371          53098         114469           3062
-</pre><br><br>
+</pre><br>
 <br><h4>Test Class: ExternalizableTest</h4>
 Performance of Externalizable objects.<br>
 <br>
@@ -146,7 +146,7 @@ Kryo 2.23 UnsafeIn/Output                   99192          89063         188255 
 JBoss-River                                123767         129922         253689          13291
 Java built in                              191301         173988         365289          14840
 JBoss-Serializer                           144327         143785         288112          14840
-</pre><br><br>
+</pre><br>
 <br><h4>Test Class: BigObject</h4>
 A bigger object graph consisting of some of the test objects at once<br>
 <br>
@@ -159,7 +159,7 @@ Kryo 2.23 UnsafeIn/Output                 4959939        3887250        8847189 
 JBoss-River                               5159753        6579654       11739407         482426
 Java built in                             7663914        8553681       16217595         588458
 JBoss-Serializer                          7782434        8144898       15927332         588458
-</pre><br><br>
+</pre><br>
 <br><h4>Test Class: HeavyNesting</h4>
 Heavily nested Objects<br>
 <br>
@@ -172,7 +172,7 @@ Kryo 2.23 UnsafeIn/Output                   75165          76354         151519 
 JBoss-River                                159585         205498         365083           7115
 Java built in                              169928         203160         373088          10182
 JBoss-Serializer                           249022         247533         496555          10182
-</pre><br><br>
+</pre><br>
 <br><h4>Test Class: MediaContent</h4>
 measures serializing the cyclefree object structure used by one of the most known encoding/decoding tests<br>
 <br>
@@ -185,7 +185,7 @@ Kryo 2.23 UnsafeIn/Output                    2130           1696           3826 
 JBoss-River                                  9529           5870          15399            694
 Java built in                               35706           6289          41995            889
 JBoss-Serializer                            13272          13020          26292            856
-</pre><br><br>
+</pre><br>
 <br><h4>Test Class: ShortRemoteCall</h4>
 measures overhead of stream initialization+classname decoding. Only one very short object is serialized<br>
 <br>
@@ -198,7 +198,7 @@ Kryo 2.23 UnsafeIn/Output                     337            261            598 
 JBoss-River                                  2641           1577           4218            172
 Java built in                                9031           1303          10334            220
 JBoss-Serializer                             4531           2720           7251            220
-</pre><br><br>
+</pre><br>
 <br><h4>Test Class: SmallThing</h4>
 only one int. benches pure init time<br>
 <br>
@@ -211,5 +211,5 @@ Kryo 2.23 UnsafeIn/Output                     113            105            218 
 JBoss-River                                  2121           1139           3260            102
 Java built in                                4468            746           5214            100
 JBoss-Serializer                             2491           1370           3861            100
-</pre><br><br>
+</pre><br>
 </html>

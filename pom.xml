@@ -50,8 +50,8 @@
             <groupId>de.ruedigermoeller</groupId>
             <scope>system</scope>
             <artifactId>fst</artifactId>
-            <version>1.42</version>
-            <systemPath>${basedir}\src\lib\fst-1.42.jar</systemPath>
+            <version>1.5</version>
+            <systemPath>${basedir}\src\lib\fst-1.5.jar</systemPath>
         </dependency>
 
         <dependency>
