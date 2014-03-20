@@ -1,7 +1,5 @@
 package data.media;
 
-import de.ruedigermoeller.serialization.annotations.OneOf;
-import de.ruedigermoeller.serialization.annotations.Predict;
 
 import java.util.List;
 

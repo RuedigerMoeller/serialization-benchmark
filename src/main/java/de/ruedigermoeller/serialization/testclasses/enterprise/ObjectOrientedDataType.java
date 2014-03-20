@@ -1,9 +1,5 @@
 package de.ruedigermoeller.serialization.testclasses.enterprise;
 
-import de.ruedigermoeller.serialization.annotations.Compress;
-import de.ruedigermoeller.serialization.annotations.EqualnessIsIdentity;
-import de.ruedigermoeller.serialization.annotations.OneOf;
-
 import java.io.*;
 
 /**

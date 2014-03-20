@@ -1,6 +1,5 @@
 package de.ruedigermoeller.serialization.testclasses.enterprise.murks.common.special.common;
 
-import de.ruedigermoeller.serialization.annotations.EqualnessIsIdentity;
 import de.ruedigermoeller.serialization.testclasses.enterprise.ObjectOrientedDataType;
 
 /**

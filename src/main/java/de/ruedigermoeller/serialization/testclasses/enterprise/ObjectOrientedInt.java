@@ -1,6 +1,5 @@
 package de.ruedigermoeller.serialization.testclasses.enterprise;
 
-import de.ruedigermoeller.serialization.annotations.Flat;
 
 import java.io.*;
 
