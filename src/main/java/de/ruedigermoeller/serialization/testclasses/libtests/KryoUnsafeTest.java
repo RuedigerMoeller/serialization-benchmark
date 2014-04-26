@@ -9,6 +9,8 @@ import com.esotericsoftware.kryo.io.UnsafeOutput;
 import java.io.ByteArrayInputStream;
 import java.io.OutputStream;
 
+import org.objenesis.strategy.StdInstantiatorStrategy;
+
 /**
  * Copyright (c) 2012, Ruediger Moeller. All rights reserved.
  * <p/>
@@ -44,6 +46,7 @@ public class KryoUnsafeTest extends KryoTest {
     @Override
     public void init() {
         kryo = new Kryo();
+        kryo.setInstantiatorStrategy(new StdInstantiatorStrategy());
         in = new UnsafeInput(500*1000);
         output = new UnsafeOutput(500*1000);
     }

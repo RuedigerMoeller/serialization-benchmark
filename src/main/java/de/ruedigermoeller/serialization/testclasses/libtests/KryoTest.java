@@ -10,6 +10,8 @@ import de.ruedigermoeller.serialization.testclasses.jdkcompatibility.Swing;
 import java.io.ByteArrayInputStream;
 import java.io.OutputStream;
 
+import org.objenesis.strategy.StdInstantiatorStrategy;
+
 /**
  * Copyright (c) 2012, Ruediger Moeller. All rights reserved.
  * <p/>
@@ -46,6 +48,7 @@ public class KryoTest extends SerTest {
     @Override
     public void init() {
         kryo = new Kryo();
+        kryo.setInstantiatorStrategy(new StdInstantiatorStrategy());
         in = new Input(500*1000);
         output = new Output(500*1000);
     }
