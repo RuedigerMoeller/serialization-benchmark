@@ -33,7 +33,7 @@ public class CommonCollections implements Serializable, HasDescription {
     static class MyComp implements Comparator, Serializable{ // Kryo can't handle this if non-static (invalid sanity check)
         @Override
         public int compare(Object o1, Object o2) {
-            return (""+o1).compareTo(""+o2);
+            return (o1.toString()).compareTo(o2.toString());
         }
     };
 
