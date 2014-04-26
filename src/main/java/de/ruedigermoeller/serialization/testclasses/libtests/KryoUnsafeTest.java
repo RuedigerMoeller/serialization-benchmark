@@ -6,8 +6,11 @@ import com.esotericsoftware.kryo.io.Output;
 import com.esotericsoftware.kryo.io.UnsafeInput;
 import com.esotericsoftware.kryo.io.UnsafeOutput;
 
+import de.javakaffee.kryoserializers.UnmodifiableCollectionsSerializer;
+
 import java.io.ByteArrayInputStream;
 import java.io.OutputStream;
+import java.util.Collections;
 
 import org.objenesis.strategy.StdInstantiatorStrategy;
 
@@ -46,7 +49,9 @@ public class KryoUnsafeTest extends KryoTest {
     @Override
     public void init() {
         kryo = new Kryo();
-        kryo.setInstantiatorStrategy(new StdInstantiatorStrategy());
+        kryo.addDefaultSerializer(
+                Collections.unmodifiableCollection( Collections.EMPTY_LIST ).getClass(),
+                UnmodifiableCollectionsSerializer.class );
         in = new UnsafeInput(500*1000);
         output = new UnsafeOutput(500*1000);
     }

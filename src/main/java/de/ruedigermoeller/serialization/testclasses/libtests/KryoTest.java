@@ -5,12 +5,14 @@ import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
 import com.esotericsoftware.kryo.io.UnsafeInput;
 import com.esotericsoftware.kryo.io.UnsafeOutput;
+
+import de.javakaffee.kryoserializers.UnmodifiableCollectionsSerializer;
 import de.ruedigermoeller.serialization.testclasses.jdkcompatibility.Swing;
 
 import java.io.ByteArrayInputStream;
 import java.io.OutputStream;
+import java.util.Collections;
 
-import org.objenesis.strategy.StdInstantiatorStrategy;
 
 /**
  * Copyright (c) 2012, Ruediger Moeller. All rights reserved.
@@ -48,7 +50,9 @@ public class KryoTest extends SerTest {
     @Override
     public void init() {
         kryo = new Kryo();
-        kryo.setInstantiatorStrategy(new StdInstantiatorStrategy());
+        kryo.addDefaultSerializer(
+                Collections.unmodifiableCollection( Collections.EMPTY_LIST ).getClass(),
+                UnmodifiableCollectionsSerializer.class );
         in = new Input(500*1000);
         output = new Output(500*1000);
     }
