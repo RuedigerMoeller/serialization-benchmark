@@ -137,9 +137,13 @@ public class TestRunner {
         runner.charter.text("<i>"+System.getProperty("java.runtime.version")+","+System.getProperty("java.vm.name")+","+System.getProperty("os.name")+"</i>");
 
         Object media = "";
-        // read in the popular media benchmark
-        ObjectInputStream oin = new ObjectInputStream(new FileInputStream(".\\data\\media_from_eisheye_test.os"));
-        media = oin.readObject();
+        try {
+            // read in the popular media benchmark
+            ObjectInputStream oin = new ObjectInputStream(new FileInputStream("./data/media_from_eisheye_test.os"));
+            media = oin.readObject();
+        } catch (Exception ex) {
+            System.out.println("could not find media data for media test. Expect to run with project-root as working dir. Will skip test.");
+        }
 
         Object testCases[] = {
                 "a", FrequentPrimitives.getArray(10), // avoid measuring init overhead only for jboss, jdk 
@@ -164,7 +168,8 @@ public class TestRunner {
             String testLetter = (String) testCases[i];
             if ( runner.tests.indexOf(testLetter) >= 0 ) {
                 Object testCase = testCases[i+1];
-                runner.runAll(testCase,runner.warmup,runner.test);
+                if ( testCase != null ) // catch media file not found
+                    runner.runAll(testCase,runner.warmup,runner.test);
             }
         }
         runner.charter.closeDoc();

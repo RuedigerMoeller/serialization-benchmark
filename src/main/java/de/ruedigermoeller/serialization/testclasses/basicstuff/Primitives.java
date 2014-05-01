@@ -20,6 +20,8 @@ import java.util.*;
  */
 public class Primitives extends PrivatePrimitive implements Serializable, HasDescription {
 
+//    String hidden (**)
+
     @Override
     public String getDescription() {
         return "A broad test of primitive values and specials such as Enums, EnumSets, Date, String, byte, short, int, .. Byte, Character; Short, Integer, .. <br> plus opaque private field with same name in a private subclass";
@@ -154,7 +156,6 @@ public class Primitives extends PrivatePrimitive implements Serializable, HasDes
     }
 
     public static void main(String[] args) throws Exception {
-//        FSTConfiguration conf = FSTConfiguration.createMinimalConfiguration();
         FSTConfiguration conf = FSTConfiguration.createDefaultConfiguration();
         Primitives prim = new Primitives(4);
         System.out.println("Size:"+conf.calcObjectSizeBytesNotAUtility(prim));
@@ -164,6 +165,7 @@ public class Primitives extends PrivatePrimitive implements Serializable, HasDes
 }
 
 class PrivatePrimitive {
+    //private (many libs fail here, see (**)
     String hidden = "Hidden";
 }
 

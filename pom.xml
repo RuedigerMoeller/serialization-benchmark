@@ -18,20 +18,20 @@
     </plugins>
     </build>
     
-    <repositories>
-        <repository>
-            <id>lib</id>
-            <name>lib</name>
-            <releases>
-                <enabled>true</enabled>
-                <checksumPolicy>ignore</checksumPolicy>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <url>file://${project.basedir}/lib</url>
-        </repository>
-    </repositories>
+    <!--<repositories>-->
+        <!--<repository>-->
+            <!--<id>lib</id>-->
+            <!--<name>lib</name>-->
+            <!--<releases>-->
+                <!--<enabled>true</enabled>-->
+                <!--<checksumPolicy>ignore</checksumPolicy>-->
+            <!--</releases>-->
+            <!--<snapshots>-->
+                <!--<enabled>false</enabled>-->
+            <!--</snapshots>-->
+            <!--&lt;!&ndash;<url>file://${project.basedir}/lib</url>&ndash;&gt;-->
+        <!--</repository>-->
+    <!--</repositories>-->
 
     <dependencies>
         <dependency>
@@ -48,10 +48,8 @@
 
         <dependency>
             <groupId>de.ruedigermoeller</groupId>
-            <scope>system</scope>
             <artifactId>fst</artifactId>
             <version>LATEST</version>
-            <!--<systemPath>${basedir}\src\lib\fst-1.5.jar</systemPath>-->
         </dependency>
 
         <dependency>
