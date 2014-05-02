@@ -30,7 +30,7 @@ public class CommonCollections implements Serializable, HasDescription {
         return "In depth test of collections incl. collections of collections.<br> (ArrayList, ArrayDeque, ConcurrentLinkedQueue, Vector, TreeSet, LinkedList, TreeMap, ConcurrentHashMap, Hashtable, HashMap). Note: has been modified to workaround Kryo-specific Issue.";
     }
 
-    static class MyComp implements Comparator, Serializable{ // Kryo can't handle this if non-static (invalid sanity check)
+    public static class MyComp implements Comparator, Serializable{ // Kryo can't handle this if non-static (invalid sanity check)
         @Override
         public int compare(Object o1, Object o2) {
             return (o1.toString()).compareTo(o2.toString());

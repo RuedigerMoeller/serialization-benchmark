@@ -41,7 +41,7 @@ public class ExternalizableTest implements Serializable, HasDescription {
         return "Performance of Externalizable objects.";
     }
 
-    static class ExternalTest implements Externalizable {
+    public static class ExternalTest implements Externalizable {
 
         String pok = "HuckaHuckaHuckaHuckaHuckaHucka";
         NestedExternalTest nested = new NestedExternalTest(43);
@@ -72,7 +72,7 @@ public class ExternalizableTest implements Serializable, HasDescription {
         }
     }
 
-    static class NestedExternalTest implements Externalizable {
+    public static class NestedExternalTest implements Externalizable {
 
         String pok = "Some String";
         int i = 22;
