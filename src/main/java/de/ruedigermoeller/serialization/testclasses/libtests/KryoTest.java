@@ -3,15 +3,14 @@ package de.ruedigermoeller.serialization.testclasses.libtests;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
-import com.esotericsoftware.kryo.io.UnsafeInput;
-import com.esotericsoftware.kryo.io.UnsafeOutput;
 
 import de.javakaffee.kryoserializers.UnmodifiableCollectionsSerializer;
-import de.ruedigermoeller.serialization.testclasses.jdkcompatibility.Swing;
 
 import java.io.ByteArrayInputStream;
 import java.io.OutputStream;
 import java.util.Collections;
+
+import org.objenesis.strategy.StdInstantiatorStrategy;
 
 
 /**
@@ -38,6 +37,7 @@ import java.util.Collections;
  */
 public class KryoTest extends SerTest {
     Kryo kryo;
+    StdInstantiatorStrategy stdInstantiatorStrategy;
 
     public KryoTest(String title) {
         super(title);
@@ -50,6 +50,7 @@ public class KryoTest extends SerTest {
     @Override
     public void init() {
         kryo = new Kryo();
+        stdInstantiatorStrategy = new StdInstantiatorStrategy();
         kryo.addDefaultSerializer(
                 Collections.unmodifiableCollection( Collections.EMPTY_LIST ).getClass(),
                 UnmodifiableCollectionsSerializer.class );
