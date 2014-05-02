@@ -3,15 +3,14 @@ package de.ruedigermoeller.serialization.testclasses;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import de.ruedigermoeller.serialization.testclasses.basicstuff.*;
+import de.ruedigermoeller.serialization.testclasses.basicstuff.Arrays;
 import de.ruedigermoeller.serialization.testclasses.enterprise.*;
 import de.ruedigermoeller.serialization.testclasses.jdkcompatibility.*;
 import de.ruedigermoeller.serialization.testclasses.libtests.*;
 import de.ruedigermoeller.serialization.testclasses.remoting.ShortRemoteCall;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Formatter;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -31,10 +30,14 @@ public class TestRunner {
         mTests.addAll(java.util.Arrays.asList(
                 new FSTTest("FST", false, false), // unsafe and preferspeed deprecated unsupported since 1.43.
                 new KryoTest("Kryo 2.23"),
-                new KryoUnsafeTest("Kryo 2.23 UnsafeIn/Output"),
+                new KryoUnsafeTest("Kryo 2.23 Unsafe"),
                 new JBossRiver("JBoss-River"),
                 new JavaSerTest("Java built in"),
-                new JBossSerializer("JBoss-Serializer")
+                new JBossSerializer("JBoss-Serializer"),
+                new KryoRegTest("Kryo 2.23 pre-register JDK", true),
+                new KryoRegTest("Kryo 2.23 pre-register all", false),
+                new KryoUnsafeRegTest("Kryo 2.23 Unsafe pre-register JDK", true),
+                new KryoUnsafeRegTest("Kryo 2.23 Unsafe pre-register all", false)
         ));
     }
 
@@ -70,6 +73,12 @@ public class TestRunner {
             e.printStackTrace();
         }
 
+        Collections.sort(mTests, new Comparator<SerTest>() {
+            @Override
+            public int compare(SerTest o1, SerTest o2) {
+                return o1.getRWTimeNanos()-o2.getRWTimeNanos();
+            }
+        });
         List<Integer> hi = new ArrayList<>();
         List<Integer> lo = new ArrayList<>();
         List<Integer> siz = new ArrayList<>();
@@ -82,15 +91,15 @@ public class TestRunner {
                 siz.add(0);
                 names[i] = serTest.title+" FAIL ";
             } else {
-                int rv = (int) (serTest.timRead / serTest.readIter);
-                int wv = (int) (serTest.timWrite / (long)serTest.writeIter);
+                int rv = serTest.getReadTimeNS ();
+                int wv = serTest.getWriteTimeNanos();
                 lo.add(rv);
                 hi.add(rv+wv);
                 siz.add(serTest.bout.size());
                 names[i] = serTest.title;
             }
         }
-        charter.gChart(hi,lo,"read+write (ns)",names);
+        charter.gChart(hi,lo,"speed read+write (ns)",names);
         charter.gChart(siz,siz,"size (bytes)",names);
 
         String format = "%-34s %14s %14s %14s %14s\n";

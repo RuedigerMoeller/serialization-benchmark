@@ -11,12 +11,16 @@ A array[10] of objects with a typical distribution of primitve fields: 2 short S
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST                                          6838           5033          11871            836
-Kryo 2.23                                    6283           5498          11781            708
-Kryo 2.23 UnsafeIn/Output                    5699           5692          11391            848
-JBoss-River                                 15459          15649          31108           1017
-Java built in                               30942          13860          44802           1143
-JBoss-Serializer                            19937          18548          38485           1143
+Kryo 2.23 Unsafe pre-register all            5502           4316           9818            762
+Kryo 2.23 Unsafe pre-register JDK            6137           4583          10720            848
+Kryo 2.23 pre-register all                   5546           5206          10752            622
+Kryo 2.23 Unsafe                             6087           4745          10832            848
+Kryo 2.23                                    6030           5315          11345            708
+Kryo 2.23 pre-register JDK                   6333           5578          11911            708
+FST                                          7209           5063          12272            836
+JBoss-River                                 15715          14667          30382           1017
+JBoss-Serializer                            19540          17636          37176           1143
+Java built in                               30549          13593          44142           1143
 </pre>
 
 
@@ -27,12 +31,16 @@ A class with a typical distribution of primitve fields: 2 short Strings, 3 boole
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST                                          5803           4943          10746            964
-Kryo 2.23                                    6107           5844          11951            722
-Kryo 2.23 UnsafeIn/Output                    5663           5261          10924            862
-JBoss-River                                  9955           8142          18097            964
-Java built in                               20108           7675          27783           1065
-JBoss-Serializer                            15433          11167          26600           1065
+Kryo 2.23 Unsafe pre-register all            5341           4387           9728            762
+Kryo 2.23 pre-register all                   5755           5077          10832            622
+FST                                          5913           4979          10892            964
+Kryo 2.23 Unsafe pre-register JDK            6115           4823          10938            862
+Kryo 2.23 Unsafe                             6072           4943          11015            862
+Kryo 2.23                                    6507           5474          11981            722
+Kryo 2.23 pre-register JDK                   6442           5548          11990            722
+JBoss-River                                  9970           8245          18215            964
+JBoss-Serializer                            16434          10854          27288           1065
+Java built in                               21198           7897          29095           1065
 </pre>
 
 
@@ -43,12 +51,16 @@ Measures serialization of most popular collection classes. (HashMap and an Array
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST                                         42321          30292          72613           4671
-Kryo 2.23                                   64708          50148         114856           4612
-Kryo 2.23 UnsafeIn/Output                   59615          42283         101898           4443
-JBoss-River                                 42305          47530          89835           4515
-Java built in                              253272         350844         604116           8435
-JBoss-Serializer                           345170         323894         669064           8435
+FST                                         38489          30695          69184           4671
+JBoss-River                                 41804          48248          90052           4515
+Kryo 2.23 Unsafe pre-register all           52664          44903          97567           4405
+Kryo 2.23 Unsafe                            59115          45264         104379           4443
+Kryo 2.23 Unsafe pre-register JDK           60731          44415         105146           4405
+Kryo 2.23                                   64660          54994         119654           4617
+Kryo 2.23 pre-register all                  67365          53691         121056           4579
+Kryo 2.23 pre-register JDK                  63994          57840         121834           4579
+Java built in                              261127         344572         605699           8435
+JBoss-Serializer                           342613         322320         664933           8435
 </pre>
 
 
@@ -59,12 +71,16 @@ measures performance serializing a large int array, a large long array and a lar
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST                                         66079          45353         111432          31219
-Kryo 2.23                                  109309          98202         207511          34934
-Kryo 2.23 UnsafeIn/Output                   21048           6848          27896          31210
-JBoss-River                                 67170          80080         147250          31339
-Java built in                               64160          49216         113376          31403
-JBoss-Serializer                            82960          80620         163580          31403
+Kryo 2.23 Unsafe pre-register JDK           18410           6656          25066          31210
+Kryo 2.23 Unsafe                            19587           6683          26270          31210
+Kryo 2.23 Unsafe pre-register all           21659           8533          30192          31210
+FST                                         58974          45394         104368          31219
+Java built in                               64930          50482         115412          31403
+JBoss-River                                 66354          80099         146453          31339
+JBoss-Serializer                            76840          78395         155235          31403
+Kryo 2.23                                  107884          93990         201874          34954
+Kryo 2.23 pre-register JDK                 107190          94915         202105          34954
+Kryo 2.23 pre-register all                 108404          95428         203832          34954
 </pre>
 
 
@@ -75,12 +91,16 @@ measures serialization of mid size to very long Strings
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST                                         63700          37576         101276          20020
-Kryo 2.23                                  124934         108171         233105          17716
-Kryo 2.23 UnsafeIn/Output                  127976         109159         237135          17716
-JBoss-River                                105614          77775         183389          17820
-Java built in                              144490         173458         317948          17931
-JBoss-Serializer                           223550         109115         332665          17931
+FST                                         63346          35911          99257          20020
+JBoss-River                                103645          77768         181413          17820
+Kryo 2.23                                  125200          97988         223188          17716
+Kryo 2.23 Unsafe                           124187         103669         227856          17716
+Kryo 2.23 Unsafe pre-register JDK          122985         105219         228204          17716
+Kryo 2.23 pre-register JDK                 124951         104482         229433          17716
+Kryo 2.23 Unsafe pre-register all          125416         104508         229924          17716
+Kryo 2.23 pre-register all                 127541         105750         233291          17716
+Java built in                              134945         163706         298651          17931
+JBoss-Serializer                           216893         106652         323545          17931
 </pre>
 
 
@@ -92,12 +112,16 @@ A broad test of primitive values and specials such as Enums, EnumSets, Date, Str
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST                                         22503          20345          42848           1458
 Kryo 2.23 FAIL                                  0              0              0              0
-Kryo 2.23 UnsafeIn/Output FAIL                  0              0              0              0
-JBoss-River                                 90800          54808         145608           3048
-Java built in                              222161          65353         287514           3614
-JBoss-Serializer                           109976          90773         200749           3669
+Kryo 2.23 Unsafe FAIL                           0              0              0              0
+Kryo 2.23 Unsafe pre-register all           17167          17108          34275            952
+Kryo 2.23 pre-register all                  17686          17736          35422            842
+FST                                         22517          21049          43566           1458
+Kryo 2.23 Unsafe pre-register JDK           32348          17665          50013           1115
+Kryo 2.23 pre-register JDK                  32452          18517          50969           1005
+JBoss-River                                103403          62916         166319           3048
+JBoss-Serializer                           107314          92754         200068           3669
+Java built in                              213953          63057         277010           3614
 </pre>
 
 
@@ -108,12 +132,16 @@ Tests various arrays of int, Dimension, Date, Object. Nested arrays, multidimens
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST                                        148811         111217         260028          22764
-Kryo 2.23                                  143003         134246         277249           9681
-Kryo 2.23 UnsafeIn/Output                  109779         100650         210429          16471
-JBoss-River                                131896         148563         280459          16691
-Java built in                              318144         212664         530808          20774
-JBoss-Serializer                           195323         229364         424687          20774
+Kryo 2.23 Unsafe pre-register all           99961          90309         190270          15761
+Kryo 2.23 Unsafe pre-register JDK          106369          92441         198810          16226
+Kryo 2.23 Unsafe                           108809          94861         203670          16471
+FST                                        141464         106166         247630          22764
+Kryo 2.23 pre-register all                 130570         124726         255296           8971
+Kryo 2.23 pre-register JDK                 136202         129621         265823           9436
+Kryo 2.23                                  138593         131240         269833           9681
+JBoss-River                                130621         142879         273500          16691
+JBoss-Serializer                           185007         217430         402437          20774
+Java built in                              300796         205935         506731          20774
 </pre>
 
 
@@ -125,12 +153,16 @@ In depth test of collections incl. collections of collections.
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST                                        122179          86168         208347           8502
-Kryo 2.23                                  230082         106650         336732           8323
-Kryo 2.23 UnsafeIn/Output                  228300         102976         331276           9408
-JBoss-River                                145373         188394         333767           9886
-Java built in                              433686         324122         757808          13172
-JBoss-Serializer                           347576         320979         668555          13172
+FST                                        124115          85692         209807           8502
+Kryo 2.23 Unsafe                           205787         101286         307073           9408
+Kryo 2.23 Unsafe pre-register JDK          202337         107798         310135           9167
+Kryo 2.23 pre-register all                 201784         109899         311683           7999
+Kryo 2.23 pre-register JDK                 206806         107127         313933           8082
+Kryo 2.23                                  206018         108638         314656           8323
+JBoss-River                                154923         178386         333309           9886
+Kryo 2.23 Unsafe pre-register all          229828         109256         339084           9084
+JBoss-Serializer                           354431         307363         661794          13172
+Java built in                              449014         328684         777698          13172
 </pre>
 
 
@@ -141,12 +173,16 @@ Measures serialization of a typical 'Enterprise-Object' using Value-Classes inst
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST                                         99430         108926         208356           5192
-Kryo 2.23                                  145219         149801         295020           5919
-Kryo 2.23 UnsafeIn/Output                  136760         132101         268861           5928
-JBoss-River                                313580         286985         600565           7210
-Java built in                              378458         381447         759905          11075
-JBoss-Serializer                           422162         406986         829148          11075
+FST                                         98519         101320         199839           5192
+Kryo 2.23 Unsafe pre-register all          133847         127509         261356           4886
+Kryo 2.23 pre-register all                 136710         144223         280933           4877
+Kryo 2.23 Unsafe pre-register JDK          150414         134402         284816           5799
+Kryo 2.23 Unsafe                           150385         135261         285646           5928
+Kryo 2.23 pre-register JDK                 147460         152909         300369           5790
+Kryo 2.23                                  157865         149260         307125           5919
+JBoss-River                                314783         288101         602884           7210
+Java built in                              375262         373630         748892          11075
+JBoss-Serializer                           431511         415081         846592          11075
 </pre>
 
 
@@ -157,12 +193,16 @@ Tests speed serializing a complex object graph of many different classes with fe
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST                                         11614           8542          20156           1000
-Kryo 2.23                                   15353          11586          26939           1220
-Kryo 2.23 UnsafeIn/Output                   15420          10857          26277           1283
-JBoss-River                                 74653          39757         114410           2322
-Java built in                              184685          46769         231454           3062
-JBoss-Serializer                           104385          91601         195986           3062
+Kryo 2.23 Unsafe pre-register all            9806           8752          18558            335
+Kryo 2.23 pre-register all                  10464           9264          19728            272
+FST                                         11834           8628          20462           1000
+Kryo 2.23 Unsafe pre-register JDK           14892          10582          25474           1228
+Kryo 2.23 Unsafe                            15367          10898          26265           1283
+Kryo 2.23 pre-register JDK                  14699          11778          26477           1165
+Kryo 2.23                                   15378          11830          27208           1220
+JBoss-River                                 74884          39590         114474           2322
+JBoss-Serializer                           103872          90761         194633           3062
+Java built in                              181688          45555         227243           3062
 </pre>
 
 
@@ -173,12 +213,16 @@ Performance of Externalizable objects.
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST                                        132522         176730         309252          10137
-Kryo 2.23                                  141864         154460         296324           4733
-Kryo 2.23 UnsafeIn/Output                  146433         139634         286067           7507
-JBoss-River                                232086         232660         464746          13291
-Java built in                              308255         308743         616998          14840
-JBoss-Serializer                           262566         274554         537120          14840
+Kryo 2.23 pre-register all                 139192         131073         270265           3898
+Kryo 2.23 Unsafe pre-register all          144411         129098         273509           6672
+FST                                        125902         154661         280563          10137
+Kryo 2.23 Unsafe pre-register JDK          152942         136263         289205           7470
+Kryo 2.23 Unsafe                           155956         136206         292162           7507
+Kryo 2.23 pre-register JDK                 147823         146960         294783           4696
+Kryo 2.23                                  151945         154106         306051           4733
+JBoss-River                                237927         198750         436677          13291
+JBoss-Serializer                           249843         258268         508111          14840
+Java built in                              326612         311665         638277          14840
 </pre>
 
 
@@ -189,12 +233,16 @@ A bigger object graph consisting of some of the test objects at once
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST                                       6498928        6693129       13192057         432548
-Kryo 2.23                                 8300319        7008580       15308899         322340
-Kryo 2.23 UnsafeIn/Output                 8115270        6211020       14326290         396290
-JBoss-River                              10217377       11351010       21568387         482426
-Java built in                            12445001       15286713       27731714         588458
-JBoss-Serializer                         14539353       14291443       28830796         588458
+FST                                       6371686        6225703       12597389         432548
+Kryo 2.23 Unsafe pre-register all         7495611        6086162       13581773         373247
+Kryo 2.23 Unsafe pre-register JDK         8005349        6265279       14270628         394200
+Kryo 2.23 pre-register all                7909434        6417403       14326837         299297
+Kryo 2.23 Unsafe                          8186992        6260010       14447002         396290
+Kryo 2.23 pre-register JDK                8145270        6817343       14962613         320250
+Kryo 2.23                                 8200814        6976040       15176854         322340
+JBoss-River                              10249026       10694813       20943839         482426
+Java built in                            12940092       15046956       27987048         588458
+JBoss-Serializer                         14091229       13907132       27998361         588458
 </pre>
 
 
@@ -205,12 +253,16 @@ Heavily nested Objects
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST                                        102023         147101         249124           3747
-Kryo 2.23                                  152619         165338         317957           5009
-Kryo 2.23 UnsafeIn/Output                  161328         142603         303931           7076
-JBoss-River                                348265         374299         722564           7115
-Java built in                              291782         416936         708718          10182
-JBoss-Serializer                           446710         404067         850777          10182
+FST                                        101260         128194         229454           3747
+Kryo 2.23 Unsafe pre-register all          139996         130822         270818           6006
+Kryo 2.23 pre-register all                 142263         150415         292678           3939
+Kryo 2.23 Unsafe pre-register JDK          162288         139732         302020           7076
+Kryo 2.23 Unsafe                           165830         137921         303751           7076
+Kryo 2.23 pre-register JDK                 159246         169176         328422           5009
+Kryo 2.23                                  170509         169377         339886           5009
+Java built in                              294911         397891         692802          10182
+JBoss-River                                360251         338742         698993           7115
+JBoss-Serializer                           440584         418463         859047          10182
 </pre>
 
 
@@ -221,12 +273,16 @@ measures serializing the cyclefree object structure used by one of the most know
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST                                          3875           3166           7041            316
-Kryo 2.23                                    4011           3162           7173            286
-Kryo 2.23 UnsafeIn/Output                    3825           2846           6671            307
-JBoss-River                                 17568          12305          29873            694
-Java built in                               61610          13835          75445            889
-JBoss-Serializer                            24784          23538          48322            856
+Kryo 2.23 Unsafe pre-register all            3080           2503           5583            251
+Kryo 2.23 pre-register all                   3133           2657           5790            230
+Kryo 2.23 Unsafe pre-register JDK            3487           2634           6121            286
+Kryo 2.23 Unsafe                             3643           2835           6478            307
+Kryo 2.23 pre-register JDK                   3644           2967           6611            265
+FST                                          3923           2770           6693            316
+Kryo 2.23                                    3935           3106           7041            286
+JBoss-River                                 17988          12034          30022            694
+JBoss-Serializer                            23944          22778          46722            856
+Java built in                               59490          13328          72818            889
 </pre>
 
 
@@ -237,12 +293,16 @@ measures overhead of stream initialization+classname decoding. Only one very sho
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST                                           510            369            879             15
-Kryo 2.23                                     645            547           1192             32
-Kryo 2.23 UnsafeIn/Output                     703            532           1235             36
-JBoss-River                                  4427           3183           7610            172
-Java built in                               14910           2807          17717            220
-JBoss-Serializer                             7621           5092          12713            220
+Kryo 2.23 Unsafe pre-register JDK             370            362            732             16
+Kryo 2.23 Unsafe pre-register all             400            386            786             16
+Kryo 2.23 pre-register all                    404            399            803             12
+FST                                           512            330            842             15
+Kryo 2.23 pre-register JDK                    423            456            879             12
+Kryo 2.23 Unsafe                              636            507           1143             36
+Kryo 2.23                                     656            524           1180             32
+JBoss-River                                  4664           2976           7640            172
+JBoss-Serializer                             7413           5131          12544            220
+Java built in                               14328           2740          17068            220
 </pre>
 
 
@@ -253,11 +313,15 @@ only one int. benches pure init time
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST                                           309            309            618              2
-Kryo 2.23                                     245            199            444              2
-Kryo 2.23 UnsafeIn/Output                     241            194            435              5
-JBoss-River                                  3340           2313           5653            102
-Java built in                                7531           1625           9156            100
-JBoss-Serializer                             4080           2731           6811            100
+Kryo 2.23 Unsafe pre-register all             225            195            420              5
+Kryo 2.23 Unsafe pre-register JDK             224            197            421              5
+Kryo 2.23 pre-register JDK                    231            203            434              2
+Kryo 2.23 Unsafe                              236            198            434              5
+Kryo 2.23 pre-register all                    239            200            439              2
+Kryo 2.23                                     255            214            469              2
+FST                                           290            273            563              2
+JBoss-River                                  3479           2129           5608            102
+JBoss-Serializer                             4069           2756           6825            100
+Java built in                                6995           1551           8546            100
 </pre>
 

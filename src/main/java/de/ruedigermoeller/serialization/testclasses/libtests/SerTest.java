@@ -133,6 +133,22 @@ public abstract class SerTest {
         }
     }
 
+    public int getRWTimeNanos() {
+        return getReadTimeNS() + getWriteTimeNanos();
+    }
+
+    public int getWriteTimeNanos() {
+        if ( writeIter == 0 )
+            return 0;
+        return (int) (timWrite / (long)writeIter);
+    }
+
+    public int getReadTimeNS() {
+        if ( readIter == 0 )
+            return 0;
+        return (int) (timRead / readIter);
+    }
+
     public void runReadTest(Class cl) {
         bin = new ByteArrayInputStream(bout.toByteArray());
         readTest(bin, cl);

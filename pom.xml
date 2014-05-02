@@ -49,7 +49,7 @@
         <dependency>
             <groupId>de.ruedigermoeller</groupId>
             <artifactId>fst</artifactId>
-            <version>LATEST</version>
+            <version>1.55</version>
         </dependency>
 
         <dependency>
