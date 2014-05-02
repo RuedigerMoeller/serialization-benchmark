@@ -3,6 +3,8 @@ package de.ruedigermoeller.serialization.testclasses.libtests;
 import com.esotericsoftware.kryo.io.UnsafeInput;
 import com.esotericsoftware.kryo.io.UnsafeOutput;
 
+
+
 /**
  * Copyright (c) 2012, Ruediger Moeller. All rights reserved.
  * <p/>
@@ -25,10 +27,10 @@ import com.esotericsoftware.kryo.io.UnsafeOutput;
  * Time: 10:35
  * To change this template use File | Settings | File Templates.
  */
-public class KryoUnsafeTest extends KryoTest {
+public class KryoUnsafeRegTest extends KryoRegTest {
 
-    public KryoUnsafeTest(String title) {
-        super(title);
+    public KryoUnsafeRegTest(String title, boolean regOnlyJDK) {
+        super(title, regOnlyJDK);
     }
 
     public String getColor() {

@@ -83,7 +83,7 @@ public class Arrays implements Serializable, HasDescription {
         return "Tests various arrays of int, Dimension, Date, Object. Nested arrays, multidimensional arrays.";
     }
 
-    static class Dim implements Serializable {
+    public static class Dim implements Serializable {
         int x;
         int y;
         long z;
