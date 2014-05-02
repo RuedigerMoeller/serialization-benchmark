@@ -60,22 +60,18 @@ public abstract class SerTest {
 
         System.out.println("==================== Run Test "+title);
         System.out.println("warmup ..");
-        
-        long startTim = 0;
-        startTim = System.nanoTime();
-        while ( System.nanoTime()-startTim < warmupTimeNanos ) {
-            for ( int i = 0; i < 10; i++ ) {
-                try {
-                    runOnce(toWrite);
-                } catch (Throwable th) {
-                    break;
+
+        try {
+            long startTim = 0;
+            startTim = System.nanoTime();
+            while ( System.nanoTime()-startTim < warmupTimeNanos ) {
+                for ( int i = 0; i < 10; i++ ) {
+                     runOnce(toWrite);
                 }
             }
-        }
 
-        System.gc();
-        System.out.println("write ..");
-        try {
+            System.gc();
+            System.out.println("write ..");
             startTim = System.nanoTime();
             while ( System.nanoTime()-startTim < testTimeNanos ) {
                 for ( int i = 0; i < 10; i++ ) {
@@ -85,13 +81,9 @@ public abstract class SerTest {
             }
             timWrite = System.nanoTime()-startTim;
             writeIter*=10;
-        } catch (Exception e) {
-            System.out.println(""+title+" FAILURE in write "+e.getMessage());
-        }
-        length = bout.toByteArray().length;
+            length = bout.toByteArray().length;
 
-        System.gc();
-        try {
+            System.gc();
             System.out.println("read ..");
             startTim = System.nanoTime();
             Class<?> aClass = toWrite.getClass();
@@ -103,7 +95,7 @@ public abstract class SerTest {
             }
             timRead = System.nanoTime()-startTim;
             readIter*=10;
-        } catch (Exception e) {
+        } catch (Throwable e) {
             timRead = 0;
             e.printStackTrace();
             System.out.println(""+title+" FAILURE in read "+e.getMessage());
@@ -111,6 +103,7 @@ public abstract class SerTest {
         if ( resObject != null ) {
             if ( ! DeepEquals.deepEquals(resObject, toWrite) ) {
                 System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! EqualTest failed !!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                boolean bool = DeepEquals.deepEquals(resObject, toWrite);
                 length = 0;
                 timRead = 0;
                 timWrite = 0;

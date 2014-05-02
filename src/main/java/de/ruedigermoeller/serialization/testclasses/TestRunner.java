@@ -22,23 +22,46 @@ import java.util.*;
 public class TestRunner {
 
     public TestRunner() {
-        registerTests();
     }
 
     List<SerTest> mTests = new ArrayList<>();
     public void registerTests() {
-        mTests.addAll(java.util.Arrays.asList(
-                new FSTTest("FST", false, false), // unsafe and preferspeed deprecated unsupported since 1.43.
-                new KryoTest("Kryo 2.23"),
+        if ( "default".equals(variants) ) {
+            mTests.addAll(java.util.Arrays.asList(
+                    new FSTCrossPlatformTest("FST cross platform", false, false), // unsafe and preferspeed deprecated unsupported since 1.43.
+                    new FSTTest("FST", false, false), // unsafe and preferspeed deprecated unsupported since 1.43.
+                    new KryoTest("Kryo 2.23"),
+                    new JBossRiver("JBoss-River"),
+                    new JavaSerTest("Java built in"),
+                    new JBossSerializer("JBoss-Serializer")
+            ));
+        } else if ( "unsafe".equals(variants)) {
+            mTests.addAll(java.util.Arrays.asList(
                 new KryoUnsafeTest("Kryo 2.23 Unsafe"),
-                new JBossRiver("JBoss-River"),
-                new JavaSerTest("Java built in"),
-                new JBossSerializer("JBoss-Serializer"),
-                new KryoRegTest("Kryo 2.23 pre-register JDK", true),
-                new KryoRegTest("Kryo 2.23 pre-register all", false),
                 new KryoUnsafeRegTest("Kryo 2.23 Unsafe pre-register JDK", true),
                 new KryoUnsafeRegTest("Kryo 2.23 Unsafe pre-register all", false)
-        ));
+            ));
+        } else if ( "fst".equals(variants)) {
+            mTests.addAll(java.util.Arrays.asList(
+                    new FSTCrossPlatformTest("FST cross platform", false, false), // unsafe and preferspeed deprecated unsupported since 1.43.
+                    new FSTTest("FST", false, false) // unsafe and preferspeed deprecated unsupported since 1.43.
+//                    new JavaSerTest("Java built in")
+            ));
+        } else {
+            mTests.addAll(java.util.Arrays.asList(
+                    new FSTCrossPlatformTest("FST cross platform", false, false), // unsafe and preferspeed deprecated unsupported since 1.43.
+                    new FSTTest("FST", false, false), // unsafe and preferspeed deprecated unsupported since 1.43.
+                    new KryoTest("Kryo 2.23"),
+                    new JBossRiver("JBoss-River"),
+                    new JavaSerTest("Java built in"),
+                    new JBossSerializer("JBoss-Serializer"),
+                    new KryoRegTest("Kryo 2.23 pre-register JDK", true),
+                    new KryoRegTest("Kryo 2.23 pre-register all", false),
+                    new KryoUnsafeTest("Kryo 2.23 Unsafe"),
+                    new KryoUnsafeRegTest("Kryo 2.23 Unsafe pre-register JDK", true),
+                    new KryoUnsafeRegTest("Kryo 2.23 Unsafe pre-register all", false)
+            ));
+        }
     }
 
     Class testClass;
@@ -121,20 +144,24 @@ public class TestRunner {
     }
     HtmlCharter charter = new HtmlCharter("./result.html");
 
-    @Parameter(names = { "-warm" }, description = "number of warmup time ms >5000 for stable results")
+    @Parameter(names = { "-warm", "-w" }, description = "number of warmup time ms >5000 for stable results")
     Integer warmup = 5000;
-    @Parameter(names = { "-test" }, description = "number of test time ms  >5000 for stable results")
+    @Parameter(names = { "-test", "-t" }, description = "number of test time ms  >5000 for stable results")
     Integer test = 3000;
-    @Parameter(names = { "-cases" }, description = "testcases to execute (string of a..z, not specified: all)")
+    @Parameter(names = { "-cases", "-c" }, description = "testcases to execute (string of a..z, not specified: all)")
     String tests = "abcdefghijklmnopqrstuvwxyz";
 
-    @Parameter(names = "--help", help = true)
+    @Parameter(names = {"-help", "-h", "-?", "--help"}, help = true)
     private boolean help;
+
+    @Parameter(names={"-variants", "-var"}, description = "default|unsafe|fst|all")
+    String variants = "default";
 
     public static void main( String[] arg ) throws Exception {
         
         TestRunner runner = new TestRunner();
         JCommander jCommander = new JCommander(runner, arg);
+        runner.registerTests();
         
         runner.charter.setAsc(new AsciiCharter("./result.txt"));
 
