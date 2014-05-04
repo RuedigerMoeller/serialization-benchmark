@@ -1,7 +1,6 @@
 package de.ruedigermoeller.serialization.testclasses.basicstuff;
 
 import de.ruedigermoeller.serialization.testclasses.HasDescription;
-
 import java.io.Serializable;
 
 /**
@@ -20,12 +19,26 @@ import java.io.Serializable;
  limitations under the License.
  */
 
-
-public class SmallThing implements Serializable, HasDescription {
-    int ageSum;
-
+public class LargeFPArrays implements Serializable, HasDescription {
     @Override
     public String getDescription() {
-        return "only one int. benches pure init time";
+        return "measures performance serializing a large flaot and a large double array filled with random values. ";
+    }
+
+    public LargeFPArrays() {
+    }
+
+    float floats[];
+    double doubles[];
+    public LargeFPArrays(int dummy) {
+        int N = 1300;
+        floats = new float[N*2];
+        for (int i = 0; i < floats.length; i++) {
+            floats[i] = (float) (Math.random()*Integer.MAX_VALUE*2-Integer.MAX_VALUE);
+        }
+        doubles = new double[N];
+        for (int i = 0; i < doubles.length; i++) {
+            doubles[i] = Math.random()*Double.MAX_VALUE*2-Double.MAX_VALUE;
+        }
     }
 }

@@ -1,4 +1,4 @@
-//// commented as i can't redistribute the jars.
+//// commented as i can't redistribute the jars. anyway not competitive in general
 //
 //package de.ruedigermoeller.serialization.testclasses.libtests;
 //

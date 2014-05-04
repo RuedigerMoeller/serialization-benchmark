@@ -11,11 +11,11 @@ A array[10] of objects with a typical distribution of primitve fields: 2 short S
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-BOON JSon FAIL                                  0              0              0              0
-FST                                          7484           5512          12996            836
-Java built in                               35186          14459          49645           1143
-FST cross platform                         117727         101682         219409           2102
-JSON IO                                    459324         189894         649218           2100
+FST                                          7502           5590          13092            836
+Java built in                               29945          14046          43991           1143
+Jackson                                     31009          17989          48998           2001
+FST cross platform                          32393          17171          49564           2102
+JSON IO                                    266443         104569         371012           2100
 </pre>
 
 
@@ -26,11 +26,11 @@ A class with a typical distribution of primitve fields: 2 short Strings, 3 boole
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-BOON JSon FAIL                                  0              0              0              0
-FST cross platform FAIL                         0              0              0              0
-FST                                          4616           3867           8483            864
-Java built in                               20898           7543          28441           1065
-JSON IO                                    269249          67829         337078           2114
+FST                                          4546           3501           8047            864
+Java built in                               19935           7459          27394           1065
+FST cross platform                          22027          14037          36064           2968
+Jackson                                     30876          18791          49667           2001
+JSON IO                                    234655          53710         288365           2114
 </pre>
 
 
@@ -41,26 +41,41 @@ Measures serialization of most popular collection classes. (HashMap and an Array
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-BOON JSon                                       0              0              0           9357
-FST                                         47532          41518          89050           4671
-FST cross platform                         104511          69607         174118           4530
-Java built in                              261467         360574         622041           8435
-JSON IO                                   2604639         828021        3432660          24722
+Jackson                                         0              0              0           9199
+FST                                         45040          37070          82110           4671
+FST cross platform                         105485          50152         155637           4605
+Java built in                              264950         363809         628759           8435
+JSON IO                                   2508003         714897        3222900          24696
 </pre>
 
 
-=============================
-Test Class: LargeNativeArrays
-=============================
-measures performance serializing a large int array, a large long array and a large double array filled with random values. Note that random values destroy any value compression, so the increased size of kryo in this test will not be observable in most real world data.
+================================
+Test Class: LargeNativeIntArrays
+================================
+measures performance serializing a large int array, a large long array filled with random values. Note that random values destroy any value compression, so the increased size of kryo in this test will not be observable in most real world data.
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-BOON JSon FAIL                                  0              0              0              0
-JSON IO                                         0              0              0          76131
-Java built in                               71620          51879         123499          31403
-FST                                         75296          98387         173683          35119
-FST cross platform                        2714530        5943220        8657750          45786
+FST                                         34738          18952          53690          20814
+Java built in                               43529          23918          67447          20968
+FST cross platform                          85853         119102         204955          20990
+Jackson                                    768370         368695        1137065          55096
+JSON IO                                   5048631         525968        5574599          55183
+</pre>
+
+
+=========================
+Test Class: LargeFPArrays
+=========================
+measures performance serializing a large flaot and a large double array filled with random values. 
+
+
+<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                           310            323            633              3
+Jackson                                       829            386           1215             30
+FST cross platform                           1697            564           2261            174
+Java built in                                8467           1943          10410            121
+JSON IO                                     19851           8346          28197            110
 </pre>
 
 
@@ -71,11 +86,11 @@ measures serialization of mid size to very long Strings
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST                                         65426          41486         106912          20020
-Java built in                              141756         173641         315397          17931
-BOON JSon                                  992181         679275        1671456          58787
-FST cross platform                        1009785        1088482        2098267          29726
-JSON IO                                   2844312         552094        3396406          42412
+FST                                         62569          40942         103511          20020
+Java built in                              135997         163373         299370          17931
+FST cross platform                         179273         140925         320198          29964
+Jackson                                    252138         250766         502904          42328
+JSON IO                                   2738957         543320        3282277          42412
 </pre>
 
 
@@ -87,11 +102,11 @@ A broad test of primitive values and specials such as Enums, EnumSets, Date, Str
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-BOON JSon                                       0              0              0            977
 JSON IO FAIL                                    0              0              0              0
-FST                                          3821           4267           8088            295
-FST cross platform                          50318          48688          99006            892
-Java built in                              100201          21833         122034           1548
+FST                                          3656           4116           7772            295
+Jackson                                     10763           6093          16856            529
+FST cross platform                          15942           8714          24656           1190
+Java built in                              100541          22306         122847           1548
 </pre>
 
 
@@ -102,27 +117,11 @@ Tests various arrays of int, Dimension, Date, Object. Nested arrays, multidimens
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-BOON JSon FAIL                                  0              0              0              0
-FST                                        115781         112886         228667          10297
-Java built in                              304259         214296         518555          20774
-FST cross platform                        1812100        1420114        3232214          31925
-JSON IO                                   4320323         954375        5274698          26944
-</pre>
-
-
-=============================
-Test Class: CommonCollections
-=============================
-In depth test of collections incl. collections of collections.
- (ArrayList, ArrayDeque, ConcurrentLinkedQueue, Vector, TreeSet, LinkedList, TreeMap, ConcurrentHashMap, Hashtable, HashMap). Note: has been modified to workaround Kryo-specific Issue.
-
-
-<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-BOON JSon                                       0              0              0          12291
-FST cross platform FAIL                         0              0              0              0
-JSON IO FAIL                                    0              0              0              0
-FST                                        140736         140622         281358           8665
-Java built in                              452672         336254         788926          13172
+Jackson                                         0              0              0          30626
+FST                                        116051         102133         218184          15365
+Java built in                              306891         216893         523784          20774
+FST cross platform                         404835         252980         657815          40460
+JSON IO                                   4456942         898586        5355528          26944
 </pre>
 
 
@@ -133,11 +132,11 @@ Measures serialization of a typical 'Enterprise-Object' using Value-Classes inst
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-BOON JSon                                       0              0              0          54050
-FST                                        110428         129427         239855           5253
-Java built in                              384627         378695         763322          11075
-FST cross platform                        4013110        2515041        6528151          43196
-JSON IO                                   9499206        1270067       10769273          47411
+FST                                        111877         122820         234697           5374
+Jackson                                    446042         221204         667246          41721
+Java built in                              385250         390740         775990          11075
+FST cross platform                         692203         243226         935429          43196
+JSON IO                                   9540326        1246696       10787022          47422
 </pre>
 
 
@@ -148,41 +147,11 @@ Tests speed serializing a complex object graph of many different classes with fe
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-BOON JSon                                       0              0              0           2253
-FST                                         12239           9928          22167            986
-Java built in                              191216          45486         236702           3062
-FST cross platform                         410226         317302         727528           5082
-JSON IO                                    729270          80019         809289           5106
-</pre>
-
-
-==============================
-Test Class: ExternalizableTest
-==============================
-Performance of Externalizable objects.
-
-
-<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-BOON JSon                                       0              0              0          31265
-FST cross platform FAIL                         0              0              0              0
-FST                                        108280         149735         258015           7772
-Java built in                              318589         313548         632137          14840
-JSON IO                                  10821101        1080130       11901231          62507
-</pre>
-
-
-=====================
-Test Class: BigObject
-=====================
-A bigger object graph consisting of some of the test objects at once
-
-
-<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-BOON JSon FAIL                                  0              0              0              0
-FST cross platform FAIL                         0              0              0              0
-JSON IO FAIL                                    0              0              0              0
-FST                                       6145932        7021694       13167626         366324
-Java built in                            12677233       15635102       28312335         588458
+Jackson                                         0              0              0           1974
+FST                                         12123           9035          21158            986
+FST cross platform                          73163          17580          90743           7841
+Java built in                              188147          45962         234109           3062
+JSON IO                                    721126          72338         793464           5106
 </pre>
 
 
@@ -193,11 +162,11 @@ Heavily nested Objects
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST                                        103407         161588         264995           3747
-Java built in                              285471         412767         698238          10182
-BOON JSon                                 1087386         706663        1794049          59920
-JSON IO                                  10078818        1060735       11139553          20992
-FST cross platform                        8270197        6020271       14290468          97104
+FST                                        100511         138441         238952           3747
+Jackson                                    322685         214234         536919          20913
+Java built in                              279608         440660         720268          10182
+FST cross platform                        1333144         309500        1642644         165172
+JSON IO                                  10060000         992011       11052011          20992
 </pre>
 
 
@@ -208,11 +177,11 @@ measures serializing the cyclefree object structure used by one of the most know
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST                                          4081           3690           7771            316
-BOON JSon                                   21708          12012          33720            608
-Java built in                               59178          13061          72239            889
-FST cross platform                          42601          38116          80717            672
-JSON IO                                    116979          26226         143205            736
+FST                                          4223           3160           7383            316
+Jackson                                      7130           3667          10797            503
+FST cross platform                          10402           6343          16745            672
+Java built in                               61483          13081          74564            889
+JSON IO                                    118034          25408         143442            736
 </pre>
 
 
@@ -223,11 +192,11 @@ measures overhead of stream initialization+classname decoding. Only one very sho
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-BOON JSon                                       0              0              0            189
-FST                                           503            488            991             15
-Java built in                               14364           2590          16954            220
-FST cross platform                          11694           9736          21430            172
-JSON IO                                     25626           9642          35268            159
+FST                                           468            423            891             15
+Jackson                                      1498            603           2101             79
+FST cross platform                           2544            857           3401            241
+Java built in                               14830           2677          17507            220
+JSON IO                                     25043           9187          34230            159
 </pre>
 
 
@@ -238,10 +207,10 @@ only one int. benches pure init time
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST                                           337            382            719              2
-Java built in                                6978           1457           8435            100
-FST cross platform                           7854           5640          13494             94
-BOON JSon                                   12783           4256          17039             54
-JSON IO                                     18552           8011          26563             89
+FST                                           296            322            618              2
+Jackson                                       659            331            990             12
+FST cross platform                           1407            557           1964            160
+Java built in                                7267           1464           8731            100
+JSON IO                                     18410           8002          26412             89
 </pre>
 

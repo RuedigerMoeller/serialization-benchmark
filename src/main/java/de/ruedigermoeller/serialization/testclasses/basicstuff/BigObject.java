@@ -27,7 +27,7 @@ public class BigObject implements Serializable, HasDescription {
 //        runner.runAll(FrequentPrimitives.getArray(200));
 //        runner.runAll(new StringPerformance(0));
 //        runner.runAll(new FrequentCollections());
-//        runner.runAll(new LargeNativeArrays());
+//        runner.runAll(new LargeNativeIntArrays());
 //        runner.runAll("new Primitives(0).createPrimArray() jva ser bug");
 //        runner.runAll(new Arrays().createPrimArray());
 //        runner.runAll(new CommonCollections());

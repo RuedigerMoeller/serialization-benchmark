@@ -24,47 +24,6 @@ public class TestRunner {
     public TestRunner() {
     }
 
-    List<SerTest> mTests = new ArrayList<>();
-    public void registerTests() {
-        if ( "default".equals(variants) ) {
-            mTests.addAll(java.util.Arrays.asList(
-                    new FSTCrossPlatformTest("FST cross platform", false, false), // unsafe and preferspeed deprecated unsupported since 1.43.
-                    new FSTTest("FST", false, false), // unsafe and preferspeed deprecated unsupported since 1.43.
-                    new KryoTest("Kryo 2.23"),
-                    new JBossRiver("JBoss-River"),
-                    new JavaSerTest("Java built in"),
-                    new JBossSerializer("JBoss-Serializer")
-            ));
-        } else if ( "unsafe".equals(variants)) {
-            mTests.addAll(java.util.Arrays.asList(
-                new KryoUnsafeTest("Kryo 2.23 Unsafe"),
-                new KryoUnsafeRegTest("Kryo 2.23 Unsafe pre-register JDK", true),
-                new KryoUnsafeRegTest("Kryo 2.23 Unsafe pre-register all", false)
-            ));
-        } else if ( "fst".equals(variants)) {
-            mTests.addAll(java.util.Arrays.asList(
-                    new BoonTest("BOON JSon") ,// crashes.
-                    new JSonIOTest("JSON IO") , // pretty slow, some fails
-                    new FSTCrossPlatformTest("FST cross platform", false, false) ,
-                    new FSTTest("FST", false, false), // unsafe and preferspeed deprecated unsupported since 1.43.
-                    new JavaSerTest("Java built in")
-            ));
-        } else {
-            mTests.addAll(java.util.Arrays.asList(
-                    new FSTCrossPlatformTest("FST cross platform", false, false),
-                    new FSTTest("FST", false, false), // unsafe and preferspeed deprecated unsupported since 1.43.
-                    new KryoTest("Kryo 2.23"),
-                    new JBossRiver("JBoss-River"),
-                    new JavaSerTest("Java built in"),
-                    new JBossSerializer("JBoss-Serializer"),
-                    new KryoRegTest("Kryo 2.23 pre-register JDK", true),
-                    new KryoRegTest("Kryo 2.23 pre-register all", false),
-                    new KryoUnsafeTest("Kryo 2.23 Unsafe"),
-                    new KryoUnsafeRegTest("Kryo 2.23 Unsafe pre-register JDK", true),
-                    new KryoUnsafeRegTest("Kryo 2.23 Unsafe pre-register all", false)
-            ));
-        }
-    }
 
     Class testClass;
     public List<SerTest> runAll( Object toSer, int warmUP, int testRuns ) throws IOException, InterruptedException {
@@ -144,6 +103,51 @@ public class TestRunner {
 
         return mTests;
     }
+
+
+    List<SerTest> mTests = new ArrayList<>();
+    public void registerTests() {
+        if ( "default".equals(variants) ) {
+            mTests.addAll(java.util.Arrays.asList(
+                    new FSTCrossPlatformTest("FST cross platform", false, false), // unsafe and preferspeed deprecated unsupported since 1.43.
+                    new FSTTest("FST", false, false), // unsafe and preferspeed deprecated unsupported since 1.43.
+                    new KryoTest("Kryo 2.23"),
+                    new JBossRiver("JBoss-River"),
+                    new JavaSerTest("Java built in"),
+                    new JBossSerializer("JBoss-Serializer")
+            ));
+        } else if ( "unsafe".equals(variants)) {
+            mTests.addAll(java.util.Arrays.asList(
+                    new KryoUnsafeTest("Kryo 2.23 Unsafe"),
+                    new KryoUnsafeRegTest("Kryo 2.23 Unsafe pre-register JDK", true),
+                    new KryoUnsafeRegTest("Kryo 2.23 Unsafe pre-register all", false)
+            ));
+        } else if ( "cross".equals(variants)) {
+            mTests.addAll(java.util.Arrays.asList(
+//                    new BoonTest("BOON JSon") , too many fails
+                    new JSonIOTest("JSON IO") ,
+                    new JacksonTest("Jackson") ,
+                    new FSTCrossPlatformTest("FST cross platform", false, false) ,
+                    new FSTTest("FST", false, false), // compare to fastest
+                    new JavaSerTest("Java built in") // and standard
+            ));
+        } else {
+            mTests.addAll(java.util.Arrays.asList(
+                    new FSTCrossPlatformTest("FST cross platform", false, false),
+                    new FSTTest("FST", false, false), // unsafe and preferspeed deprecated unsupported since 1.43.
+                    new KryoTest("Kryo 2.23"),
+                    new JBossRiver("JBoss-River"),
+                    new JavaSerTest("Java built in"),
+                    new JBossSerializer("JBoss-Serializer"),
+                    new KryoRegTest("Kryo 2.23 pre-register JDK", true),
+                    new KryoRegTest("Kryo 2.23 pre-register all", false),
+                    new KryoUnsafeTest("Kryo 2.23 Unsafe"),
+                    new KryoUnsafeRegTest("Kryo 2.23 Unsafe pre-register JDK", true),
+                    new KryoUnsafeRegTest("Kryo 2.23 Unsafe pre-register all", false)
+            ));
+        }
+    }
+
     HtmlCharter charter = new HtmlCharter("./result.html");
 
     @Parameter(names = { "-warm", "-w" }, description = "number of warmup time ms >5000 for stable results")
@@ -187,7 +191,8 @@ public class TestRunner {
                 "a", FrequentPrimitives.getArray(10), // avoid measuring init overhead only for jboss, jdk 
                 "b", FrequentPrimitivesExternalizable.getArray(10), // avoid measuring init overhead only for jboss, jdk
                 "c", new FrequentCollections(1),
-                "d", new LargeNativeArrays(1),
+                "d", new LargeNativeIntArrays(1),
+                "q", new LargeFPArrays(), // same as initial: measure effects of max hashsize on reuse speed
                 "e", new StringPerformance(0),
                 "f", new Primitives(),
                 "g", Arrays.createPrimArray(),

@@ -20,19 +20,19 @@ import java.io.Serializable;
  limitations under the License.
  */
 
-public class LargeNativeArrays implements Serializable, HasDescription {
+public class LargeNativeIntArrays implements Serializable, HasDescription {
     @Override
     public String getDescription() {
-        return "measures performance serializing a large int array, a large long array and a large double array filled with random values. Note that random values destroy any value compression, so the increased size of kryo in this test will not be observable in most real world data.";
+        return "measures performance serializing a large int array, a large long array filled with random values. Note that random values destroy any value compression, so the increased size of kryo in this test will not be observable in most real world data.";
     }
 
-    public LargeNativeArrays() {
+    public LargeNativeIntArrays() {
     }
     
     int ints[];
     long longs[];
-    double doubles[];
-    public LargeNativeArrays(int dummy) {
+
+    public LargeNativeIntArrays(int dummy) {
         int N = 1300;
         ints = new int[N*2];
         for (int i = 0; i < ints.length; i++) {
@@ -41,10 +41,6 @@ public class LargeNativeArrays implements Serializable, HasDescription {
         longs = new long[N];
         for (int i = 0; i < longs.length; i++) {
             longs[i] = (long) (Math.random()*Long.MAX_VALUE*2-Long.MAX_VALUE);
-        }
-        doubles = new double[N];
-        for (int i = 0; i < doubles.length; i++) {
-            doubles[i] = Math.random()*Double.MAX_VALUE*2-Double.MAX_VALUE;
         }
     }
 }

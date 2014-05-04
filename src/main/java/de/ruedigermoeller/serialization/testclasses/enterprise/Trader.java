@@ -55,7 +55,7 @@ public class Trader implements Serializable, HasDescription {
                 int start = Math.max(0, rand.nextInt(orders-5));
                 int len = rand.nextInt(5);
                 for (int j = start; j < start+len; j++ ) {
-                    tr.ordersOfFriends.put(tr,SimpleOrder.generateOrder(j+randomSeed));
+                    tr.ordersOfFriends.put(tr.getLoginName().toString(),SimpleOrder.generateOrder(j+randomSeed));
                 }
             }
         }
@@ -118,7 +118,8 @@ public class Trader implements Serializable, HasDescription {
 
     List<SimpleOrder> orders = new ArrayList<SimpleOrder>();
     List<Trader> friends = new ArrayList<Trader>();
-    HashMap<Trader,SimpleOrder> ordersOfFriends = new HashMap<Trader, SimpleOrder>();
+    // modified as jackson cannot stand non string keys
+    HashMap<String/*TraderName*/,SimpleOrder> ordersOfFriends = new HashMap<>();
 
     public ObjectOrientedInt getArtificialID() {
         return mArtificialID;

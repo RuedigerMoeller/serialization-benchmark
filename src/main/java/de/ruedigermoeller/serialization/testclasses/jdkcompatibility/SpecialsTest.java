@@ -67,25 +67,32 @@ public class SpecialsTest {
     }
 
     public static void main(String[]s) throws IOException, ClassNotFoundException {
-        FSTConfiguration conf = FSTConfiguration.createDefaultConfiguration();
-        exceptionTest(conf);
+        double d = 1345.23423;
+        long l = (long) d;
+        long l1 = (long) ((d-l)*100000);
+        double d1 = l+(double)l1/100000d;
 
-
-        ToWrite w = new ToWrite("bla");
-
-        byte b[] = null;
-        FSTObjectOutput out = new FSTObjectOutput(conf);
-        out.writeObject(w);
-        out.flush();
-        b = out.getBuffer();
-
-        FSTObjectInput in = new FSTObjectInput(conf);
-        in.resetForReuseUseArray(b,b.length);
-        Object res = in.readObject();
-
-        if ( !res.equals("bla") ) {
-            throw new RuntimeException("fail "+res);
-        }
+        System.out.println( d==d1 );
+        System.out.println( d+" "+d1);
+//        FSTConfiguration conf = FSTConfiguration.createDefaultConfiguration();
+//        exceptionTest(conf);
+//
+//
+//        ToWrite w = new ToWrite("bla");
+//
+//        byte b[] = null;
+//        FSTObjectOutput out = new FSTObjectOutput(conf);
+//        out.writeObject(w);
+//        out.flush();
+//        b = out.getBuffer();
+//
+//        FSTObjectInput in = new FSTObjectInput(conf);
+//        in.resetForReuseUseArray(b,b.length);
+//        Object res = in.readObject();
+//
+//        if ( !res.equals("bla") ) {
+//            throw new RuntimeException("fail "+res);
+//        }
 
     }
 
