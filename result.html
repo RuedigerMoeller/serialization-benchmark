@@ -7,161 +7,193 @@ Cores (incl HT):32<br>
 <br><h4>Test Class: FrequentPrimitives[]</h4>
 A array[10] of objects with a typical distribution of primitve fields: 2 short Strings, 3 boolean, 6 ints, 2 long, one double.<br>
 <br>
-<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:7336,30253,31701|5612,13000,17711&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,49412&chxr=1,0,49412&chxt=y,x&chxl=0:|FST+cross+platform%7CJava+built+in%7CFST'/><br>
-<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:836,1143,2102|0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,2102&chxr=1,0,2102&chxt=y,x&chxl=0:|FST+cross+platform%7CJava+built+in%7CFST'/><br>
+<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x116&chd=t:0,7484,35186,117727,459324|0,5512,14459,101682,189894&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,649218&chxr=1,0,649218&chxt=y,x&chxl=0:|JSON+IO%7CFST+cross+platform%7CJava+built+in%7CFST%7CBOON+JSon+FAIL+'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x116&chd=t:0,836,1143,2102,2100|0,0,0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,2102&chxr=1,0,2102&chxt=y,x&chxl=0:|JSON+IO%7CFST+cross+platform%7CJava+built+in%7CFST%7CBOON+JSon+FAIL+'/><br>
 <br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST                                          7336           5612          12948            836
-Java built in                               30253          13000          43253           1143
-FST cross platform                          31701          17711          49412           2102
+BOON JSon FAIL                                  0              0              0              0
+FST                                          7484           5512          12996            836
+Java built in                               35186          14459          49645           1143
+FST cross platform                         117727         101682         219409           2102
+JSON IO                                    459324         189894         649218           2100
 </pre><br><br>
 <br><h4>Test Class: FrequentPrimitivesExternalizable[]</h4>
 A class with a typical distribution of primitve fields: 2 short Strings, 3 boolean, 6 ints, 2 long, one double. But implementing Externalizable<br>
 <br>
-<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:4596,19856,22344|3367,6954,12553&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,34897&chxr=1,0,34897&chxt=y,x&chxl=0:|FST+cross+platform%7CJava+built+in%7CFST'/><br>
-<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:864,1065,2968|0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,2968&chxr=1,0,2968&chxt=y,x&chxl=0:|FST+cross+platform%7CJava+built+in%7CFST'/><br>
+<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x116&chd=t:0,0,4616,20898,269249|0,0,3867,7543,67829&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,337078&chxr=1,0,337078&chxt=y,x&chxl=0:|JSON+IO%7CJava+built+in%7CFST%7CFST+cross+platform+FAIL+%7CBOON+JSon+FAIL+'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x116&chd=t:0,0,864,1065,2114|0,0,0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,2114&chxr=1,0,2114&chxt=y,x&chxl=0:|JSON+IO%7CJava+built+in%7CFST%7CFST+cross+platform+FAIL+%7CBOON+JSon+FAIL+'/><br>
 <br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST                                          4596           3367           7963            864
-Java built in                               19856           6954          26810           1065
-FST cross platform                          22344          12553          34897           2968
+BOON JSon FAIL                                  0              0              0              0
+FST cross platform FAIL                         0              0              0              0
+FST                                          4616           3867           8483            864
+Java built in                               20898           7543          28441           1065
+JSON IO                                    269249          67829         337078           2114
 </pre><br><br>
 <br><h4>Test Class: FrequentCollections</h4>
 Measures serialization of most popular collection classes. (HashMap and an ArrayList filled with Integer and Long).<br>
 <br>
-<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:42405,91491,249913|35595,49510,327492&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,577405&chxr=1,0,577405&chxt=y,x&chxl=0:|Java+built+in%7CFST+cross+platform%7CFST'/><br>
-<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:4671,4605,8435|0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,8435&chxr=1,0,8435&chxt=y,x&chxl=0:|Java+built+in%7CFST+cross+platform%7CFST'/><br>
+<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x116&chd=t:0,47532,104511,261467,2604639|0,41518,69607,360574,828021&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,3432660&chxr=1,0,3432660&chxt=y,x&chxl=0:|JSON+IO%7CJava+built+in%7CFST+cross+platform%7CFST%7CBOON+JSon'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x116&chd=t:9357,4671,4530,8435,24722|0,0,0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,24722&chxr=1,0,24722&chxt=y,x&chxl=0:|JSON+IO%7CJava+built+in%7CFST+cross+platform%7CFST%7CBOON+JSon'/><br>
 <br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST                                         42405          35595          78000           4671
-FST cross platform                          91491          49510         141001           4605
-Java built in                              249913         327492         577405           8435
+BOON JSon                                       0              0              0           9357
+FST                                         47532          41518          89050           4671
+FST cross platform                         104511          69607         174118           4530
+Java built in                              261467         360574         622041           8435
+JSON IO                                   2604639         828021        3432660          24722
 </pre><br><br>
 <br><h4>Test Class: LargeNativeArrays</h4>
 measures performance serializing a large int array, a large long array and a large double array filled with random values. Note that random values destroy any value compression, so the increased size of kryo in this test will not be observable in most real world data.<br>
 <br>
-<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:60297,70355,1386021|49046,77190,4620549&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,6006570&chxr=1,0,6006570&chxt=y,x&chxl=0:|FST+cross+platform%7CFST%7CJava+built+in'/><br>
-<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:31403,35119,45770|0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,45770&chxr=1,0,45770&chxt=y,x&chxl=0:|FST+cross+platform%7CFST%7CJava+built+in'/><br>
+<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x116&chd=t:0,0,71620,75296,2714530|0,0,51879,98387,5943220&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,8657750&chxr=1,0,8657750&chxt=y,x&chxl=0:|FST+cross+platform%7CFST%7CJava+built+in%7CJSON+IO%7CBOON+JSon+FAIL+'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x116&chd=t:0,76131,31403,35119,45786|0,0,0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,76131&chxr=1,0,76131&chxt=y,x&chxl=0:|FST+cross+platform%7CFST%7CJava+built+in%7CJSON+IO%7CBOON+JSon+FAIL+'/><br>
 <br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-Java built in                               60297          49046         109343          31403
-FST                                         70355          77190         147545          35119
-FST cross platform                        1386021        4620549        6006570          45770
+BOON JSon FAIL                                  0              0              0              0
+JSON IO                                         0              0              0          76131
+Java built in                               71620          51879         123499          31403
+FST                                         75296          98387         173683          35119
+FST cross platform                        2714530        5943220        8657750          45786
 </pre><br><br>
 <br><h4>Test Class: StringPerformance</h4>
 measures serialization of mid size to very long Strings<br>
 <br>
-<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:61186,138223,177524|41219,164761,145628&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,323152&chxr=1,0,323152&chxt=y,x&chxl=0:|FST+cross+platform%7CJava+built+in%7CFST'/><br>
-<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:20020,17931,29964|0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,29964&chxr=1,0,29964&chxt=y,x&chxl=0:|FST+cross+platform%7CJava+built+in%7CFST'/><br>
+<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x116&chd=t:65426,141756,992181,1009785,2844312|41486,173641,679275,1088482,552094&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,3396406&chxr=1,0,3396406&chxt=y,x&chxl=0:|JSON+IO%7CFST+cross+platform%7CBOON+JSon%7CJava+built+in%7CFST'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x116&chd=t:20020,17931,58787,29726,42412|0,0,0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,58787&chxr=1,0,58787&chxt=y,x&chxl=0:|JSON+IO%7CFST+cross+platform%7CBOON+JSon%7CJava+built+in%7CFST'/><br>
 <br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST                                         61186          41219         102405          20020
-Java built in                              138223         164761         302984          17931
-FST cross platform                         177524         145628         323152          29964
+FST                                         65426          41486         106912          20020
+Java built in                              141756         173641         315397          17931
+BOON JSon                                  992181         679275        1671456          58787
+FST cross platform                        1009785        1088482        2098267          29726
+JSON IO                                   2844312         552094        3396406          42412
 </pre><br><br>
 <br><h4>Test Class: Primitives</h4>
 A broad test of primitive values and specials such as Enums, EnumSets, Date, String, byte, short, int, .. Byte, Character; Short, Integer, .. <br> plus opaque private field with same name in a private subclass<br>
 <br>
-<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:3775,15907,95427|3897,8673,21404&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,116831&chxr=1,0,116831&chxt=y,x&chxl=0:|Java+built+in%7CFST+cross+platform%7CFST'/><br>
-<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:295,1190,1548|0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,1548&chxr=1,0,1548&chxt=y,x&chxl=0:|Java+built+in%7CFST+cross+platform%7CFST'/><br>
+<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x116&chd=t:0,0,3821,50318,100201|0,0,4267,48688,21833&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,122034&chxr=1,0,122034&chxt=y,x&chxl=0:|Java+built+in%7CFST+cross+platform%7CFST%7CJSON+IO+FAIL+%7CBOON+JSon'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x116&chd=t:977,0,295,892,1548|0,0,0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,1548&chxr=1,0,1548&chxt=y,x&chxl=0:|Java+built+in%7CFST+cross+platform%7CFST%7CJSON+IO+FAIL+%7CBOON+JSon'/><br>
 <br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST                                          3775           3897           7672            295
-FST cross platform                          15907           8673          24580           1190
-Java built in                               95427          21404         116831           1548
+BOON JSon                                       0              0              0            977
+JSON IO FAIL                                    0              0              0              0
+FST                                          3821           4267           8088            295
+FST cross platform                          50318          48688          99006            892
+Java built in                              100201          21833         122034           1548
 </pre><br><br>
 <br><h4>Test Class: Arrays[]</h4>
 Tests various arrays of int, Dimension, Date, Object. Nested arrays, multidimensional arrays.<br>
 <br>
-<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:113363,294932,417848|113211,208455,240691&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,658539&chxr=1,0,658539&chxt=y,x&chxl=0:|FST+cross+platform%7CJava+built+in%7CFST'/><br>
-<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:10297,20774,40460|0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,40460&chxr=1,0,40460&chxt=y,x&chxl=0:|FST+cross+platform%7CJava+built+in%7CFST'/><br>
+<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x116&chd=t:0,115781,304259,1812100,4320323|0,112886,214296,1420114,954375&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,5274698&chxr=1,0,5274698&chxt=y,x&chxl=0:|JSON+IO%7CFST+cross+platform%7CJava+built+in%7CFST%7CBOON+JSon+FAIL+'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x116&chd=t:0,10297,20774,31925,26944|0,0,0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,31925&chxr=1,0,31925&chxt=y,x&chxl=0:|JSON+IO%7CFST+cross+platform%7CJava+built+in%7CFST%7CBOON+JSon+FAIL+'/><br>
 <br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST                                        113363         113211         226574          10297
-Java built in                              294932         208455         503387          20774
-FST cross platform                         417848         240691         658539          40460
+BOON JSon FAIL                                  0              0              0              0
+FST                                        115781         112886         228667          10297
+Java built in                              304259         214296         518555          20774
+FST cross platform                        1812100        1420114        3232214          31925
+JSON IO                                   4320323         954375        5274698          26944
 </pre><br><br>
 <br><h4>Test Class: CommonCollections</h4>
 In depth test of collections incl. collections of collections.<br> (ArrayList, ArrayDeque, ConcurrentLinkedQueue, Vector, TreeSet, LinkedList, TreeMap, ConcurrentHashMap, Hashtable, HashMap). Note: has been modified to workaround Kryo-specific Issue.<br>
 <br>
-<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:0,127072,433492|0,136724,319403&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,752895&chxr=1,0,752895&chxt=y,x&chxl=0:|Java+built+in%7CFST%7CFST+cross+platform+FAIL+'/><br>
-<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:0,8665,13172|0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,13172&chxr=1,0,13172&chxt=y,x&chxl=0:|Java+built+in%7CFST%7CFST+cross+platform+FAIL+'/><br>
+<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x116&chd=t:0,0,0,140736,452672|0,0,0,140622,336254&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,788926&chxr=1,0,788926&chxt=y,x&chxl=0:|Java+built+in%7CFST%7CJSON+IO+FAIL+%7CFST+cross+platform+FAIL+%7CBOON+JSon'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x116&chd=t:12291,0,0,8665,13172|0,0,0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,13172&chxr=1,0,13172&chxt=y,x&chxl=0:|Java+built+in%7CFST%7CJSON+IO+FAIL+%7CFST+cross+platform+FAIL+%7CBOON+JSon'/><br>
 <br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+BOON JSon                                       0              0              0          12291
 FST cross platform FAIL                         0              0              0              0
-FST                                        127072         136724         263796           8665
-Java built in                              433492         319403         752895          13172
+JSON IO FAIL                                    0              0              0              0
+FST                                        140736         140622         281358           8665
+Java built in                              452672         336254         788926          13172
 </pre><br><br>
 <br><h4>Test Class: Trader</h4>
 Measures serialization of a typical 'Enterprise-Object' using Value-Classes instead of primitive tpyes.<br>
 <br>
-<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:101494,376735,742642|126892,358671,236452&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,979094&chxr=1,0,979094&chxt=y,x&chxl=0:|FST+cross+platform%7CJava+built+in%7CFST'/><br>
-<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:5253,11075,43196|0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,43196&chxr=1,0,43196&chxt=y,x&chxl=0:|FST+cross+platform%7CJava+built+in%7CFST'/><br>
+<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x116&chd=t:0,110428,384627,4013110,9499206|0,129427,378695,2515041,1270067&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,10769273&chxr=1,0,10769273&chxt=y,x&chxl=0:|JSON+IO%7CFST+cross+platform%7CJava+built+in%7CFST%7CBOON+JSon'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x116&chd=t:54050,5253,11075,43196,47411|0,0,0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,54050&chxr=1,0,54050&chxt=y,x&chxl=0:|JSON+IO%7CFST+cross+platform%7CJava+built+in%7CFST%7CBOON+JSon'/><br>
 <br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST                                        101494         126892         228386           5253
-Java built in                              376735         358671         735406          11075
-FST cross platform                         742642         236452         979094          43196
+BOON JSon                                       0              0              0          54050
+FST                                        110428         129427         239855           5253
+Java built in                              384627         378695         763322          11075
+FST cross platform                        4013110        2515041        6528151          43196
+JSON IO                                   9499206        1270067       10769273          47411
 </pre><br><br>
 <br><h4>Test Class: ManyClasses</h4>
 Tests speed serializing a complex object graph of many different classes with few primitive fields.<br>
 <br>
-<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:12216,80498,184542|9406,18498,44717&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,229259&chxr=1,0,229259&chxt=y,x&chxl=0:|Java+built+in%7CFST+cross+platform%7CFST'/><br>
-<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:986,7841,3062|0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,7841&chxr=1,0,7841&chxt=y,x&chxl=0:|Java+built+in%7CFST+cross+platform%7CFST'/><br>
+<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x116&chd=t:0,12239,191216,410226,729270|0,9928,45486,317302,80019&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,809289&chxr=1,0,809289&chxt=y,x&chxl=0:|JSON+IO%7CFST+cross+platform%7CJava+built+in%7CFST%7CBOON+JSon'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x116&chd=t:2253,986,3062,5082,5106|0,0,0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,5106&chxr=1,0,5106&chxt=y,x&chxl=0:|JSON+IO%7CFST+cross+platform%7CJava+built+in%7CFST%7CBOON+JSon'/><br>
 <br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST                                         12216           9406          21622            986
-FST cross platform                          80498          18498          98996           7841
-Java built in                              184542          44717         229259           3062
+BOON JSon                                       0              0              0           2253
+FST                                         12239           9928          22167            986
+Java built in                              191216          45486         236702           3062
+FST cross platform                         410226         317302         727528           5082
+JSON IO                                    729270          80019         809289           5106
 </pre><br><br>
 <br><h4>Test Class: ExternalizableTest</h4>
 Performance of Externalizable objects.<br>
 <br>
-<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:0,137265,298226|0,155098,300880&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,599106&chxr=1,0,599106&chxt=y,x&chxl=0:|Java+built+in%7CFST%7CFST+cross+platform+FAIL+'/><br>
-<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:0,7772,14840|0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,14840&chxr=1,0,14840&chxt=y,x&chxl=0:|Java+built+in%7CFST%7CFST+cross+platform+FAIL+'/><br>
+<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x116&chd=t:0,0,108280,318589,10821101|0,0,149735,313548,1080130&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,11901231&chxr=1,0,11901231&chxt=y,x&chxl=0:|JSON+IO%7CJava+built+in%7CFST%7CFST+cross+platform+FAIL+%7CBOON+JSon'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x116&chd=t:31265,0,7772,14840,62507|0,0,0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,62507&chxr=1,0,62507&chxt=y,x&chxl=0:|JSON+IO%7CJava+built+in%7CFST%7CFST+cross+platform+FAIL+%7CBOON+JSon'/><br>
 <br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+BOON JSon                                       0              0              0          31265
 FST cross platform FAIL                         0              0              0              0
-FST                                        137265         155098         292363           7772
-Java built in                              298226         300880         599106          14840
+FST                                        108280         149735         258015           7772
+Java built in                              318589         313548         632137          14840
+JSON IO                                  10821101        1080130       11901231          62507
 </pre><br><br>
 <br><h4>Test Class: BigObject</h4>
 A bigger object graph consisting of some of the test objects at once<br>
 <br>
-<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:0,6101532,12554126|0,7171581,14820163&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,27374289&chxr=1,0,27374289&chxt=y,x&chxl=0:|Java+built+in%7CFST%7CFST+cross+platform+FAIL+'/><br>
-<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:0,366324,588458|0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,588458&chxr=1,0,588458&chxt=y,x&chxl=0:|Java+built+in%7CFST%7CFST+cross+platform+FAIL+'/><br>
+<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x116&chd=t:0,0,0,6145932,12677233|0,0,0,7021694,15635102&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,28312335&chxr=1,0,28312335&chxt=y,x&chxl=0:|Java+built+in%7CFST%7CJSON+IO+FAIL+%7CFST+cross+platform+FAIL+%7CBOON+JSon+FAIL+'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x116&chd=t:0,0,0,366324,588458|0,0,0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,588458&chxr=1,0,588458&chxt=y,x&chxl=0:|Java+built+in%7CFST%7CJSON+IO+FAIL+%7CFST+cross+platform+FAIL+%7CBOON+JSon+FAIL+'/><br>
 <br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+BOON JSon FAIL                                  0              0              0              0
 FST cross platform FAIL                         0              0              0              0
-FST                                       6101532        7171581       13273113         366324
-Java built in                            12554126       14820163       27374289         588458
+JSON IO FAIL                                    0              0              0              0
+FST                                       6145932        7021694       13167626         366324
+Java built in                            12677233       15635102       28312335         588458
 </pre><br><br>
 <br><h4>Test Class: HeavyNesting</h4>
 Heavily nested Objects<br>
 <br>
-<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:106844,285714,1447104|161825,413552,334879&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,1781983&chxr=1,0,1781983&chxt=y,x&chxl=0:|FST+cross+platform%7CJava+built+in%7CFST'/><br>
-<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:3747,10182,165172|0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,165172&chxr=1,0,165172&chxt=y,x&chxl=0:|FST+cross+platform%7CJava+built+in%7CFST'/><br>
+<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x116&chd=t:103407,285471,1087386,10078818,8270197|161588,412767,706663,1060735,6020271&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,14290468&chxr=1,0,14290468&chxt=y,x&chxl=0:|FST+cross+platform%7CJSON+IO%7CBOON+JSon%7CJava+built+in%7CFST'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x116&chd=t:3747,10182,59920,20992,97104|0,0,0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,97104&chxr=1,0,97104&chxt=y,x&chxl=0:|FST+cross+platform%7CJSON+IO%7CBOON+JSon%7CJava+built+in%7CFST'/><br>
 <br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST                                        106844         161825         268669           3747
-Java built in                              285714         413552         699266          10182
-FST cross platform                        1447104         334879        1781983         165172
+FST                                        103407         161588         264995           3747
+Java built in                              285471         412767         698238          10182
+BOON JSon                                 1087386         706663        1794049          59920
+JSON IO                                  10078818        1060735       11139553          20992
+FST cross platform                        8270197        6020271       14290468          97104
 </pre><br><br>
 <br><h4>Test Class: MediaContent</h4>
 measures serializing the cyclefree object structure used by one of the most known encoding/decoding tests<br>
 <br>
-<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:3849,11573,58886|3445,6857,13164&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,72050&chxr=1,0,72050&chxt=y,x&chxl=0:|Java+built+in%7CFST+cross+platform%7CFST'/><br>
-<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:316,672,889|0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,889&chxr=1,0,889&chxt=y,x&chxl=0:|Java+built+in%7CFST+cross+platform%7CFST'/><br>
+<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x116&chd=t:4081,21708,59178,42601,116979|3690,12012,13061,38116,26226&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,143205&chxr=1,0,143205&chxt=y,x&chxl=0:|JSON+IO%7CFST+cross+platform%7CJava+built+in%7CBOON+JSon%7CFST'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x116&chd=t:316,608,889,672,736|0,0,0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,889&chxr=1,0,889&chxt=y,x&chxl=0:|JSON+IO%7CFST+cross+platform%7CJava+built+in%7CBOON+JSon%7CFST'/><br>
 <br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST                                          3849           3445           7294            316
-FST cross platform                          11573           6857          18430            672
-Java built in                               58886          13164          72050            889
+FST                                          4081           3690           7771            316
+BOON JSon                                   21708          12012          33720            608
+Java built in                               59178          13061          72239            889
+FST cross platform                          42601          38116          80717            672
+JSON IO                                    116979          26226         143205            736
 </pre><br><br>
 <br><h4>Test Class: ShortRemoteCall</h4>
 measures overhead of stream initialization+classname decoding. Only one very short object is serialized<br>
 <br>
-<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:543,2755,14766|443,873,2673&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,17439&chxr=1,0,17439&chxt=y,x&chxl=0:|Java+built+in%7CFST+cross+platform%7CFST'/><br>
-<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:15,241,220|0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,241&chxr=1,0,241&chxt=y,x&chxl=0:|Java+built+in%7CFST+cross+platform%7CFST'/><br>
+<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x116&chd=t:0,503,14364,11694,25626|0,488,2590,9736,9642&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,35268&chxr=1,0,35268&chxt=y,x&chxl=0:|JSON+IO%7CFST+cross+platform%7CJava+built+in%7CFST%7CBOON+JSon'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x116&chd=t:189,15,220,172,159|0,0,0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,220&chxr=1,0,220&chxt=y,x&chxl=0:|JSON+IO%7CFST+cross+platform%7CJava+built+in%7CFST%7CBOON+JSon'/><br>
 <br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST                                           543            443            986             15
-FST cross platform                           2755            873           3628            241
-Java built in                               14766           2673          17439            220
+BOON JSon                                       0              0              0            189
+FST                                           503            488            991             15
+Java built in                               14364           2590          16954            220
+FST cross platform                          11694           9736          21430            172
+JSON IO                                     25626           9642          35268            159
 </pre><br><br>
 <br><h4>Test Class: SmallThing</h4>
 only one int. benches pure init time<br>
 <br>
-<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:319,1437,6973|339,588,1495&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,8468&chxr=1,0,8468&chxt=y,x&chxl=0:|Java+built+in%7CFST+cross+platform%7CFST'/><br>
-<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:2,160,100|0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,160&chxr=1,0,160&chxt=y,x&chxl=0:|Java+built+in%7CFST+cross+platform%7CFST'/><br>
+<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x116&chd=t:337,6978,7854,12783,18552|382,1457,5640,4256,8011&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,26563&chxr=1,0,26563&chxt=y,x&chxl=0:|JSON+IO%7CBOON+JSon%7CFST+cross+platform%7CJava+built+in%7CFST'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x116&chd=t:2,100,94,54,89|0,0,0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,100&chxr=1,0,100&chxt=y,x&chxl=0:|JSON+IO%7CBOON+JSon%7CFST+cross+platform%7CJava+built+in%7CFST'/><br>
 <br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST                                           319            339            658              2
-FST cross platform                           1437            588           2025            160
-Java built in                                6973           1495           8468            100
+FST                                           337            382            719              2
+Java built in                                6978           1457           8435            100
+FST cross platform                           7854           5640          13494             94
+BOON JSon                                   12783           4256          17039             54
+JSON IO                                     18552           8011          26563             89
 </pre><br><br>
 </html>

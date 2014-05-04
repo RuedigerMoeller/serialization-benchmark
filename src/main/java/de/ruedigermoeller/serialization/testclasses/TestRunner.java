@@ -43,8 +43,8 @@ public class TestRunner {
             ));
         } else if ( "fst".equals(variants)) {
             mTests.addAll(java.util.Arrays.asList(
-//                    new BoonTest("BOON JSon") ,// crashes.
-//                    new JSonIOTest("JSON IO") , // pretty slow, some fails
+                    new BoonTest("BOON JSon") ,// crashes.
+                    new JSonIOTest("JSON IO") , // pretty slow, some fails
                     new FSTCrossPlatformTest("FST cross platform", false, false) ,
                     new FSTTest("FST", false, false), // unsafe and preferspeed deprecated unsupported since 1.43.
                     new JavaSerTest("Java built in")
