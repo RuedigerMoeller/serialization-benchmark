@@ -4,3 +4,164 @@ JVM:Oracle Corporation 1.7.0_55<br>
 CPU:null os-arch:null<br>
 Cores (incl HT):32<br>
 <i>1.7.0_55-b13,Java HotSpot(TM) 64-Bit Server VM,Linux</i><br>
+<br><h4>Test Class: FrequentPrimitives[]</h4>
+A array[10] of objects with a typical distribution of primitve fields: 2 short Strings, 3 boolean, 6 ints, 2 long, one double.<br>
+<br>
+<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:7336,30253,31701|5612,13000,17711&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,49412&chxr=1,0,49412&chxt=y,x&chxl=0:|FST+cross+platform%7CJava+built+in%7CFST'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:836,1143,2102|0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,2102&chxr=1,0,2102&chxt=y,x&chxl=0:|FST+cross+platform%7CJava+built+in%7CFST'/><br>
+<br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                          7336           5612          12948            836
+Java built in                               30253          13000          43253           1143
+FST cross platform                          31701          17711          49412           2102
+</pre><br><br>
+<br><h4>Test Class: FrequentPrimitivesExternalizable[]</h4>
+A class with a typical distribution of primitve fields: 2 short Strings, 3 boolean, 6 ints, 2 long, one double. But implementing Externalizable<br>
+<br>
+<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:4596,19856,22344|3367,6954,12553&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,34897&chxr=1,0,34897&chxt=y,x&chxl=0:|FST+cross+platform%7CJava+built+in%7CFST'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:864,1065,2968|0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,2968&chxr=1,0,2968&chxt=y,x&chxl=0:|FST+cross+platform%7CJava+built+in%7CFST'/><br>
+<br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                          4596           3367           7963            864
+Java built in                               19856           6954          26810           1065
+FST cross platform                          22344          12553          34897           2968
+</pre><br><br>
+<br><h4>Test Class: FrequentCollections</h4>
+Measures serialization of most popular collection classes. (HashMap and an ArrayList filled with Integer and Long).<br>
+<br>
+<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:42405,91491,249913|35595,49510,327492&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,577405&chxr=1,0,577405&chxt=y,x&chxl=0:|Java+built+in%7CFST+cross+platform%7CFST'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:4671,4605,8435|0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,8435&chxr=1,0,8435&chxt=y,x&chxl=0:|Java+built+in%7CFST+cross+platform%7CFST'/><br>
+<br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                         42405          35595          78000           4671
+FST cross platform                          91491          49510         141001           4605
+Java built in                              249913         327492         577405           8435
+</pre><br><br>
+<br><h4>Test Class: LargeNativeArrays</h4>
+measures performance serializing a large int array, a large long array and a large double array filled with random values. Note that random values destroy any value compression, so the increased size of kryo in this test will not be observable in most real world data.<br>
+<br>
+<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:60297,70355,1386021|49046,77190,4620549&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,6006570&chxr=1,0,6006570&chxt=y,x&chxl=0:|FST+cross+platform%7CFST%7CJava+built+in'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:31403,35119,45770|0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,45770&chxr=1,0,45770&chxt=y,x&chxl=0:|FST+cross+platform%7CFST%7CJava+built+in'/><br>
+<br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+Java built in                               60297          49046         109343          31403
+FST                                         70355          77190         147545          35119
+FST cross platform                        1386021        4620549        6006570          45770
+</pre><br><br>
+<br><h4>Test Class: StringPerformance</h4>
+measures serialization of mid size to very long Strings<br>
+<br>
+<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:61186,138223,177524|41219,164761,145628&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,323152&chxr=1,0,323152&chxt=y,x&chxl=0:|FST+cross+platform%7CJava+built+in%7CFST'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:20020,17931,29964|0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,29964&chxr=1,0,29964&chxt=y,x&chxl=0:|FST+cross+platform%7CJava+built+in%7CFST'/><br>
+<br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                         61186          41219         102405          20020
+Java built in                              138223         164761         302984          17931
+FST cross platform                         177524         145628         323152          29964
+</pre><br><br>
+<br><h4>Test Class: Primitives</h4>
+A broad test of primitive values and specials such as Enums, EnumSets, Date, String, byte, short, int, .. Byte, Character; Short, Integer, .. <br> plus opaque private field with same name in a private subclass<br>
+<br>
+<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:3775,15907,95427|3897,8673,21404&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,116831&chxr=1,0,116831&chxt=y,x&chxl=0:|Java+built+in%7CFST+cross+platform%7CFST'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:295,1190,1548|0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,1548&chxr=1,0,1548&chxt=y,x&chxl=0:|Java+built+in%7CFST+cross+platform%7CFST'/><br>
+<br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                          3775           3897           7672            295
+FST cross platform                          15907           8673          24580           1190
+Java built in                               95427          21404         116831           1548
+</pre><br><br>
+<br><h4>Test Class: Arrays[]</h4>
+Tests various arrays of int, Dimension, Date, Object. Nested arrays, multidimensional arrays.<br>
+<br>
+<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:113363,294932,417848|113211,208455,240691&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,658539&chxr=1,0,658539&chxt=y,x&chxl=0:|FST+cross+platform%7CJava+built+in%7CFST'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:10297,20774,40460|0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,40460&chxr=1,0,40460&chxt=y,x&chxl=0:|FST+cross+platform%7CJava+built+in%7CFST'/><br>
+<br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                        113363         113211         226574          10297
+Java built in                              294932         208455         503387          20774
+FST cross platform                         417848         240691         658539          40460
+</pre><br><br>
+<br><h4>Test Class: CommonCollections</h4>
+In depth test of collections incl. collections of collections.<br> (ArrayList, ArrayDeque, ConcurrentLinkedQueue, Vector, TreeSet, LinkedList, TreeMap, ConcurrentHashMap, Hashtable, HashMap). Note: has been modified to workaround Kryo-specific Issue.<br>
+<br>
+<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:0,127072,433492|0,136724,319403&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,752895&chxr=1,0,752895&chxt=y,x&chxl=0:|Java+built+in%7CFST%7CFST+cross+platform+FAIL+'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:0,8665,13172|0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,13172&chxr=1,0,13172&chxt=y,x&chxl=0:|Java+built+in%7CFST%7CFST+cross+platform+FAIL+'/><br>
+<br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST cross platform FAIL                         0              0              0              0
+FST                                        127072         136724         263796           8665
+Java built in                              433492         319403         752895          13172
+</pre><br><br>
+<br><h4>Test Class: Trader</h4>
+Measures serialization of a typical 'Enterprise-Object' using Value-Classes instead of primitive tpyes.<br>
+<br>
+<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:101494,376735,742642|126892,358671,236452&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,979094&chxr=1,0,979094&chxt=y,x&chxl=0:|FST+cross+platform%7CJava+built+in%7CFST'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:5253,11075,43196|0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,43196&chxr=1,0,43196&chxt=y,x&chxl=0:|FST+cross+platform%7CJava+built+in%7CFST'/><br>
+<br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                        101494         126892         228386           5253
+Java built in                              376735         358671         735406          11075
+FST cross platform                         742642         236452         979094          43196
+</pre><br><br>
+<br><h4>Test Class: ManyClasses</h4>
+Tests speed serializing a complex object graph of many different classes with few primitive fields.<br>
+<br>
+<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:12216,80498,184542|9406,18498,44717&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,229259&chxr=1,0,229259&chxt=y,x&chxl=0:|Java+built+in%7CFST+cross+platform%7CFST'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:986,7841,3062|0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,7841&chxr=1,0,7841&chxt=y,x&chxl=0:|Java+built+in%7CFST+cross+platform%7CFST'/><br>
+<br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                         12216           9406          21622            986
+FST cross platform                          80498          18498          98996           7841
+Java built in                              184542          44717         229259           3062
+</pre><br><br>
+<br><h4>Test Class: ExternalizableTest</h4>
+Performance of Externalizable objects.<br>
+<br>
+<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:0,137265,298226|0,155098,300880&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,599106&chxr=1,0,599106&chxt=y,x&chxl=0:|Java+built+in%7CFST%7CFST+cross+platform+FAIL+'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:0,7772,14840|0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,14840&chxr=1,0,14840&chxt=y,x&chxl=0:|Java+built+in%7CFST%7CFST+cross+platform+FAIL+'/><br>
+<br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST cross platform FAIL                         0              0              0              0
+FST                                        137265         155098         292363           7772
+Java built in                              298226         300880         599106          14840
+</pre><br><br>
+<br><h4>Test Class: BigObject</h4>
+A bigger object graph consisting of some of the test objects at once<br>
+<br>
+<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:0,6101532,12554126|0,7171581,14820163&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,27374289&chxr=1,0,27374289&chxt=y,x&chxl=0:|Java+built+in%7CFST%7CFST+cross+platform+FAIL+'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:0,366324,588458|0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,588458&chxr=1,0,588458&chxt=y,x&chxl=0:|Java+built+in%7CFST%7CFST+cross+platform+FAIL+'/><br>
+<br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST cross platform FAIL                         0              0              0              0
+FST                                       6101532        7171581       13273113         366324
+Java built in                            12554126       14820163       27374289         588458
+</pre><br><br>
+<br><h4>Test Class: HeavyNesting</h4>
+Heavily nested Objects<br>
+<br>
+<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:106844,285714,1447104|161825,413552,334879&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,1781983&chxr=1,0,1781983&chxt=y,x&chxl=0:|FST+cross+platform%7CJava+built+in%7CFST'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:3747,10182,165172|0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,165172&chxr=1,0,165172&chxt=y,x&chxl=0:|FST+cross+platform%7CJava+built+in%7CFST'/><br>
+<br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                        106844         161825         268669           3747
+Java built in                              285714         413552         699266          10182
+FST cross platform                        1447104         334879        1781983         165172
+</pre><br><br>
+<br><h4>Test Class: MediaContent</h4>
+measures serializing the cyclefree object structure used by one of the most known encoding/decoding tests<br>
+<br>
+<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:3849,11573,58886|3445,6857,13164&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,72050&chxr=1,0,72050&chxt=y,x&chxl=0:|Java+built+in%7CFST+cross+platform%7CFST'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:316,672,889|0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,889&chxr=1,0,889&chxt=y,x&chxl=0:|Java+built+in%7CFST+cross+platform%7CFST'/><br>
+<br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                          3849           3445           7294            316
+FST cross platform                          11573           6857          18430            672
+Java built in                               58886          13164          72050            889
+</pre><br><br>
+<br><h4>Test Class: ShortRemoteCall</h4>
+measures overhead of stream initialization+classname decoding. Only one very short object is serialized<br>
+<br>
+<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:543,2755,14766|443,873,2673&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,17439&chxr=1,0,17439&chxt=y,x&chxl=0:|Java+built+in%7CFST+cross+platform%7CFST'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:15,241,220|0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,241&chxr=1,0,241&chxt=y,x&chxl=0:|Java+built+in%7CFST+cross+platform%7CFST'/><br>
+<br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                           543            443            986             15
+FST cross platform                           2755            873           3628            241
+Java built in                               14766           2673          17439            220
+</pre><br><br>
+<br><h4>Test Class: SmallThing</h4>
+only one int. benches pure init time<br>
+<br>
+<b>speed read+write (ns)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:319,1437,6973|339,588,1495&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,8468&chxr=1,0,8468&chxt=y,x&chxl=0:|Java+built+in%7CFST+cross+platform%7CFST'/><br>
+<b>size (bytes)</b><br><img src='https://chart.googleapis.com/chart?cht=bhs&chs=600x76&chd=t:2,160,100|0,0,0&chco=5d99f9,4d89f9&chdlp=t&chbh=15&chds=0,160&chxr=1,0,160&chxt=y,x&chxl=0:|Java+built+in%7CFST+cross+platform%7CFST'/><br>
+<br><pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                           319            339            658              2
+FST cross platform                           1437            588           2025            160
+Java built in                                6973           1495           8468            100
+</pre><br><br>
+</html>

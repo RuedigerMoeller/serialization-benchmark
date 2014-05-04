@@ -3,3 +3,213 @@ JVM:Oracle Corporation 1.7.0_55
 CPU:null os-arch:null
 Cores (incl HT):32
 1.7.0_55-b13,Java HotSpot(TM) 64-Bit Server VM,Linux
+
+================================
+Test Class: FrequentPrimitives[]
+================================
+A array[10] of objects with a typical distribution of primitve fields: 2 short Strings, 3 boolean, 6 ints, 2 long, one double.
+
+
+<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                          7336           5612          12948            836
+Java built in                               30253          13000          43253           1143
+FST cross platform                          31701          17711          49412           2102
+</pre>
+
+
+==============================================
+Test Class: FrequentPrimitivesExternalizable[]
+==============================================
+A class with a typical distribution of primitve fields: 2 short Strings, 3 boolean, 6 ints, 2 long, one double. But implementing Externalizable
+
+
+<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                          4596           3367           7963            864
+Java built in                               19856           6954          26810           1065
+FST cross platform                          22344          12553          34897           2968
+</pre>
+
+
+===============================
+Test Class: FrequentCollections
+===============================
+Measures serialization of most popular collection classes. (HashMap and an ArrayList filled with Integer and Long).
+
+
+<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                         42405          35595          78000           4671
+FST cross platform                          91491          49510         141001           4605
+Java built in                              249913         327492         577405           8435
+</pre>
+
+
+=============================
+Test Class: LargeNativeArrays
+=============================
+measures performance serializing a large int array, a large long array and a large double array filled with random values. Note that random values destroy any value compression, so the increased size of kryo in this test will not be observable in most real world data.
+
+
+<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+Java built in                               60297          49046         109343          31403
+FST                                         70355          77190         147545          35119
+FST cross platform                        1386021        4620549        6006570          45770
+</pre>
+
+
+=============================
+Test Class: StringPerformance
+=============================
+measures serialization of mid size to very long Strings
+
+
+<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                         61186          41219         102405          20020
+Java built in                              138223         164761         302984          17931
+FST cross platform                         177524         145628         323152          29964
+</pre>
+
+
+======================
+Test Class: Primitives
+======================
+A broad test of primitive values and specials such as Enums, EnumSets, Date, String, byte, short, int, .. Byte, Character; Short, Integer, .. 
+ plus opaque private field with same name in a private subclass
+
+
+<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                          3775           3897           7672            295
+FST cross platform                          15907           8673          24580           1190
+Java built in                               95427          21404         116831           1548
+</pre>
+
+
+====================
+Test Class: Arrays[]
+====================
+Tests various arrays of int, Dimension, Date, Object. Nested arrays, multidimensional arrays.
+
+
+<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                        113363         113211         226574          10297
+Java built in                              294932         208455         503387          20774
+FST cross platform                         417848         240691         658539          40460
+</pre>
+
+
+=============================
+Test Class: CommonCollections
+=============================
+In depth test of collections incl. collections of collections.
+ (ArrayList, ArrayDeque, ConcurrentLinkedQueue, Vector, TreeSet, LinkedList, TreeMap, ConcurrentHashMap, Hashtable, HashMap). Note: has been modified to workaround Kryo-specific Issue.
+
+
+<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST cross platform FAIL                         0              0              0              0
+FST                                        127072         136724         263796           8665
+Java built in                              433492         319403         752895          13172
+</pre>
+
+
+==================
+Test Class: Trader
+==================
+Measures serialization of a typical 'Enterprise-Object' using Value-Classes instead of primitive tpyes.
+
+
+<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                        101494         126892         228386           5253
+Java built in                              376735         358671         735406          11075
+FST cross platform                         742642         236452         979094          43196
+</pre>
+
+
+=======================
+Test Class: ManyClasses
+=======================
+Tests speed serializing a complex object graph of many different classes with few primitive fields.
+
+
+<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                         12216           9406          21622            986
+FST cross platform                          80498          18498          98996           7841
+Java built in                              184542          44717         229259           3062
+</pre>
+
+
+==============================
+Test Class: ExternalizableTest
+==============================
+Performance of Externalizable objects.
+
+
+<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST cross platform FAIL                         0              0              0              0
+FST                                        137265         155098         292363           7772
+Java built in                              298226         300880         599106          14840
+</pre>
+
+
+=====================
+Test Class: BigObject
+=====================
+A bigger object graph consisting of some of the test objects at once
+
+
+<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST cross platform FAIL                         0              0              0              0
+FST                                       6101532        7171581       13273113         366324
+Java built in                            12554126       14820163       27374289         588458
+</pre>
+
+
+========================
+Test Class: HeavyNesting
+========================
+Heavily nested Objects
+
+
+<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                        106844         161825         268669           3747
+Java built in                              285714         413552         699266          10182
+FST cross platform                        1447104         334879        1781983         165172
+</pre>
+
+
+========================
+Test Class: MediaContent
+========================
+measures serializing the cyclefree object structure used by one of the most known encoding/decoding tests
+
+
+<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                          3849           3445           7294            316
+FST cross platform                          11573           6857          18430            672
+Java built in                               58886          13164          72050            889
+</pre>
+
+
+===========================
+Test Class: ShortRemoteCall
+===========================
+measures overhead of stream initialization+classname decoding. Only one very short object is serialized
+
+
+<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                           543            443            986             15
+FST cross platform                           2755            873           3628            241
+Java built in                               14766           2673          17439            220
+</pre>
+
+
+======================
+Test Class: SmallThing
+======================
+only one int. benches pure init time
+
+
+<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                           319            339            658              2
+FST cross platform                           1437            588           2025            160
+Java built in                                6973           1495           8468            100
+</pre>
+
