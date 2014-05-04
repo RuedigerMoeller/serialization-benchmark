@@ -43,13 +43,15 @@ public class TestRunner {
             ));
         } else if ( "fst".equals(variants)) {
             mTests.addAll(java.util.Arrays.asList(
-                    new FSTCrossPlatformTest("FST cross platform", false, false), // unsafe and preferspeed deprecated unsupported since 1.43.
-                    new FSTTest("FST", false, false) // unsafe and preferspeed deprecated unsupported since 1.43.
-//                    new JavaSerTest("Java built in")
+//                    new BoonTest("BOON JSon") ,// crashes.
+//                    new JSonIOTest("JSON IO") , // pretty slow, some fails
+                    new FSTCrossPlatformTest("FST cross platform", false, false) ,
+                    new FSTTest("FST", false, false), // unsafe and preferspeed deprecated unsupported since 1.43.
+                    new JavaSerTest("Java built in")
             ));
         } else {
             mTests.addAll(java.util.Arrays.asList(
-                    new FSTCrossPlatformTest("FST cross platform", false, false), // unsafe and preferspeed deprecated unsupported since 1.43.
+                    new FSTCrossPlatformTest("FST cross platform", false, false),
                     new FSTTest("FST", false, false), // unsafe and preferspeed deprecated unsupported since 1.43.
                     new KryoTest("Kryo 2.23"),
                     new JBossRiver("JBoss-River"),

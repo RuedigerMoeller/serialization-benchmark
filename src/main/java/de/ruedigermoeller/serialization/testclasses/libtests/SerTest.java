@@ -97,8 +97,9 @@ public abstract class SerTest {
             readIter*=10;
         } catch (Throwable e) {
             timRead = 0;
+            timWrite = 0;
             e.printStackTrace();
-            System.out.println(""+title+" FAILURE in read "+e.getMessage());
+            System.out.println(""+title+" FAILURE "+e.getMessage());
         }
         if ( resObject != null ) {
             if ( ! DeepEquals.deepEquals(resObject, toWrite) ) {
