@@ -25,22 +25,6 @@ public class TestRunner {
         registerTests();
     }
 
-    List<SerTest> mTests = new ArrayList<>();
-    public void registerTests() {
-        mTests.addAll(java.util.Arrays.asList(
-                new FSTTest("FST", false, false), // unsafe and preferspeed deprecated unsupported since 1.43.
-                new KryoTest("Kryo 2.23"),
-                new KryoUnsafeTest("Kryo 2.23 Unsafe"),
-                new JBossRiver("JBoss-River"),
-                new JavaSerTest("Java built in"),
-                new JBossSerializer("JBoss-Serializer"),
-                new KryoRegTest("Kryo 2.23 pre-register JDK", true),
-                new KryoRegTest("Kryo 2.23 pre-register all", false),
-                new KryoUnsafeRegTest("Kryo 2.23 Unsafe pre-register JDK", true),
-                new KryoUnsafeRegTest("Kryo 2.23 Unsafe pre-register all", false)
-        ));
-    }
-
     Class testClass;
     public List<SerTest> runAll( Object toSer, int warmUP, int testRuns ) throws IOException, InterruptedException {
         testClass = toSer.getClass();
@@ -121,16 +105,42 @@ public class TestRunner {
     }
     HtmlCharter charter = new HtmlCharter("./result.html");
 
-    @Parameter(names = { "-warm" }, description = "number of warmup time ms >5000 for stable results")
+
+    List<SerTest> mTests = new ArrayList<>();
+    public void registerTests() {
+        mTests.addAll(java.util.Arrays.asList(
+                new FSTTest("FST", false, false), // unsafe and preferspeed deprecated unsupported since 1.43.
+                new KryoTest("Kryo 2.23"),
+//                new KryoUnsafeTest("Kryo 2.23 Unsafe"),
+                new JBossRiver("JBoss-River"),
+                new JavaSerTest("Java built in"),
+                new JBossSerializer("JBoss-Serializer")
+
+//                new BoonTest("Boon JSON"),
+//                new JSonIOTest("Json-io")
+
+//                new KryoRegTest("Kryo 2.23 pre-register JDK", true),
+//                new KryoRegTest("Kryo 2.23 pre-register all", false),
+//                new KryoUnsafeRegTest("Kryo 2.23 Unsafe pre-register JDK", true),
+//                new KryoUnsafeRegTest("Kryo 2.23 Unsafe pre-register all", false)
+        ));
+    }
+
+
+    @Parameter(names = { "-warm", "-w" }, description = "number of warmup time ms >5000 for stable results")
     Integer warmup = 5000;
-    @Parameter(names = { "-test" }, description = "number of test time ms  >5000 for stable results")
+    @Parameter(names = { "-test", "-t" }, description = "number of test time ms  >5000 for stable results")
     Integer test = 3000;
-    @Parameter(names = { "-cases" }, description = "testcases to execute (string of a..z, not specified: all)")
+    @Parameter(names = { "-cases", "-c" }, description = "testcases to execute (string of a..z, not specified: all)")
     String tests = "abcdefghijklmnopqrstuvwxyz";
 
     @Parameter(names = "--help", help = true)
     private boolean help;
 
+
+    //
+    // example cmdline: -test 1000 -warm 2000 -cases adj
+    //
     public static void main( String[] arg ) throws Exception {
         
         TestRunner runner = new TestRunner();
