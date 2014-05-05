@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.jboss.marshalling:jboss-marshalling-osgi:2.0.0.Beta1">
+    <CLASSES>
+      <root url="jar://$M2_REPO$/org/jboss/marshalling/jboss-marshalling-osgi/2.0.0.Beta1/jboss-marshalling-osgi-2.0.0.Beta1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$M2_REPO$/org/jboss/marshalling/jboss-marshalling-osgi/2.0.0.Beta1/jboss-marshalling-osgi-2.0.0.Beta1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$M2_REPO$/org/jboss/marshalling/jboss-marshalling-osgi/2.0.0.Beta1/jboss-marshalling-osgi-2.0.0.Beta1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
