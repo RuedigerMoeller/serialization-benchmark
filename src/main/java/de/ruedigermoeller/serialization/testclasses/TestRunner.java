@@ -124,12 +124,12 @@ public class TestRunner {
             ));
         } else if ( "cross".equals(variants)) {
             mTests.addAll(java.util.Arrays.asList(
-//                    new BoonTest("BOON JSon") , too many fails
+                    new BoonTest("BOON JSon") ,
                     new JSonIOTest("JSON IO") ,
                     new JacksonTest("Jackson") ,
-                    new FSTCrossPlatformTest("FST cross platform", false, false) ,
-                    new FSTTest("FST", false, false), // compare to fastest
-                    new JavaSerTest("Java built in") // and standard
+                    new FSTCrossPlatformTest("FST cross platform", false, false)
+//                    new FSTTest("FST", false, false), // compare to fastest
+//                    new JavaSerTest("Java built in") // and standard
             ));
         } else {
             mTests.addAll(java.util.Arrays.asList(
