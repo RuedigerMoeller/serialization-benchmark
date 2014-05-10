@@ -121,7 +121,7 @@ public abstract class SerTest {
 
     public void dumpRes() {
         try {
-            System.out.println(title+" : Size:"+length+",  TimeRead: "+(timRead/readIter)+" ns,   TimeWrite: "+(timWrite/writeIter)+" ns ");
+        System.out.println(title+" : Size:"+length+",  TimeRead: "+(timRead/readIter)+" ns,   TimeWrite: "+(timWrite/writeIter)+" ns ");
         } catch (Exception e) {
             System.out.println("** Exception in dump"+e.getMessage());
         }

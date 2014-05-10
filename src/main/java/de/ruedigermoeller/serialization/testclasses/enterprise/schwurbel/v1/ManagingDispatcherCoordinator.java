@@ -1,6 +1,5 @@
 package de.ruedigermoeller.serialization.testclasses.enterprise.schwurbel.v1;
 
-import de.ruedigermoeller.serialization.annotations.EqualnessIsIdentity;
 import de.ruedigermoeller.serialization.testclasses.enterprise.ObjectOrientedInt;
 
 /**

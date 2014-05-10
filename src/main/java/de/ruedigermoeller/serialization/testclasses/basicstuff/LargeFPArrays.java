@@ -1,7 +1,6 @@
 package de.ruedigermoeller.serialization.testclasses.basicstuff;
 
 import de.ruedigermoeller.serialization.testclasses.HasDescription;
-
 import java.io.Serializable;
 
 /**
@@ -20,27 +19,22 @@ import java.io.Serializable;
  limitations under the License.
  */
 
-public class LargeNativeArrays implements Serializable, HasDescription {
+public class LargeFPArrays implements Serializable, HasDescription {
     @Override
     public String getDescription() {
-        return "measures performance serializing a large int array, a large long array and a large double array filled with random values. Note that random values destroy any value compression, so the increased size of kryo in this test will not be observable in most real world data.";
+        return "measures performance serializing a large flaot and a large double array filled with random values. ";
     }
 
-    public LargeNativeArrays() {
+    public LargeFPArrays() {
     }
-    
-    int ints[];
-    long longs[];
+
+    float floats[];
     double doubles[];
-    public LargeNativeArrays(int dummy) {
+    public LargeFPArrays(int dummy) {
         int N = 1300;
-        ints = new int[N*2];
-        for (int i = 0; i < ints.length; i++) {
-            ints[i] = (int) (Math.random()*Integer.MAX_VALUE*2-Integer.MAX_VALUE);
-        }
-        longs = new long[N];
-        for (int i = 0; i < longs.length; i++) {
-            longs[i] = (long) (Math.random()*Long.MAX_VALUE*2-Long.MAX_VALUE);
+        floats = new float[N*2];
+        for (int i = 0; i < floats.length; i++) {
+            floats[i] = (float) (Math.random()*Integer.MAX_VALUE*2-Integer.MAX_VALUE);
         }
         doubles = new double[N];
         for (int i = 0; i < doubles.length; i++) {

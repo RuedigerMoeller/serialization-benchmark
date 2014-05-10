@@ -22,8 +22,8 @@ import java.util.*;
 public class TestRunner {
 
     public TestRunner() {
-        registerTests();
     }
+
 
     Class testClass;
     public List<SerTest> runAll( Object toSer, int warmUP, int testRuns ) throws IOException, InterruptedException {
@@ -103,40 +103,67 @@ public class TestRunner {
 
         return mTests;
     }
-    HtmlCharter charter = new HtmlCharter("./result.html");
 
 
     List<SerTest> mTests = new ArrayList<>();
     public void registerTests() {
-        mTests.addAll(java.util.Arrays.asList(
-                new FSTTest("FST", false, false), // unsafe and preferspeed deprecated unsupported since 1.43.
-                new KryoTest("Kryo 2.23"),
+        if ( "default".equals(variants) ) {
+            mTests.addAll(java.util.Arrays.asList(
+                    new FSTTest("FST", false, false), // unsafe and preferspeed deprecated unsupported since 1.43.
+                    new KryoTest("Kryo 2.23"),
 //                new KryoUnsafeTest("Kryo 2.23 Unsafe"),
-                new JBossRiver("JBoss-River"),
-                new JavaSerTest("Java built in"),
-                new JBossSerializer("JBoss-Serializer")
-
-//                new BoonTest("Boon JSON"),
-//                new JSonIOTest("Json-io")
-
-//                new KryoRegTest("Kryo 2.23 pre-register JDK", true),
-//                new KryoRegTest("Kryo 2.23 pre-register all", false),
-//                new KryoUnsafeRegTest("Kryo 2.23 Unsafe pre-register JDK", true),
-//                new KryoUnsafeRegTest("Kryo 2.23 Unsafe pre-register all", false)
-        ));
+                    new JBossRiver("JBoss-River"),
+                    new JavaSerTest("Java built in"),
+                    new JBossSerializer("JBoss-Serializer")
+            ));
+        } else if ( "unsafe".equals(variants)) {
+            mTests.addAll(java.util.Arrays.asList(
+                    new KryoUnsafeTest("Kryo 2.23 Unsafe"),
+                    new KryoUnsafeRegTest("Kryo 2.23 Unsafe pre-register JDK", true),
+                    new KryoUnsafeRegTest("Kryo 2.23 Unsafe pre-register all", false)
+            ));
+        } else if ( "cross".equals(variants)) {
+            if ( variants.equals(testDefault) ) {
+                variants = "acdqefgijmonp"; // for jsonish tests use subset
+            }
+            mTests.addAll(java.util.Arrays.asList(
+                    new BoonTest("BOON JSon") ,
+                    new JSonIOTest("JSON IO") ,
+                    new JacksonTest("Jackson")
+//                    new FSTTest("FST", false, false), // compare to fastest
+//                    new JavaSerTest("Java built in") // and standard
+            ));
+        } else {
+            mTests.addAll(java.util.Arrays.asList(
+                    new FSTTest("FST", false, false), // unsafe and preferspeed deprecated unsupported since 1.43.
+                    new KryoTest("Kryo 2.23"),
+                    new JBossRiver("JBoss-River"),
+                    new JavaSerTest("Java built in"),
+                    new JBossSerializer("JBoss-Serializer"),
+                    new KryoRegTest("Kryo 2.23 pre-register JDK", true),
+                    new KryoRegTest("Kryo 2.23 pre-register all", false),
+                    new KryoUnsafeTest("Kryo 2.23 Unsafe"),
+                    new KryoUnsafeRegTest("Kryo 2.23 Unsafe pre-register JDK", true),
+                    new KryoUnsafeRegTest("Kryo 2.23 Unsafe pre-register all", false)
+            ));
+        }
     }
 
+    HtmlCharter charter = new HtmlCharter("./result.html");
+    String testDefault = "abcdefghijklmnopqrstuvwxyz";
 
     @Parameter(names = { "-warm", "-w" }, description = "number of warmup time ms >5000 for stable results")
     Integer warmup = 5000;
     @Parameter(names = { "-test", "-t" }, description = "number of test time ms  >5000 for stable results")
     Integer test = 3000;
     @Parameter(names = { "-cases", "-c" }, description = "testcases to execute (string of a..z, not specified: all)")
-    String tests = "abcdefghijklmnopqrstuvwxyz";
+    String tests = testDefault;
 
-    @Parameter(names = "--help", help = true)
+    @Parameter(names = {"-help", "-h", "-?", "--help"}, help = true)
     private boolean help;
 
+    @Parameter(names={"-variants", "-var"}, description = "default|unsafe|fst|all")
+    String variants = "default";
 
     //
     // example cmdline: -test 1000 -warm 2000 -cases adj
@@ -145,7 +172,8 @@ public class TestRunner {
         
         TestRunner runner = new TestRunner();
         JCommander jCommander = new JCommander(runner, arg);
-        
+        runner.registerTests();
+
         runner.charter.setAsc(new AsciiCharter("./result.txt"));
 
         runner.charter.openDoc();
@@ -168,7 +196,8 @@ public class TestRunner {
                 "a", FrequentPrimitives.getArray(10), // avoid measuring init overhead only for jboss, jdk 
                 "b", FrequentPrimitivesExternalizable.getArray(10), // avoid measuring init overhead only for jboss, jdk
                 "c", new FrequentCollections(1),
-                "d", new LargeNativeArrays(1),
+                "d", new LargeNativeIntArrays(1),
+                "q", new LargeFPArrays(), // same as initial: measure effects of max hashsize on reuse speed
                 "e", new StringPerformance(0),
                 "f", new Primitives(),
                 "g", Arrays.createPrimArray(),

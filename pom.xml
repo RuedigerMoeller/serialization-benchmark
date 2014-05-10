@@ -85,8 +85,14 @@
         <dependency>
             <groupId>io.fastjson</groupId>
             <artifactId>boon</artifactId>
-            <version>0.14</version>
-		</dependency>
-    
+            <version>LATEST</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>LATEST</version>
+        </dependency>
+
     </dependencies>
 </project>

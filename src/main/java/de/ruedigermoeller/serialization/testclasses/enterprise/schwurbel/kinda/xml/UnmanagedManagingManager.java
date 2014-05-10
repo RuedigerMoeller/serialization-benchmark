@@ -1,6 +1,5 @@
 package de.ruedigermoeller.serialization.testclasses.enterprise.schwurbel.kinda.xml;
 
-import de.ruedigermoeller.serialization.annotations.EqualnessIsIdentity;
 import de.ruedigermoeller.serialization.testclasses.enterprise.ObjectOrientedInt;
 
 /**

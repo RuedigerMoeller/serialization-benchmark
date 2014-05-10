@@ -122,9 +122,10 @@ public class Primitives extends PrivatePrimitive implements Serializable, HasDes
     URL on1 = null;
     File on2 = null;
 
-    Object exceptions[] = {
-        null, new Exception("test"), new ArrayIndexOutOfBoundsException(), new RuntimeException(new IllegalArgumentException("Blub"))
-    };
+// commented this and moved to FST test cases as this is not a performance test but a test for feature completeness
+//    Object exceptions[] = {
+//        null, new Exception("test"), new ArrayIndexOutOfBoundsException(), new RuntimeException(new IllegalArgumentException("Blub"))
+//    };
 
     public Primitives() {
     }
@@ -139,11 +140,12 @@ public class Primitives extends PrivatePrimitive implements Serializable, HasDes
         st5 = st+"1"+num;
         st6 = "Some english, text; fragment. "+num;
         st7 = st6+" paokasd 1";
-        try {
-            throw new IOException();
-        } catch (Exception ex) {
-            exceptions[0] = ex;
-        }
+// see comments above
+//        try {
+//            throw new IOException();
+//        } catch (Exception ex) {
+//            exceptions[0] = ex;
+//        }
     }
 
     // to avoid measurement of pure stream init performance
@@ -155,13 +157,6 @@ public class Primitives extends PrivatePrimitive implements Serializable, HasDes
         return res;
     }
 
-    public static void main(String[] args) throws Exception {
-        FSTConfiguration conf = FSTConfiguration.createDefaultConfiguration();
-        Primitives prim = new Primitives(4);
-        System.out.println("Size:"+conf.calcObjectSizeBytesNotAUtility(prim));
-        System.out.println("Write:"+conf.calcObjectWriteTimeNotAUtility(100000, prim));
-        System.out.println("Read:"+conf.calcObjectReadTimeNotAUtility(100000, prim));
-    }
 }
 
 class PrivatePrimitive {
