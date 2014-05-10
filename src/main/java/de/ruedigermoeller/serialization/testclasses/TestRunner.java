@@ -123,8 +123,8 @@ public class TestRunner {
                     new KryoUnsafeRegTest("Kryo 2.23 Unsafe pre-register all", false)
             ));
         } else if ( "cross".equals(variants)) {
-            if ( variants.equals(testDefault) ) {
-                variants = "acdqefgijmonp"; // for jsonish tests use subset
+            if ( tests.equals(testDefault) ) {
+                tests = "acdqefgijmonp"; // for jsonish tests use subset
             }
             mTests.addAll(java.util.Arrays.asList(
                     new BoonTest("BOON JSon") ,
