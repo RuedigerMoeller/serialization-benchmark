@@ -1,10 +1,10 @@
 package de.ruedigermoeller.serialization.testclasses.libtests;
 
+import de.ruedigermoeller.serialization.FSTConfiguration;
+import de.ruedigermoeller.serialization.FSTObjectInput;
+import de.ruedigermoeller.serialization.FSTObjectOutput;
 import de.ruedigermoeller.serialization.testclasses.jdkcompatibility.Swing;
-import org.nustaq.serialization.FSTConfiguration;
-import org.nustaq.serialization.FSTObjectInput;
-import org.nustaq.serialization.FSTObjectOutput;
-import org.nustaq.serialization.util.FSTUtil;
+import de.ruedigermoeller.serialization.util.FSTUtil;
 import sun.misc.Unsafe;
 
 import java.io.ByteArrayInputStream;
@@ -32,14 +32,14 @@ import java.io.OutputStream;
  * Time: 10:38
  * To change this template use File | Settings | File Templates.
  */
-public class FSTTest extends SerTest {
+public class FST1Test extends SerTest {
 
     FSTConfiguration defconf;
     boolean uns;
     boolean preferSpeed;
     FSTObjectInput in;
     FSTObjectOutput out;
-    public FSTTest(String desc,boolean uns,boolean preferSpeed) {
+    public FST1Test(String desc,boolean uns,boolean preferSpeed) {
         super(desc);
         this.uns = uns;
         this.preferSpeed = preferSpeed;
@@ -79,4 +79,4 @@ public class FSTTest extends SerTest {
             throw new RuntimeException(e);
         }
     }
-};
+}

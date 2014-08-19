@@ -2,15 +2,14 @@ package de.ruedigermoeller.serialization.testclasses.libtests;
 
 import data.media.Image;
 import data.media.Media;
-import de.ruedigermoeller.serialization.FSTConfiguration;
-import de.ruedigermoeller.serialization.FSTObjectInput;
-import de.ruedigermoeller.serialization.FSTObjectOutput;
-import de.ruedigermoeller.serialization.minbin.MBPrinter;
 import de.ruedigermoeller.serialization.testclasses.basicstuff.FrequentPrimitives;
 import de.ruedigermoeller.serialization.testclasses.enterprise.ObjectOrientedDataType;
 import de.ruedigermoeller.serialization.testclasses.enterprise.ObjectOrientedInt;
 import de.ruedigermoeller.serialization.testclasses.enterprise.SimpleOrder;
 import de.ruedigermoeller.serialization.testclasses.enterprise.Trader;
+import org.nustaq.serialization.FSTConfiguration;
+import org.nustaq.serialization.FSTObjectInput;
+import org.nustaq.serialization.FSTObjectOutput;
 
 import java.io.ByteArrayInputStream;
 import java.io.OutputStream;

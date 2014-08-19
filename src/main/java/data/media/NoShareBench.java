@@ -3,7 +3,10 @@ package data.media;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
-import de.ruedigermoeller.serialization.*;
+import org.nustaq.serialization.*;
+import org.nustaq.serialization.FSTConfiguration;
+import org.nustaq.serialization.FSTObjectInput;
+import org.nustaq.serialization.FSTObjectOutput;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -17,7 +20,7 @@ import java.util.ArrayList;
 public class NoShareBench {
 
     public static void main( String a[] ) throws IOException, ClassNotFoundException {
-        ObjectInputStream oin = new ObjectInputStream(new FileInputStream(".\\src\\test\\java\\data\\test.os"));
+        ObjectInputStream oin = new ObjectInputStream(new FileInputStream("./data/media_from_eisheye_test.os"));
         final Object medpa = oin.readObject();
 
         boolean register = false;

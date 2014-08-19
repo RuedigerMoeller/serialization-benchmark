@@ -107,6 +107,16 @@ public class TestRunner {
 
     List<SerTest> mTests = new ArrayList<>();
     public void registerTests() {
+        if ( "fst".equals(variants) ) {
+            mTests.addAll(java.util.Arrays.asList(
+//                 new FSTCrossPlatformTest("FST cross platform", false, false), // unsafe and preferspeed deprecated unsupported since 1.43.
+                 new FSTTest("FST 2.x", false, false),
+                 new FST1Test("FST 1.58", false, false),
+                 new KryoTest("Kryo 2.23"),
+//                 new FSTCrossPlatformTest("FST cross platform", false, false), // unsafe and preferspeed deprecated unsupported since 1.43.
+                 new JavaSerTest("Java built in")
+            ));
+        } else
         if ( "default".equals(variants) ) {
             mTests.addAll(java.util.Arrays.asList(
                     new FSTCrossPlatformTest("FST cross platform", false, false), // unsafe and preferspeed deprecated unsupported since 1.43.

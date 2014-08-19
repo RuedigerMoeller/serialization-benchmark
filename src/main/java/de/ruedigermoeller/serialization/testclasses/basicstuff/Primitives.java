@@ -1,7 +1,5 @@
 package de.ruedigermoeller.serialization.testclasses.basicstuff;
 
-import de.ruedigermoeller.serialization.FSTConfiguration;
-import de.ruedigermoeller.serialization.annotations.*;
 import de.ruedigermoeller.serialization.testclasses.HasDescription;
 
 import javax.swing.text.html.StyleSheet;
