@@ -210,7 +210,12 @@ public class TestRunner {
                 "i", Trader.generateTrader(101, true),
                 "j", new ManyClasses(1),    // ref hashing, class writing
                 "k", new ExternalizableTest(),  // performance of object*stream faking
-                "l", new BigObject("dummy"),
+                "l", new Object[] {
+                        new BigObject("dummy"), new BigObject("dummy"), new BigObject("dummy"),
+                        new BigObject("dummy"), new BigObject("dummy"), new BigObject("dummy"),
+                        new BigObject("dummy"), new BigObject("dummy"), new BigObject("dummy"),
+                        new BigObject("dummy"),
+                  },
                 "m", HeavyNesting.createNestedObject(1000),
                 "o", media,
                 "n", new ShortRemoteCall(1),

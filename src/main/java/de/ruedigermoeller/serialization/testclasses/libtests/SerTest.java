@@ -30,6 +30,7 @@ import com.cedarsoftware.util.DeepEquals;
  */
 public abstract class SerTest {
 
+    private static final boolean CHECK_ENABLED = false;
     public String title;
     public ByteArrayOutputStream bout = new ByteArrayOutputStream(100000);
     ByteArrayInputStream bin;
@@ -102,7 +103,7 @@ public abstract class SerTest {
             System.out.println(""+title+" FAILURE "+e.getMessage());
         }
         if ( resObject != null ) {
-            if ( ! DeepEquals.deepEquals(resObject, toWrite) ) {
+            if ( CHECK_ENABLED && ! DeepEquals.deepEquals(resObject, toWrite) ) {
                 System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! EqualTest failed !!!!!!!!!!!!!!!!!!!!!!!!!!!");
                 boolean bool = DeepEquals.deepEquals(resObject, toWrite);
                 length = 0;
