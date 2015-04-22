@@ -3,7 +3,6 @@ package de.ruedigermoeller.serialization.testclasses.libtests;
 import de.ruedigermoeller.serialization.FSTConfiguration;
 import de.ruedigermoeller.serialization.FSTObjectInput;
 import de.ruedigermoeller.serialization.FSTObjectOutput;
-import de.ruedigermoeller.serialization.testclasses.jdkcompatibility.Swing;
 import de.ruedigermoeller.serialization.util.FSTUtil;
 import sun.misc.Unsafe;
 

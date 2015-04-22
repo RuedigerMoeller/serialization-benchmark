@@ -1,5 +1,296 @@
 OS:Linux
-JVM:Oracle Corporation 1.7.0_55
+JVM:Oracle Corporation 1.8.0_40
 CPU:null os-arch:null
-Cores (incl HT):32
-1.7.0_55-b13,Java HotSpot(TM) 64-Bit Server VM,Linux
+Cores (incl HT):20
+1.8.0_40-b26,Java HotSpot(TM) 64-Bit Server VM,Linux
+
+================================
+Test Class: FrequentPrimitives[]
+================================
+A array[10] of objects with a typical distribution of primitve fields: 2 short Strings, 3 boolean, 6 ints, 2 long, one double.
+
+
+<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+JBoss-Serializer                            11434           8582          20016           1143
+FST 2                                       11528           9094          20622            846
+FST 2 Binary                                10625          10268          20893           1293
+FST                                         11343           9579          20922            836
+Kryo 2.23                                   12170          11596          23766            708
+Java built in                               20034           7996          28030           1143
+JBoss-River                                 22874          65766          88640           1017
+</pre>
+
+
+==============================================
+Test Class: FrequentPrimitivesExternalizable[]
+==============================================
+A class with a typical distribution of primitve fields: 2 short Strings, 3 boolean, 6 ints, 2 long, one double. But implementing Externalizable
+
+
+<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST 2                                        4019           3616           7635            864
+FST 2 Binary                                 4119           5321           9440           1325
+Java built in                               13530           5468          18998           1065
+Kryo 2.23                                    8018          11469          19487            722
+JBoss-River                                  6209          15316          21525            964
+FST                                         11391          11085          22476            964
+JBoss-Serializer                            24865           7028          31893           1065
+</pre>
+
+
+===============================
+Test Class: FrequentCollections
+===============================
+Measures serialization of most popular collection classes. (HashMap and an ArrayList filled with Integer and Long).
+
+
+<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+Kryo 2.23                                   56223          53247         109470           4617
+FST 2                                       66543          56412         122955           4672
+FST                                         77155          60826         137981           4671
+FST 2 Binary                                73960          66254         140214           4410
+JBoss-Serializer                           315235         304285         619520           8435
+Java built in                              272319         397113         669432           8435
+JBoss-River                                 83952        1131075        1215027           4515
+</pre>
+
+
+================================
+Test Class: LargeNativeIntArrays
+================================
+measures performance serializing a large int array, a large long array and a large double array filled with random values. Note that random values destroy any value compression, so the increased size of kryo in this test will not be observable in most real world data.
+
+
+<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST 2 Binary                                15878           4185          20063          31231
+Java built in                               56445          52097         108542          31406
+JBoss-Serializer                            53222          75466         128688          31406
+FST 2                                      108282          80435         188717          31220
+FST                                        125333         103257         228590          31219
+JBoss-River                                 63738         248144         311882          31342
+Kryo 2.23                                  217871         210391         428262          34942
+</pre>
+
+
+=========================
+Test Class: LargeFPArrays
+=========================
+measures performance serializing a large flaot and a large double array filled with random values. 
+
+
+<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+Kryo 2.23                                     267            160            427              3
+FST 2                                         257            312            569              4
+FST                                           560            503           1063              3
+FST 2 Binary                                  668            686           1354              4
+JBoss-River                                  2624           3150           5774            116
+Java built in                                4886           1197           6083            121
+JBoss-Serializer                             6934           4153          11087            121
+</pre>
+
+
+=============================
+Test Class: StringPerformance
+=============================
+measures serialization of mid size to very long Strings
+
+
+<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST 2 Binary                                17995          10005          28000          29806
+FST                                         37251          22288          59539          20020
+FST 2                                       37245          24772          62017          20002
+Kryo 2.23                                  153445          94986         248431          17716
+JBoss-Serializer                           151768         100769         252537          17931
+JBoss-River                                281260         133160         414420          17819
+Java built in                              362868         340695         703563          17931
+</pre>
+
+
+======================
+Test Class: Primitives
+======================
+A broad test of primitive values and specials such as Enums, EnumSets, Date, String, byte, short, int, .. Byte, Character; Short, Integer, .. 
+ plus opaque private field with same name in a private subclass
+
+
+<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+JBoss-River                                     0              0              0            856
+FST 2 Binary                                 2026           1893           3919            527
+FST                                          2119           2148           4267            309
+FST 2                                        2870           5265           8135            296
+Kryo 2.23                                    7397           5785          13182            315
+Java built in                               64874          14233          79107           1548
+JBoss-Serializer                            36644          58374          95018           1603
+</pre>
+
+
+====================
+Test Class: Arrays[]
+====================
+Tests various arrays of int, Dimension, Date, Object. Nested arrays, multidimensional arrays.
+
+
+<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST 2 Binary                               168211         156899         325110          18583
+FST                                        225372         169163         394535          22764
+FST 2                                      214467         186553         401020          15455
+Kryo 2.23                                  238650         236759         475409           9681
+JBoss-Serializer                           298137         269293         567430          20774
+Java built in                              528048         264059         792107          20774
+JBoss-River                                154733        1405031        1559764          16682
+</pre>
+
+
+=============================
+Test Class: CommonCollections
+=============================
+In depth test of collections incl. collections of collections.
+ (ArrayList, ArrayDeque, ConcurrentLinkedQueue, Vector, TreeSet, LinkedList, TreeMap, ConcurrentHashMap, Hashtable, HashMap). Note: has been modified to workaround Kryo-specific Issue.
+
+
+<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+Kryo 2.23 FAIL                                  0              0              0              0
+JBoss-Serializer FAIL                           0              0              0              0
+FST 2 Binary                               151490         202551         354041          16857
+FST                                        212972         171576         384548           8508
+FST 2                                      187991         210149         398140           8345
+Java built in                              778953         484546        1263499          13172
+JBoss-River                                268270        1510932        1779202           9885
+</pre>
+
+
+==================
+Test Class: Trader
+==================
+Measures serialization of a typical 'Enterprise-Object' using Value-Classes instead of primitive tpyes.
+
+
+<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                        175647         198859         374506           5257
+FST 2 Binary                               196071         243491         439562           7442
+FST 2                                      214249         252557         466806           5944
+Kryo 2.23                                  290004         301636         591640           5918
+JBoss-Serializer                           467331         331606         798937          11075
+Java built in                              306712         516550         823262          11075
+JBoss-River                                148885         922743        1071628           7167
+</pre>
+
+
+=======================
+Test Class: ManyClasses
+=======================
+Tests speed serializing a complex object graph of many different classes with few primitive fields.
+
+
+<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                         17403          13975          31378           1000
+FST 2 Binary                                17715          16316          34031           1313
+FST 2                                       18615          16153          34768           1021
+Kryo 2.23                                   26913          20605          47518           1220
+JBoss-Serializer                            62645         125612         188257           3062
+JBoss-River                                120077         148022         268099           2273
+Java built in                              273325          24542         297867           3062
+</pre>
+
+
+==============================
+Test Class: ExternalizableTest
+==============================
+Performance of Externalizable objects.
+
+
+<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST 2                                       83350         104003         187353           7773
+Kryo 2.23                                  101784          93831         195615           4733
+JBoss-Serializer                           142719         215831         358550          14840
+FST                                        227824         260623         488447          10137
+FST 2 Binary                               226150         267511         493661          14662
+Java built in                              224411         340727         565138          14840
+JBoss-River                                124344         723231         847575          13290
+</pre>
+
+
+=====================
+Test Class: BigObject
+=====================
+A bigger object graph consisting of some of the test objects at once
+
+
+<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+JBoss-Serializer FAIL                           0              0              0              0
+FST 2                                     6990869        6270278       13261147         381597
+FST                                       4813996        8876355       13690351         432646
+FST 2 Binary                              5587271       11745180       17332451         643205
+Kryo 2.23                                 9259137       12894928       22154065         322313
+Java built in                            22626981       22203202       44830183         588458
+JBoss-River                              15650570       72773970       88424540         482350
+</pre>
+
+
+========================
+Test Class: HeavyNesting
+========================
+Heavily nested Objects
+
+
+<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                        188666         215627         404293           3747
+FST 2 Binary                               202613         244816         447429           6007
+FST 2                                      240684         254384         495068           4748
+Kryo 2.23                                  313315         329552         642867           5009
+JBoss-Serializer                           497874         436743         934617          10182
+Java built in                              522160         580285        1102445          10182
+JBoss-River                                433142        2046800        2479942           7114
+</pre>
+
+
+========================
+Test Class: MediaContent
+========================
+measures serializing the cyclefree object structure used by one of the most known encoding/decoding tests
+
+
+<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST 2 Binary                                 5208           5054          10262            564
+FST                                          6390           5201          11591            316
+FST 2                                        6336           5481          11817            318
+Kryo 2.23                                    6992           5866          12858            286
+JBoss-Serializer                            31915          24779          56694            856
+JBoss-River                                 27768          45045          72813            672
+Java built in                               87247          18697         105944            889
+</pre>
+
+
+===========================
+Test Class: ShortRemoteCall
+===========================
+measures overhead of stream initialization+classname decoding. Only one very short object is serialized
+
+
+<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+FST                                           930            664           1594             15
+FST 2 Binary                                  912            821           1733             21
+FST 2                                        1002            853           1855             16
+Kryo 2.23                                    1016           1028           2044             32
+Java built in                                8622           1846          10468            220
+JBoss-River                                  7843           7426          15269            171
+JBoss-Serializer                            11980           6481          18461            220
+</pre>
+
+
+======================
+Test Class: SmallThing
+======================
+only one int. benches pure init time
+
+
+<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+Kryo 2.23                                     180            131            311              2
+FST                                           531            476           1007              2
+FST 2 Binary                                  600            627           1227              6
+FST 2                                         592            639           1231              3
+JBoss-River                                  5782           3821           9603            102
+JBoss-Serializer                             6496           3300           9796            100
+Java built in                               10057           1886          11943            100
+</pre>
+

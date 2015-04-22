@@ -5,7 +5,7 @@ import com.beust.jcommander.Parameter;
 import de.ruedigermoeller.serialization.testclasses.basicstuff.*;
 import de.ruedigermoeller.serialization.testclasses.basicstuff.Arrays;
 import de.ruedigermoeller.serialization.testclasses.enterprise.*;
-import de.ruedigermoeller.serialization.testclasses.jdkcompatibility.*;
+import de.ruedigermoeller.serialization.testclasses.jdkcompatibility.ExternalizableTest;
 import de.ruedigermoeller.serialization.testclasses.libtests.*;
 import de.ruedigermoeller.serialization.testclasses.remoting.ShortRemoteCall;
 
@@ -20,6 +20,8 @@ import java.util.*;
  * To change this template use File | Settings | File Templates.
  */
 public class TestRunner {
+
+    private static final String KRVERSION = "3.01";
 
     public TestRunner() {
     }
@@ -110,17 +112,19 @@ public class TestRunner {
         if ( "default".equals(variants) ) {
             mTests.addAll(java.util.Arrays.asList(
                     new FSTTest("FST", false, false), // unsafe and preferspeed deprecated unsupported since 1.43.
-                    new KryoTest("Kryo 2.23"),
-//                new KryoUnsafeTest("Kryo 2.23 Unsafe"),
+                    new FST20Test("FST 2", false, false), // unsafe and preferspeed deprecated unsupported since 1.43.
+                    new FST20Test("FST 2 Binary", true, false), // unsafe and preferspeed deprecated unsupported since 1.43.
+                    new KryoTest("Kryo "+KRVERSION),
+//                new KryoUnsafeTest("Kryo "+KRVERSION+" Unsafe"),
                     new JBossRiver("JBoss-River"),
                     new JavaSerTest("Java built in"),
                     new JBossSerializer("JBoss-Serializer")
             ));
         } else if ( "unsafe".equals(variants)) {
             mTests.addAll(java.util.Arrays.asList(
-                    new KryoUnsafeTest("Kryo 2.23 Unsafe"),
-                    new KryoUnsafeRegTest("Kryo 2.23 Unsafe pre-register JDK", true),
-                    new KryoUnsafeRegTest("Kryo 2.23 Unsafe pre-register all", false)
+                    new KryoUnsafeTest("Kryo "+KRVERSION+" Unsafe"),
+                    new KryoUnsafeRegTest("Kryo "+KRVERSION+" Unsafe pre-register JDK", true),
+                    new KryoUnsafeRegTest("Kryo "+KRVERSION+" Unsafe pre-register all", false)
             ));
         } else if ( "cross".equals(variants)) {
             if ( tests.equals(testDefault) ) {
@@ -135,16 +139,18 @@ public class TestRunner {
             ));
         } else {
             mTests.addAll(java.util.Arrays.asList(
-                    new FSTTest("FST", false, false), // unsafe and preferspeed deprecated unsupported since 1.43.
-                    new KryoTest("Kryo 2.23"),
+                    new FSTTest("FST 1", false, false), // unsafe and preferspeed deprecated unsupported since 1.43.
+                    new FST20Test("FST 2", false, false), // unsafe and preferspeed deprecated unsupported since 1.43.
+                    new FST20Test("FST 2 Binary", true, false), // unsafe and preferspeed deprecated unsupported since 1.43.
+                    new KryoTest("Kryo "+KRVERSION),
                     new JBossRiver("JBoss-River"),
                     new JavaSerTest("Java built in"),
                     new JBossSerializer("JBoss-Serializer"),
-                    new KryoRegTest("Kryo 2.23 pre-register JDK", true),
-                    new KryoRegTest("Kryo 2.23 pre-register all", false),
-                    new KryoUnsafeTest("Kryo 2.23 Unsafe"),
-                    new KryoUnsafeRegTest("Kryo 2.23 Unsafe pre-register JDK", true),
-                    new KryoUnsafeRegTest("Kryo 2.23 Unsafe pre-register all", false)
+                    new KryoRegTest("Kryo "+KRVERSION+" pre-register JDK", true),
+                    new KryoRegTest("Kryo "+KRVERSION+" pre-register all", false),
+                    new KryoUnsafeTest("Kryo "+KRVERSION+" Unsafe"),
+                    new KryoUnsafeRegTest("Kryo "+KRVERSION+" Unsafe pre-register JDK", true),
+                    new KryoUnsafeRegTest("Kryo "+KRVERSION+" Unsafe pre-register all", false)
             ));
         }
     }
