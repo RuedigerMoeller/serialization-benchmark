@@ -111,14 +111,14 @@ public class TestRunner {
     public void registerTests() {
         if ( "default".equals(variants) ) {
             mTests.addAll(java.util.Arrays.asList(
-                    new FSTTest("FST", false, false), // unsafe and preferspeed deprecated unsupported since 1.43.
+//                    new FSTTest("FST", false, false), // unsafe and preferspeed deprecated unsupported since 1.43.
                     new FST20Test("FST 2", false, false), // unsafe and preferspeed deprecated unsupported since 1.43.
-                    new FST20Test("FST 2 Binary", true, false), // unsafe and preferspeed deprecated unsupported since 1.43.
-                    new KryoTest("Kryo "+KRVERSION),
+//                    new FST20Test("FST 2 Binary", true, false), // unsafe and preferspeed deprecated unsupported since 1.43.
+                    new KryoTest("Kryo "+KRVERSION)
 //                new KryoUnsafeTest("Kryo "+KRVERSION+" Unsafe"),
-                    new JBossRiver("JBoss-River"),
-                    new JavaSerTest("Java built in"),
-                    new JBossSerializer("JBoss-Serializer")
+//                    new JBossRiver("JBoss-River"),
+//                    new JavaSerTest("Java built in")
+//                    new JBossSerializer("JBoss-Serializer")
             ));
         } else if ( "unsafe".equals(variants)) {
             mTests.addAll(java.util.Arrays.asList(
