@@ -25,20 +25,17 @@ public class LargeFPArrays implements Serializable, HasDescription {
         return "measures performance serializing a large flaot and a large double array filled with random values. ";
     }
 
-    public LargeFPArrays() {
-    }
-
     float floats[];
     double doubles[];
-    public LargeFPArrays(int dummy) {
+    public LargeFPArrays() {
         int N = 1300;
         floats = new float[N*2];
         for (int i = 0; i < floats.length; i++) {
-            floats[i] = (float) (Math.random()*Integer.MAX_VALUE*2-Integer.MAX_VALUE);
+            floats[i] = (float) (Math.random()*Float.MAX_VALUE-Float.MAX_VALUE/2);
         }
         doubles = new double[N];
         for (int i = 0; i < doubles.length; i++) {
-            doubles[i] = Math.random()*Double.MAX_VALUE*2-Double.MAX_VALUE;
+            doubles[i] = Math.random()*Double.MAX_VALUE-Double.MAX_VALUE/2;
         }
     }
 }

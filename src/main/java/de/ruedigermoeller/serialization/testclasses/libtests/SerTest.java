@@ -2,9 +2,14 @@ package de.ruedigermoeller.serialization.testclasses.libtests;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 
 import com.cedarsoftware.util.DeepEquals;
+import de.ruedigermoeller.serialization.testclasses.basicstuff.Strings;
+import org.nustaq.serialization.FSTConfiguration;
+import org.nustaq.serialization.FSTObjectInput;
+import org.nustaq.serialization.FSTObjectOutput;
 
 /**
  * Copyright (c) 2012, Ruediger Moeller. All rights reserved.
@@ -111,6 +116,11 @@ public abstract class SerTest {
             } else {
                 System.out.println("+++++++++++++++++ EqualTest succeed ++++++++++++++++++++");
             }
+        } else {
+            length = 0;
+            timRead = 0;
+            timWrite = 0;
+            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Result is NULL ?? ");
         }
     }
 
@@ -159,5 +169,17 @@ public abstract class SerTest {
 
     public String getColor() {
         return "#a04040";
+    }
+
+    public static void main( String a[] ) throws IOException, ClassNotFoundException {
+        FSTConfiguration conf = FSTConfiguration.createJsonConfiguration();
+        Strings obj = new Strings();
+        FSTObjectOutput out = conf.getObjectOutput();
+        FSTObjectInput in = conf.getObjectInput();
+
+        out.writeObject(obj);
+        in.resetForReuseUseArray(out.getCopyOfWrittenBuffer());
+        Object res = in.readObject();
+        System.out.println(DeepEquals.deepEquals(obj, res));
     }
 }

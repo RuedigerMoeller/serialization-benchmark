@@ -128,14 +128,17 @@ public class TestRunner {
             ));
         } else if ( "cross".equals(variants)) {
             if ( tests.equals(testDefault) ) {
-                tests = "acdqefgijmonp"; // for jsonish tests use subset
+//                tests = "acdzqfgijmonp"; // for jsonish tests use subset
+                tests = "g"; // for jsonish tests use subset
             }
             mTests.addAll(java.util.Arrays.asList(
-                    new BoonTest("BOON JSon") ,
-                    new JSonIOTest("JSON IO") ,
-                    new JacksonTest("Jackson")
-//                    new FSTTest("FST", false, false), // compare to fastest
-//                    new JavaSerTest("Java built in") // and standard
+//                    new BoonTest("BOON JSon") , // too many errors
+//                    new JSonIOTest("JSON IO") , // very slow
+//                    new JacksonTest("Jackson"),
+                    new FSTJsonTest("FST over Jackson", false)
+//                    new FSTJsonTest("FST MinBin", true),
+//                    new FSTTest("FST", false, false) // compare to fastest
+//                    new JavaSerTTest("Java built in") // and standard
             ));
         } else {
             mTests.addAll(java.util.Arrays.asList(
@@ -168,7 +171,7 @@ public class TestRunner {
     @Parameter(names = {"-help", "-h", "-?", "--help"}, help = true)
     private boolean help;
 
-    @Parameter(names={"-variants", "-var"}, description = "default|unsafe|fst|all")
+    @Parameter(names={"-variants", "-var"}, description = "default|unsafe|fst|all|cross")
     String variants = "default";
 
     //
@@ -214,6 +217,7 @@ public class TestRunner {
                 "l", new BigObject("dummy"),
                 "m", HeavyNesting.createNestedObject(1000),
                 "o", media,
+                "z", new StringPerformance(0),
                 "n", new ShortRemoteCall(1),
                 "p", new SmallThing(), // same as initial: measure effects of max hashsize on reuse speed
         };

@@ -1,8 +1,8 @@
 package de.ruedigermoeller.serialization.testclasses.basicstuff;
 
-import de.ruedigermoeller.serialization.FSTConfiguration;
-import de.ruedigermoeller.serialization.annotations.*;
+import com.cedarsoftware.util.DeepEquals;
 import de.ruedigermoeller.serialization.testclasses.HasDescription;
+import org.nustaq.serialization.FSTConfiguration;
 
 import javax.swing.text.html.StyleSheet;
 import java.io.File;
@@ -107,7 +107,7 @@ public class Primitives extends PrivatePrimitive implements Serializable, HasDes
 
     SampleEnum en1 = SampleEnum.Predesignated_GiveUp_Allowed;
     EnumSet<SampleEnum> enSet = EnumSet.of(SampleEnum.Predesignated,SampleEnum.Complete);
-
+//
     String st;
 
     String st1;
@@ -155,6 +155,14 @@ public class Primitives extends PrivatePrimitive implements Serializable, HasDes
             res[i] = new Primitives(i);
         }
         return res;
+    }
+
+    public static void main(String[] args) {
+        FSTConfiguration conf = FSTConfiguration.createJsonConfiguration();
+        Primitives primitives = new Primitives(13);
+        byte[] bytes = conf.asByteArray(primitives);
+        Object deser = conf.asObject(bytes);
+        System.out.println(DeepEquals.deepEquals(primitives,deser));
     }
 
 }
