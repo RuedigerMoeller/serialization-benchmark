@@ -128,15 +128,15 @@ public class TestRunner {
             ));
         } else if ( "cross".equals(variants)) {
             if ( tests.equals(testDefault) ) {
-//                tests = "acdzqfgijmonp"; // for jsonish tests use subset
-                tests = "g"; // for jsonish tests use subset
+                tests = "acdzqfgijmonp"; // for jsonish tests use subset
+//                tests = "p"; // for jsonish tests use subset
             }
             mTests.addAll(java.util.Arrays.asList(
 //                    new BoonTest("BOON JSon") , // too many errors
 //                    new JSonIOTest("JSON IO") , // very slow
-//                    new JacksonTest("Jackson"),
+                    new JacksonTest("Jackson"),
                     new FSTJsonTest("FST over Jackson", false)
-//                    new FSTJsonTest("FST MinBin", true),
+//                    new FSTJsonTest("FST MinBin", true)
 //                    new FSTTest("FST", false, false) // compare to fastest
 //                    new JavaSerTTest("Java built in") // and standard
             ));
