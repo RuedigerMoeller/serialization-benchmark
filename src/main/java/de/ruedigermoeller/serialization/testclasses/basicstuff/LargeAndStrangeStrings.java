@@ -20,15 +20,15 @@ import java.io.Serializable;
  limitations under the License.
  */
 
-public class StringPerformance implements Serializable, HasDescription {
+public class LargeAndStrangeStrings implements Serializable, HasDescription {
 
-    public StringPerformance() {
+    public LargeAndStrangeStrings() {
     }
 
     String str[];
 
     //avoid instance initalizing - actually had no effect on test results ..
-    public StringPerformance(int dummy) {
+    public LargeAndStrangeStrings(int dummy) {
         str = new String[]
             {
                     " License along with this library; if not, write to the Free Software\n" +
@@ -249,6 +249,6 @@ public class StringPerformance implements Serializable, HasDescription {
 
     @Override
     public String getDescription() {
-        return "measures serialization of mid size to very long Strings";
+        return "measures serialization of mid size to very large unicode Strings";
     }
 }

@@ -5,7 +5,12 @@ import data.media.Media;
 import data.media.MediaContent;
 import de.ruedigermoeller.serialization.testclasses.basicstuff.FrequentCollections;
 import de.ruedigermoeller.serialization.testclasses.basicstuff.FrequentPrimitives;
+import de.ruedigermoeller.serialization.testclasses.basicstuff.Primitives;
 import de.ruedigermoeller.serialization.testclasses.basicstuff.SmallThing;
+import de.ruedigermoeller.serialization.testclasses.enterprise.ObjectOrientedDataType;
+import de.ruedigermoeller.serialization.testclasses.enterprise.ObjectOrientedInt;
+import de.ruedigermoeller.serialization.testclasses.enterprise.SimpleOrder;
+import de.ruedigermoeller.serialization.testclasses.enterprise.Trader;
 import de.ruedigermoeller.serialization.testclasses.remoting.ShortRemoteCall;
 import org.nustaq.serialization.FSTConfiguration;
 import org.nustaq.serialization.FSTObjectInput;
@@ -36,16 +41,18 @@ public class FSTJsonTest extends SerTest {
             defconf = FSTConfiguration.createMinBinConfiguration();
         } else {
             defconf = FSTConfiguration.createJsonConfiguration();
+            defconf.setShareReferences(false);
         }
-        defconf.registerCrossPlatformClassMappingUseSimpleName(
-            FrequentPrimitives.class,
-            FrequentCollections.class,
-            SmallThing.class,
-            ShortRemoteCall.class,
-            Image.class,
-            Media.class,
-            MediaContent.class
-        );
+        defconf.cpMap("fprim", FrequentPrimitives.class)
+            .cpMap("trader", Trader.class)
+            .cpMap("od", ObjectOrientedDataType.class)
+            .cpMap("oi", ObjectOrientedInt.class)
+            .cpMap("order", SimpleOrder.class)
+            .cpMap("se", Primitives.SampleEnum.class)
+            .cpMap( "rc", Primitives.class )
+            .cpMap( "im", Image.class )
+            .cpMap( "md", Media.class )
+            .cpMap( "mc", MediaContent.class );
 //        defconf.setShareReferences(false);
         in = new FSTObjectInput(defconf);
         out = new FSTObjectOutput(defconf);

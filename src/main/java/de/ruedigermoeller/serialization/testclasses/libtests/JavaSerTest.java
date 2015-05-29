@@ -30,6 +30,12 @@ public class JavaSerTest extends SerTest {
         super(title);
     }
 
+    boolean undshare = false;
+    public JavaSerTest(String title, boolean unshared) {
+        super(title);
+        this.undshare = unshared;
+    }
+
     @Override
     public void init() {
         
@@ -43,7 +49,11 @@ public class JavaSerTest extends SerTest {
     protected void readTest(ByteArrayInputStream bin, Class cl) {
         try {
             ObjectInputStream out = new ObjectInputStream(bin);
-            Object res = out.readObject();
+            Object res;
+            if ( undshare )
+                res = out.readUnshared();
+            else
+                res = out.readObject();
             out.close();
             resObject = res;
         } catch (IOException e) {
@@ -57,7 +67,11 @@ public class JavaSerTest extends SerTest {
     protected void writeTest(Object toWrite, OutputStream bout, Class aClass) {
         try {
             ObjectOutputStream out = new ObjectOutputStream(bout);
-            out.writeObject(toWrite);
+            if ( undshare ) {
+                out.writeUnshared(toWrite);
+            }
+            else
+                out.writeObject(toWrite);
             out.flush();
             out.close();
         } catch (IOException e) {

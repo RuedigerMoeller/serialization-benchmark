@@ -43,6 +43,7 @@ public abstract class SerTest {
     int length;
     Object testObject;
     protected Object resObject;
+    boolean equalTestFailure = false;
 
     public SerTest(String title) {
         this.title = title;
@@ -109,10 +110,12 @@ public abstract class SerTest {
         if ( resObject != null ) {
             if ( ! DeepEquals.deepEquals(resObject, toWrite) ) {
                 System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! EqualTest failed !!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                boolean bool = DeepEquals.deepEquals(resObject, toWrite);
-                length = 0;
-                timRead = 0;
-                timWrite = 0;
+                equalTestFailure = !DeepEquals.deepEquals(resObject, toWrite);
+                if ( System.getProperty("ignorewrong", "true").equals("false") ) {
+                    length = 0;
+                    timRead = 0;
+                    timWrite = 0;
+                }
             } else {
                 System.out.println("+++++++++++++++++ EqualTest succeed ++++++++++++++++++++");
             }
@@ -132,7 +135,7 @@ public abstract class SerTest {
     public void dumpRes() {
         try {
         System.out.println(title+" : Size:"+length+",  TimeRead: "+(timRead/readIter)+" ns,   TimeWrite: "+(timWrite/writeIter)+" ns ");
-        } catch (Exception e) {
+        } catch (Throwable e) {
             System.out.println("** Exception in dump"+e.getMessage());
         }
     }
@@ -169,6 +172,10 @@ public abstract class SerTest {
 
     public String getColor() {
         return "#a04040";
+    }
+
+    public boolean isEqualTestFailure() {
+        return equalTestFailure;
     }
 
     public static void main( String a[] ) throws IOException, ClassNotFoundException {

@@ -26,7 +26,7 @@ public class ShortRemoteCall implements Serializable, HasDescription {
 
     public ShortRemoteCall(int dummy) {
         methodId = 44;
-        args = new Object[]{}; // no args
+        args = new Object[]{"Hello", 14}; // no args
         someSenderIdOrWhatever = 345782;
         callBackId = 35378758;
     }

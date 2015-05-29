@@ -23,7 +23,7 @@ import java.io.Serializable;
 public class LargeNativeIntArrays implements Serializable, HasDescription {
     @Override
     public String getDescription() {
-        return "measures performance serializing a large int array, a large long array and a large double array filled with random values. Note that random values destroy any value compression, so the increased size of kryo in this test will not be observable in most real world data.";
+        return "measures performance serializing a large int array, a large long array and a large double array filled with random values. Note that random values destroy any value compression.";
     }
 
     public LargeNativeIntArrays() {

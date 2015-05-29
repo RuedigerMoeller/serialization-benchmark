@@ -24,7 +24,7 @@ public class Primitives extends PrivatePrimitive implements Serializable, HasDes
 
     @Override
     public String getDescription() {
-        return "A broad test of primitive values and specials such as Enums, EnumSets, Date, String, byte, short, int, .. Byte, Character; Short, Integer, .. <br> plus opaque private field with same name in a private subclass";
+        return "Enums, EnumSets, Date, String, byte, short, int, .. Byte, Character; Short, Integer, .. ";
     }
 
     public enum SpecialEnum {

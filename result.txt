@@ -11,106 +11,47 @@ A array[10] of objects with a typical distribution of primitve fields: 2 short S
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST 2                                        4287           2952           7239            846
-Kryo 3.01                                    4157           3690           7847            708
-</pre>
-
-
-==============================================
-Test Class: FrequentPrimitivesExternalizable[]
-==============================================
-A class with a typical distribution of primitve fields: 2 short Strings, 3 boolean, 6 ints, 2 long, one double. But implementing Externalizable
-
-
-<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST 2                                        3300           2528           5828            864
-Kryo 3.01                                    4186           3865           8051            722
-</pre>
-
-
-===============================
-Test Class: FrequentCollections
-===============================
-Measures serialization of most popular collection classes. (HashMap and an ArrayList filled with Integer and Long).
-
-
-<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-Kryo 3.01                                   38806          31458          70264           4616
-FST 2                                       33659          37430          71089           4672
+BOON .33 JSon FAIL                              0              0              0              0
+FST Serialization 2.29 unshared              3895           2400           6295            846
+Jackson 2.53                                15164          10955          26119           2001
+JDK 1.8 Serialization                       19811           7794          27605           1143
+FST 2.29 Json over Jackson                  22862          16987          39849           2219
+Gson                                        31484          75027         106511           2001
+JSON IO                                    149783          35514         185297           2100
 </pre>
 
 
 ================================
 Test Class: LargeNativeIntArrays
 ================================
-measures performance serializing a large int array, a large long array and a large double array filled with random values. Note that random values destroy any value compression, so the increased size of kryo in this test will not be observable in most real world data.
+measures performance serializing a large int array, a large long array and a large double array filled with random values. Note that random values destroy any value compression.
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST 2                                       39262          26447          65709          31220
-Kryo 3.01                                   68350          63250         131600          34761
-</pre>
-
-
-=========================
-Test Class: LargeFPArrays
-=========================
-measures performance serializing a large flaot and a large double array filled with random values. 
-
-
-<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST 2                                       43175          18944          62119          20812
-Kryo 3.01                                  158659          22097         180756          20807
-</pre>
-
-
-=============================
-Test Class: StringPerformance
-=============================
-measures serialization of mid size to very long Strings
-
-
-<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST 2                                       35894          21386          57280          20002
-Kryo 3.01                                  119740          72464         192204          17716
+FST Serialization 2.29 unshared             39037          23509          62546          31220
+JDK 1.8 Serialization                       42339          33081          75420          31406
+Jackson 2.53                              1286921        3101238        4388159          83126
+FST 2.29 Json over Jackson                1656462        3160617        4817079          83235
+BOON .33 JSon                             1346209        4569244        5915453          83320
+Gson                                      1901277        4842333        6743610          83126
+JSON IO                                   5467583        3284497        8752080          83213
 </pre>
 
 
 ======================
 Test Class: Primitives
 ======================
-A broad test of primitive values and specials such as Enums, EnumSets, Date, String, byte, short, int, .. Byte, Character; Short, Integer, .. 
- plus opaque private field with same name in a private subclass
+Enums, EnumSets, Date, String, byte, short, int, .. Byte, Character; Short, Integer, .. 
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST 2                                        2202           1841           4043            296
-Kryo 3.01                                    2890           2094           4984            315
-</pre>
-
-
-====================
-Test Class: Arrays[]
-====================
-Tests various arrays of int, Dimension, Date, Object. Nested arrays, multidimensional arrays.
-
-
-<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST 2                                       69136          50487         119623          14860
-Kryo 3.01                                   74449          66806         141255           9022
-</pre>
-
-
-=============================
-Test Class: CommonCollections
-=============================
-In depth test of collections incl. collections of collections.
- (ArrayList, ArrayDeque, ConcurrentLinkedQueue, Vector, TreeSet, LinkedList, TreeMap, ConcurrentHashMap, Hashtable, HashMap). Note: has been modified to workaround Kryo-specific Issue.
-
-
-<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-Kryo 3.01 FAIL                                  0              0              0              0
-FST 2                                       62769          75311         138080           8345
+JSON IO FAIL                                    0              0              0              0
+FST Serialization 2.29 unshared              1947           1801           3748            296
+Jackson 2.53                                 5880           2997           8877            529
+FST 2.29 Json over Jackson                  13533           9871          23404            801
+BOON .33 JSon(ERR)                          32389          14003          46392            852
+Gson(ERR)                                   34273          20797          55070            456
+JDK 1.8 Serialization                       63729          11102          74831           1548
 </pre>
 
 
@@ -121,56 +62,13 @@ Measures serialization of a typical 'Enterprise-Object' using Value-Classes inst
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST 2                                       79756          82760         162516           5944
-Kryo 3.01                                  102399         105549         207948           5918
-</pre>
-
-
-=======================
-Test Class: ManyClasses
-=======================
-Tests speed serializing a complex object graph of many different classes with few primitive fields.
-
-
-<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST 2                                        7545           4953          12498           1021
-Kryo 3.01                                   10108           7182          17290           1220
-</pre>
-
-
-==============================
-Test Class: ExternalizableTest
-==============================
-Performance of Externalizable objects.
-
-
-<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST 2                                       77971          95088         173059           7773
-Kryo 3.01                                  103553          95214         198767           4733
-</pre>
-
-
-=====================
-Test Class: BigObject
-=====================
-A bigger object graph consisting of some of the test objects at once
-
-
-<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST 2                                     4050622        4724793        8775415         380225
-Kryo 3.01                                 5563595        4687503       10251098         321003
-</pre>
-
-
-========================
-Test Class: HeavyNesting
-========================
-Heavily nested Objects
-
-
-<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST 2                                       96225         104885         201110           4748
-Kryo 3.01                                  104035         108628         212663           5009
+FST Serialization 2.29 unshared             76138          59362         135500          10569
+Jackson 2.53                               256897         124584         381481          41721
+JDK 1.8 Serialization                      262490         237440         499930          11075
+FST 2.29 Json over Jackson                 479230         226748         705978          54284
+BOON .33 JSon(ERR)                         550429         422649         973078          53235
+Gson(ERR)                                 1268854         909304        2178158          42072
+JSON IO(ERR)                              6232836         827333        7060169          47378
 </pre>
 
 
@@ -181,20 +79,47 @@ measures serializing the cyclefree object structure used by one of the most know
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST 2                                        2272           1902           4174            318
-Kryo 3.01                                    2522           1961           4483            286
+FST Serialization 2.29 unshared              1858           1392           3250            318
+Jackson 2.53                                 3670           1874           5544            503
+FST 2.29 Json over Jackson                   9937           8226          18163            741
+Gson(ERR)                                    7843          14295          22138            486
+BOON .33 JSon(ERR)                          16321           9356          25677            608
+JDK 1.8 Serialization                       37173           7018          44191            889
+JSON IO(ERR)                                76526          18092          94618            736
 </pre>
 
 
-=============================
-Test Class: StringPerformance
-=============================
-measures serialization of mid size to very long Strings
+=========================
+Test Class: LargeFPArrays
+=========================
+measures performance serializing a large flaot and a large double array filled with random values. 
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST 2                                       35800          21669          57469          20002
-Kryo 3.01                                  113060          72615         185675          17716
+JDK 1.8 Serialization                       29655          24798          54453          20965
+FST Serialization 2.29 unshared             42280          17093          59373          20812
+Jackson 2.53                              2131624        4755429        6887053          63671
+BOON .33 JSon(ERR)                        2274711        5761188        8035899          63787
+Gson(ERR)                                 2597405        6018496        8615901          63671
+FST 2.29 Json over Jackson                2827170        6528413        9355583          86541
+JSON IO(ERR)                              6721337        6100568       12821905          86509
+</pre>
+
+
+==========================
+Test Class: JSonCollection
+==========================
+a map of String=>int and a list holding a pojo, some numbers and a string
+
+
+<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
+BOON .33 JSon FAIL                              0              0              0              0
+FST Serialization 2.29 unshared              1637           1459           3096            200
+Jackson 2.53(ERR)                            3597           2117           5714            278
+FST 2.29 Json over Jackson                   8573           8096          16669            422
+Gson(ERR)                                    6987          13018          20005            278
+JDK 1.8 Serialization                       34323           8715          43038            760
+JSON IO(ERR)                                64323          20306          84629            713
 </pre>
 
 
@@ -205,19 +130,12 @@ measures overhead of stream initialization+classname decoding. Only one very sho
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST 2                                         380            307            687             16
-Kryo 3.01                                     481            362            843             32
-</pre>
-
-
-======================
-Test Class: SmallThing
-======================
-only one int. benches pure init time
-
-
-<pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-Kryo 3.01                                     149            130            279              2
-FST 2                                         216            240            456              3
+FST Serialization 2.29 unshared               344            291            635             25
+Jackson 2.53(ERR)                             984            471           1455             89
+Gson(ERR)                                    3327           3989           7316             89
+FST 2.29 Json over Jackson                   4577           5620          10197            200
+BOON .33 JSon(ERR)                          10341           4711          15052            209
+JDK 1.8 Serialization                       15401           2170          17571            305
+JSON IO(ERR)                                19323           7990          27313            193
 </pre>
 

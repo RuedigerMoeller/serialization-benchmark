@@ -1,6 +1,7 @@
 package de.ruedigermoeller.serialization.testclasses.libtests;
 
-import com.esotericsoftware.kryo.Kryo;
+import de.ruedigermoeller.serialization.testclasses.basicstuff.LargeAndStrangeStrings;
+
 import java.util.Collections;
 
 /**
@@ -127,7 +128,7 @@ public class KryoRegTest extends KryoTest {
 			kryo.register(de.ruedigermoeller.serialization.testclasses.jdkcompatibility.ExternalizableTest.ExternalTest.class);
 			kryo.register(de.ruedigermoeller.serialization.testclasses.jdkcompatibility.ExternalizableTest.NestedExternalTest.class);
 			kryo.register(de.ruedigermoeller.serialization.testclasses.basicstuff.FrequentPrimitives[].class);
-			kryo.register(de.ruedigermoeller.serialization.testclasses.basicstuff.StringPerformance.class);
+			kryo.register(LargeAndStrangeStrings.class);
 			kryo.register(de.ruedigermoeller.serialization.testclasses.basicstuff.FrequentCollections.class);
 			kryo.register(de.ruedigermoeller.serialization.testclasses.basicstuff.CommonCollections.class);
 			kryo.register(de.ruedigermoeller.serialization.testclasses.enterprise.ManyClasses.class);

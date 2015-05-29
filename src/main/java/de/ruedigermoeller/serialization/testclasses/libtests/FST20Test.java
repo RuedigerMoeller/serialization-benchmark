@@ -15,13 +15,14 @@ public class FST20Test extends SerTest {
 
     FSTConfiguration defconf;
     boolean uns;
-    boolean preferSpeed;
+    boolean unshared;
     FSTObjectInput in;
     FSTObjectOutput out;
-    public FST20Test(String desc,boolean uns,boolean preferSpeed) {
+
+    public FST20Test(String desc,boolean unsafe,boolean unshared) {
         super(desc);
-        this.uns = uns;
-        this.preferSpeed = preferSpeed;
+        this.uns = unsafe;
+        this.unshared = unshared;
     }
 
     @Override
@@ -30,7 +31,7 @@ public class FST20Test extends SerTest {
             defconf = FSTConfiguration.createFastBinaryConfiguration();
         else
             defconf = FSTConfiguration.createDefaultConfiguration();
-        defconf.setPreferSpeed(preferSpeed);
+        defconf.setShareReferences(!unshared);
         in = new FSTObjectInput(defconf);
         out = new FSTObjectOutput(defconf);
     }

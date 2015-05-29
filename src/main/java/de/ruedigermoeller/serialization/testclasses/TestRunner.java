@@ -6,6 +6,7 @@ import de.ruedigermoeller.serialization.testclasses.basicstuff.*;
 import de.ruedigermoeller.serialization.testclasses.basicstuff.Arrays;
 import de.ruedigermoeller.serialization.testclasses.enterprise.*;
 import de.ruedigermoeller.serialization.testclasses.jdkcompatibility.ExternalizableTest;
+import de.ruedigermoeller.serialization.testclasses.json.BasicJSon;
 import de.ruedigermoeller.serialization.testclasses.libtests.*;
 import de.ruedigermoeller.serialization.testclasses.remoting.ShortRemoteCall;
 
@@ -82,7 +83,10 @@ public class TestRunner {
                 lo.add(rv);
                 hi.add(rv+wv);
                 siz.add(serTest.bout.size());
-                names[i] = serTest.title;
+                if ( serTest.isEqualTestFailure() )
+                    names[i] = serTest.title+"(ERR)";
+                else
+                    names[i] = serTest.title;
             }
         }
         charter.gChart(hi,lo,"speed read+write (ns)",names);
@@ -128,14 +132,16 @@ public class TestRunner {
             ));
         } else if ( "cross".equals(variants)) {
             if ( tests.equals(testDefault) ) {
-                tests = "acdzqfgijmonp"; // for jsonish tests use subset
-//                tests = "p"; // for jsonish tests use subset
+                tests = "asdfoinq"; // for jsonish tests use subset
             }
             mTests.addAll(java.util.Arrays.asList(
-//                    new BoonTest("BOON JSon") , // too many errors
-//                    new JSonIOTest("JSON IO") , // very slow
-                    new JacksonTest("Jackson"),
-                    new FSTJsonTest("FST over Jackson", false)
+                    new FST20Test("FST Serialization 2.29 unshared", false, true),
+                    new BoonTest("BOON .33 JSon") ,
+                    new JSonIOTest("JSON IO") , // very slow
+                    new GsonTest("Gson"),
+                    new JacksonTest("Jackson 2.53"),
+                    new FSTJsonTest("FST 2.29 Json over Jackson", false),
+                    new JavaSerTest("JDK 1.8 Serialization", true)
 //                    new FSTJsonTest("FST MinBin", true)
 //                    new FSTTest("FST", false, false) // compare to fastest
 //                    new JavaSerTTest("Java built in") // and standard
@@ -206,8 +212,7 @@ public class TestRunner {
                 "b", FrequentPrimitivesExternalizable.getArray(10), // avoid measuring init overhead only for jboss, jdk
                 "c", new FrequentCollections(1),
                 "d", new LargeNativeIntArrays(1),
-                "q", new LargeFPArrays(), // same as initial: measure effects of max hashsize on reuse speed
-                "e", new StringPerformance(0),
+                "e", new LargeAndStrangeStrings(0),
                 "f", new Primitives(),
                 "g", Arrays.createPrimArray(),
                 "h", new CommonCollections(),
@@ -217,9 +222,11 @@ public class TestRunner {
                 "l", new BigObject("dummy"),
                 "m", HeavyNesting.createNestedObject(1000),
                 "o", media,
-                "z", new StringPerformance(0),
-                "n", new ShortRemoteCall(1),
                 "p", new SmallThing(), // same as initial: measure effects of max hashsize on reuse speed
+                "q", new LargeFPArrays(), // same as initial: measure effects of max hashsize on reuse speed
+                "r", new BasicJSon(),
+                "s", new JSonCollection(1),
+                "n", new ShortRemoteCall(1),
         };
 
         for (int i = 0; i < testCases.length; i+=2) {
