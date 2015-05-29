@@ -116,7 +116,8 @@ public class TestRunner {
         if ( "default".equals(variants) ) {
             mTests.addAll(java.util.Arrays.asList(
 //                    new FSTTest("FST", false, false), // unsafe and preferspeed deprecated unsupported since 1.43.
-                    new FST20Test("FST 2", false, false), // unsafe and preferspeed deprecated unsupported since 1.43.
+                    new FST20Test("FST 2", false, false), //
+                    new FSTJsonTest("FST JSON", false),
 //                    new FST20Test("FST 2 Binary", true, false), // unsafe and preferspeed deprecated unsupported since 1.43.
                     new KryoTest("Kryo "+KRVERSION)
 //                new KryoUnsafeTest("Kryo "+KRVERSION+" Unsafe"),

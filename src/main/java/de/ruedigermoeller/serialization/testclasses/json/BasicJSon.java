@@ -1,9 +1,11 @@
 package de.ruedigermoeller.serialization.testclasses.json;
 
+import java.io.Serializable;
+
 /**
  * Created by ruedi on 17.05.14.
  */
-public class BasicJSon {
+public class BasicJSon implements Serializable {
 
     boolean aBoolean = true;
 
