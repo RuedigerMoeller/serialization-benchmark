@@ -5,5 +5,10 @@ a set of common java data structures designed to test validity and performance o
 
 main class to run tests: TestRunner. Check source for commandline options.
 
+Run Json tests:
+'java -Dignorewrong=true -cp [...] de.ruedigermoeller.serialization.testclasses.TestRunner -var cross -w 10000 -t 10000'
 
-[latest results](https://github.com/RuedigerMoeller/fast-serialization/wiki/Benchmark)
+[json results](https://github.com/RuedigerMoeller/fast-serialization/json_bench.html)
+[fst vs kryo](https://github.com/RuedigerMoeller/fast-serialization/fst2.29vsKryo3.01.html)
+
+[older results incl jdk](https://github.com/RuedigerMoeller/fast-serialization/wiki/Benchmark)
