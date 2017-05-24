@@ -1,8 +1,8 @@
 OS:Linux
-JVM:Oracle Corporation 1.8.0_40
+JVM:Oracle Corporation 1.8.0_131
 CPU:null os-arch:null
-Cores (incl HT):20
-1.8.0_40-b26,Java HotSpot(TM) 64-Bit Server VM,Linux
+Cores (incl HT):8
+1.8.0_131-8u131-b11-0ubuntu1.16.04.2-b11,OpenJDK 64-Bit Server VM,Linux
 
 ================================
 Test Class: FrequentPrimitives[]
@@ -11,8 +11,8 @@ A array[10] of objects with a typical distribution of primitve fields: 2 short S
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST 2                                        4253           3034           7287            846
-Kryo 3.01                                    4083           3618           7701            708
+FST 2                                        2706           1870           4576            864
+Kryo 4.0.0                                   2608           2242           4850            708
 </pre>
 
 
@@ -23,8 +23,8 @@ A class with a typical distribution of primitve fields: 2 short Strings, 3 boole
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST 2                                        3167           2299           5466            864
-Kryo 3.01                                    4097           3660           7757            722
+FST 2                                        1986           1478           3464            882
+Kryo 4.0.0                                   2618           2320           4938            722
 </pre>
 
 
@@ -35,8 +35,8 @@ Measures serialization of most popular collection classes. (HashMap and an Array
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST 2                                       28290          36719          65009           4672
-Kryo 3.01                                   43640          31416          75056           4616
+FST 2                                       21634          13518          35152           4672
+Kryo 4.0.0                                  28218          19906          48124           4612
 </pre>
 
 
@@ -47,8 +47,8 @@ measures performance serializing a large int array, a large long array and a lar
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST 2                                       40891          26587          67478          31220
-Kryo 3.01                                   75718          63600         139318          34755
+FST 2                                       32295          17230          49525          31217
+Kryo 4.0.0                                  44035          40273          84308          34820
 </pre>
 
 
@@ -59,8 +59,8 @@ measures serialization of mid size to very large unicode Strings
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST 2                                       34716          21676          56392          20002
-Kryo 3.01                                  109529          70976         180505          17716
+FST 2                                       27572          14217          41789          20002
+Kryo 4.0.0                                  74839          49804         124643          17716
 </pre>
 
 
@@ -71,8 +71,8 @@ Enums, EnumSets, Date, String, byte, short, int, .. Byte, Character; Short, Inte
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST 2                                        2065           1631           3696            296
-Kryo 3.01                                    2814           2110           4924            315
+FST 2                                        1799           1189           2988            302
+Kryo 4.0.0                                   2113           1380           3493            315
 </pre>
 
 
@@ -83,8 +83,8 @@ Tests various arrays of int, Dimension, Date, Object. Nested arrays, multidimens
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST 2                                       70650          50656         121306          14865
-Kryo 3.01                                   81192          65432         146624           9022
+FST 2                                       43152          32569          75721          15112
+Kryo 4.0.0                                  47867          44150          92017           9022
 </pre>
 
 
@@ -96,8 +96,8 @@ In depth test of collections incl. collections of collections.
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-Kryo 3.01 FAIL                                  0              0              0              0
-FST 2                                       63880          74126         138006           8345
+FST 2                                       42939          30617          73556           8345
+Kryo 4.0.0                                  88975          40339         129314           8323
 </pre>
 
 
@@ -108,8 +108,8 @@ Measures serialization of a typical 'Enterprise-Object' using Value-Classes inst
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST 2                                       82836          82849         165685           5944
-Kryo 3.01                                  101922          95494         197416           5918
+FST 2                                       54752          51132         105884           6072
+Kryo 4.0.0                                  59232          66405         125637           5919
 </pre>
 
 
@@ -120,8 +120,8 @@ Tests speed serializing a complex object graph of many different classes with fe
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST 2                                        7568           5209          12777           1021
-Kryo 3.01                                   10064           7010          17074           1220
+FST 2                                        4921           3027           7948           1061
+Kryo 4.0.0                                   6439           4283          10722           1220
 </pre>
 
 
@@ -132,8 +132,8 @@ Performance of Externalizable objects.
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST 2                                       76556         100391         176947           7773
-Kryo 3.01                                  103091          98752         201843           4733
+FST 2                                       51898          43724          95622           8971
+Kryo 4.0.0                                  56557          56521         113078           4733
 </pre>
 
 
@@ -144,8 +144,8 @@ A bigger object graph consisting of some of the test objects at once
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST 2                                     3946257        4800005        8746262         380235
-Kryo 3.01                                 5758734        4581298       10340032         321008
+FST 2                                     2692660        2496845        5189505         401976
+Kryo 4.0.0                                3346367        2828982        6175349         321022
 </pre>
 
 
@@ -156,8 +156,8 @@ Heavily nested Objects
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-Kryo 3.01                                  100933         105988         206921           5009
-FST 2                                      105654         109538         215192           4748
+FST 2                                       56114          50803         106917           4748
+Kryo 4.0.0                                  55420          64238         119658           5009
 </pre>
 
 
@@ -168,8 +168,8 @@ measures serializing the cyclefree object structure used by one of the most know
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST 2                                        2209           1769           3978            318
-Kryo 3.01                                    2559           1937           4496            286
+FST 2                                        1468           1045           2513            322
+Kryo 4.0.0                                   1539           1258           2797            288
 </pre>
 
 
@@ -180,8 +180,8 @@ only one int. benches pure init time
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-Kryo 3.01                                     144            132            276              2
-FST 2                                         218            240            458              3
+Kryo 4.0.0                                     95             99            194              2
+FST 2                                         128            134            262              3
 </pre>
 
 
@@ -192,8 +192,8 @@ measures performance serializing a large flaot and a large double array filled w
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST 2                                       39891          19012          58903          20812
-Kryo 3.01                                  163872          21985         185857          20807
+FST 2                                       23406          11299          34705          20812
+Kryo 4.0.0                                 101283          14309         115592          20807
 </pre>
 
 
@@ -202,8 +202,8 @@ Test Class: BasicJSon
 =====================
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-Kryo 3.01                                    2949           2035           4984            225
-FST 2                                        4248           3444           7692            418
+Kryo 4.0.0                                   1745           1235           2980            225
+FST 2                                        2613           2407           5020            420
 </pre>
 
 
@@ -214,8 +214,8 @@ a map of String=>int and a list holding a pojo, some numbers and a string
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST 2                                        1881           1782           3663            200
-Kryo 3.01                                    2623           1974           4597            234
+FST 2                                        1187            813           2000            200
+Kryo 4.0.0                                   1647           1201           2848            234
 </pre>
 
 
@@ -226,7 +226,7 @@ measures overhead of stream initialization+classname decoding. Only one very sho
 
 
 <pre style='background-color:#ccc;'>lib                                     read (ns)     write (ns)     total (ns)   size (bytes)
-FST 2                                         447            391            838             25
-Kryo 3.01                                     631            519           1150             41
+FST 2                                         264            219            483             25
+Kryo 4.0.0                                    407            343            750             41
 </pre>
 
