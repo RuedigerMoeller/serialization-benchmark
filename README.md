@@ -13,6 +13,6 @@ Run Json tests:
 
 [fst 2.29 vs kryo 3.01](http://ruedigermoeller.github.io/fast-serialization/fst2.29vsKryo3.01.html)
 
-[fst 2.50 vs kryo 4.0.0](http://htmlpreview.github.com/?http://ruedigermoeller.github.io/serialization-benchmark/results_fst2_Kryo4.html)
+[fst 2.50 vs kryo 4.0.0](http://htmlpreview.github.com/?http://ruedigermoeller.github.io/serialization-benchmark/result_fst2_kryo4.html)
 
 [older results incl jdk](https://github.com/RuedigerMoeller/fast-serialization/wiki/Benchmark)
