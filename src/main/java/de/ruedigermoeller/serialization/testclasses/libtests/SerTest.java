@@ -179,7 +179,7 @@ public abstract class SerTest {
     }
 
     public static void main( String a[] ) throws IOException, ClassNotFoundException {
-        FSTConfiguration conf = FSTConfiguration.createJsonConfiguration();
+        FSTConfiguration conf = FSTConfiguration.createJsonConfiguration(false,true);
         Strings obj = new Strings();
         FSTObjectOutput out = conf.getObjectOutput();
         FSTObjectInput in = conf.getObjectInput();

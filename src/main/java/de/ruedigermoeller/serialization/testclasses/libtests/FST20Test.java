@@ -28,7 +28,7 @@ public class FST20Test extends SerTest {
     @Override
     public void init() {
         if ( uns )
-            defconf = FSTConfiguration.createFastBinaryConfiguration();
+            defconf = FSTConfiguration.createUnsafeBinaryConfiguration();
         else
             defconf = FSTConfiguration.createDefaultConfiguration();
         defconf.setShareReferences(!unshared);

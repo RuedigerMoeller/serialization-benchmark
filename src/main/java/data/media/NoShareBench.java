@@ -4,6 +4,7 @@ import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
 import de.ruedigermoeller.serialization.*;
+import org.nustaq.serialization.*;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

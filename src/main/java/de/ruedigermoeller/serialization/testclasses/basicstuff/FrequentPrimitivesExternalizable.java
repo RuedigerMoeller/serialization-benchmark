@@ -1,7 +1,8 @@
 package de.ruedigermoeller.serialization.testclasses.basicstuff;
 
-import de.ruedigermoeller.serialization.annotations.Flat;
+//import de.ruedigermoeller.serialization.annotations.Flat;
 import de.ruedigermoeller.serialization.testclasses.HasDescription;
+import org.nustaq.serialization.annotations.Flat;
 
 import java.io.*;
 

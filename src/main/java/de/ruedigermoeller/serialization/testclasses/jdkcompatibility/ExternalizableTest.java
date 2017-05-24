@@ -1,6 +1,6 @@
 package de.ruedigermoeller.serialization.testclasses.jdkcompatibility;
 
-import de.ruedigermoeller.serialization.annotations.*;
+//import de.ruedigermoeller.serialization.annotations.*;
 import de.ruedigermoeller.serialization.testclasses.HasDescription;
 
 import java.io.*;

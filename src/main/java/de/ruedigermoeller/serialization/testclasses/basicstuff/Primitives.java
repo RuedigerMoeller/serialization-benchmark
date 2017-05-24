@@ -158,7 +158,7 @@ public class Primitives extends PrivatePrimitive implements Serializable, HasDes
     }
 
     public static void main(String[] args) {
-        FSTConfiguration conf = FSTConfiguration.createJsonConfiguration();
+        FSTConfiguration conf = FSTConfiguration.createJsonConfiguration(false,true);
         Primitives primitives = new Primitives(13);
         byte[] bytes = conf.asByteArray(primitives);
         Object deser = conf.asObject(bytes);

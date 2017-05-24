@@ -40,7 +40,7 @@ public class FSTJsonTest extends SerTest {
         if (minbin) {
             defconf = FSTConfiguration.createMinBinConfiguration();
         } else {
-            defconf = FSTConfiguration.createJsonConfiguration();
+            defconf = FSTConfiguration.createJsonConfiguration(false,true);
             defconf.setShareReferences(false);
         }
         defconf.cpMap("fprim", FrequentPrimitives.class)

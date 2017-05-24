@@ -22,7 +22,7 @@ import java.util.*;
  */
 public class TestRunner {
 
-    private static final String KRVERSION = "3.01";
+    private static final String KRVERSION = "4.0.0";
 
     public TestRunner() {
     }
@@ -149,18 +149,18 @@ public class TestRunner {
             ));
         } else {
             mTests.addAll(java.util.Arrays.asList(
-                    new FSTTest("FST 1", false, false), // unsafe and preferspeed deprecated unsupported since 1.43.
+//                    new FSTTest("FST 1", false, false), // unsafe and preferspeed deprecated unsupported since 1.43.
                     new FST20Test("FST 2", false, false), // unsafe and preferspeed deprecated unsupported since 1.43.
-                    new FST20Test("FST 2 Binary", true, false), // unsafe and preferspeed deprecated unsupported since 1.43.
+//                    new FST20Test("FST 2 Binary", true, false), // unsafe and preferspeed deprecated unsupported since 1.43.
                     new KryoTest("Kryo "+KRVERSION),
-                    new JBossRiver("JBoss-River"),
-                    new JavaSerTest("Java built in"),
-                    new JBossSerializer("JBoss-Serializer"),
-                    new KryoRegTest("Kryo "+KRVERSION+" pre-register JDK", true),
-                    new KryoRegTest("Kryo "+KRVERSION+" pre-register all", false),
-                    new KryoUnsafeTest("Kryo "+KRVERSION+" Unsafe"),
-                    new KryoUnsafeRegTest("Kryo "+KRVERSION+" Unsafe pre-register JDK", true),
-                    new KryoUnsafeRegTest("Kryo "+KRVERSION+" Unsafe pre-register all", false)
+//                    new JBossRiver("JBoss-River"),
+                    new JavaSerTest("Java built in")
+//                    new JBossSerializer("JBoss-Serializer"),
+//                    new KryoRegTest("Kryo "+KRVERSION+" pre-register JDK", true),
+//                    new KryoRegTest("Kryo "+KRVERSION+" pre-register all", false),
+//                    new KryoUnsafeTest("Kryo "+KRVERSION+" Unsafe"),
+//                    new KryoUnsafeRegTest("Kryo "+KRVERSION+" Unsafe pre-register JDK", true),
+//                    new KryoUnsafeRegTest("Kryo "+KRVERSION+" Unsafe pre-register all", false)
             ));
         }
     }
@@ -171,7 +171,7 @@ public class TestRunner {
     @Parameter(names = { "-warm", "-w" }, description = "number of warmup time ms >5000 for stable results")
     Integer warmup = 5000;
     @Parameter(names = { "-test", "-t" }, description = "number of test time ms  >5000 for stable results")
-    Integer test = 3000;
+    Integer test = 5000;
     @Parameter(names = { "-cases", "-c" }, description = "testcases to execute (string of a..z, not specified: all)")
     String tests = testDefault;
 
