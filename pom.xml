@@ -61,7 +61,8 @@
         <dependency>
             <groupId>de.ruedigermoeller</groupId>
             <artifactId>fst</artifactId>
-            <version>2.50</version>
+            <version>2.52</version>
+            <!--<version>2.52_patch208</version>-->
         </dependency>
 
         <!--<dependency>-->
